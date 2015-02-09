@@ -1,0 +1,379 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		76DCB6951A88F4D000FAEA40 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6941A88F4D000FAEA40 /* main.m */; };
+		76DCB6981A88F4D000FAEA40 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6971A88F4D000FAEA40 /* AppDelegate.m */; };
+		76DCB69B1A88F4D000FAEA40 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB69A1A88F4D000FAEA40 /* ViewController.m */; };
+		76DCB6C31A88F54200FAEA40 /* STHTTPNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6BA1A88F54200FAEA40 /* STHTTPNetTask.m */; };
+		76DCB6C41A88F54200FAEA40 /* STHTTPNetTaskQueueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6BC1A88F54200FAEA40 /* STHTTPNetTaskQueueHandler.m */; };
+		76DCB6C51A88F54200FAEA40 /* STNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6BE1A88F54200FAEA40 /* STNetTask.m */; };
+		76DCB6C61A88F54200FAEA40 /* STNetTaskChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6C01A88F54200FAEA40 /* STNetTaskChain.m */; };
+		76DCB6C71A88F54200FAEA40 /* STNetTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6C21A88F54200FAEA40 /* STNetTaskQueue.m */; };
+		76DCB6DC1A88F54E00FAEA40 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6CA1A88F54E00FAEA40 /* AFHTTPRequestOperation.m */; };
+		76DCB6DD1A88F54E00FAEA40 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6CC1A88F54E00FAEA40 /* AFHTTPRequestOperationManager.m */; };
+		76DCB6DE1A88F54E00FAEA40 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6CE1A88F54E00FAEA40 /* AFHTTPSessionManager.m */; };
+		76DCB6DF1A88F54E00FAEA40 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6D11A88F54E00FAEA40 /* AFNetworkReachabilityManager.m */; };
+		76DCB6E01A88F54E00FAEA40 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6D31A88F54E00FAEA40 /* AFSecurityPolicy.m */; };
+		76DCB6E11A88F54E00FAEA40 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6D51A88F54E00FAEA40 /* AFURLConnectionOperation.m */; };
+		76DCB6E21A88F54E00FAEA40 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6D71A88F54E00FAEA40 /* AFURLRequestSerialization.m */; };
+		76DCB6E31A88F54E00FAEA40 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6D91A88F54E00FAEA40 /* AFURLResponseSerialization.m */; };
+		76DCB6E41A88F54E00FAEA40 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6DB1A88F54E00FAEA40 /* AFURLSessionManager.m */; };
+		76DCB6E71A88F83600FAEA40 /* STOpenWeatherNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 76DCB6E61A88F83600FAEA40 /* STOpenWeatherNetTask.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		76DCB68F1A88F4D000FAEA40 /* STNetTaskQueueExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STNetTaskQueueExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76DCB6931A88F4D000FAEA40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76DCB6941A88F4D000FAEA40 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		76DCB6961A88F4D000FAEA40 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		76DCB6971A88F4D000FAEA40 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		76DCB6991A88F4D000FAEA40 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		76DCB69A1A88F4D000FAEA40 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		76DCB6B91A88F54200FAEA40 /* STHTTPNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHTTPNetTask.h; sourceTree = "<group>"; };
+		76DCB6BA1A88F54200FAEA40 /* STHTTPNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHTTPNetTask.m; sourceTree = "<group>"; };
+		76DCB6BB1A88F54200FAEA40 /* STHTTPNetTaskQueueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHTTPNetTaskQueueHandler.h; sourceTree = "<group>"; };
+		76DCB6BC1A88F54200FAEA40 /* STHTTPNetTaskQueueHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHTTPNetTaskQueueHandler.m; sourceTree = "<group>"; };
+		76DCB6BD1A88F54200FAEA40 /* STNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTask.h; sourceTree = "<group>"; };
+		76DCB6BE1A88F54200FAEA40 /* STNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTask.m; sourceTree = "<group>"; };
+		76DCB6BF1A88F54200FAEA40 /* STNetTaskChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTaskChain.h; sourceTree = "<group>"; };
+		76DCB6C01A88F54200FAEA40 /* STNetTaskChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskChain.m; sourceTree = "<group>"; };
+		76DCB6C11A88F54200FAEA40 /* STNetTaskQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTaskQueue.h; sourceTree = "<group>"; };
+		76DCB6C21A88F54200FAEA40 /* STNetTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueue.m; sourceTree = "<group>"; };
+		76DCB6C91A88F54E00FAEA40 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		76DCB6CA1A88F54E00FAEA40 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		76DCB6CB1A88F54E00FAEA40 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
+		76DCB6CC1A88F54E00FAEA40 /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
+		76DCB6CD1A88F54E00FAEA40 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		76DCB6CE1A88F54E00FAEA40 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
+		76DCB6CF1A88F54E00FAEA40 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		76DCB6D01A88F54E00FAEA40 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		76DCB6D11A88F54E00FAEA40 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
+		76DCB6D21A88F54E00FAEA40 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
+		76DCB6D31A88F54E00FAEA40 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
+		76DCB6D41A88F54E00FAEA40 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		76DCB6D51A88F54E00FAEA40 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		76DCB6D61A88F54E00FAEA40 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		76DCB6D71A88F54E00FAEA40 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		76DCB6D81A88F54E00FAEA40 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
+		76DCB6D91A88F54E00FAEA40 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
+		76DCB6DA1A88F54E00FAEA40 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
+		76DCB6DB1A88F54E00FAEA40 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		76DCB6E51A88F83600FAEA40 /* STOpenWeatherNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOpenWeatherNetTask.h; sourceTree = "<group>"; };
+		76DCB6E61A88F83600FAEA40 /* STOpenWeatherNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOpenWeatherNetTask.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		76DCB68C1A88F4D000FAEA40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		76DCB6861A88F4D000FAEA40 = {
+			isa = PBXGroup;
+			children = (
+				76DCB6B81A88F54200FAEA40 /* STNetTaskQueue */,
+				76DCB6911A88F4D000FAEA40 /* STNetTaskQueueExample */,
+				76DCB6901A88F4D000FAEA40 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		76DCB6901A88F4D000FAEA40 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76DCB68F1A88F4D000FAEA40 /* STNetTaskQueueExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		76DCB6911A88F4D000FAEA40 /* STNetTaskQueueExample */ = {
+			isa = PBXGroup;
+			children = (
+				76DCB6921A88F4D000FAEA40 /* Supporting Files */,
+				76DCB6C81A88F54E00FAEA40 /* AFNetworking */,
+				76DCB6961A88F4D000FAEA40 /* AppDelegate.h */,
+				76DCB6971A88F4D000FAEA40 /* AppDelegate.m */,
+				76DCB6991A88F4D000FAEA40 /* ViewController.h */,
+				76DCB69A1A88F4D000FAEA40 /* ViewController.m */,
+				76DCB6E51A88F83600FAEA40 /* STOpenWeatherNetTask.h */,
+				76DCB6E61A88F83600FAEA40 /* STOpenWeatherNetTask.m */,
+			);
+			path = STNetTaskQueueExample;
+			sourceTree = "<group>";
+		};
+		76DCB6921A88F4D000FAEA40 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				76DCB6931A88F4D000FAEA40 /* Info.plist */,
+				76DCB6941A88F4D000FAEA40 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		76DCB6B81A88F54200FAEA40 /* STNetTaskQueue */ = {
+			isa = PBXGroup;
+			children = (
+				76DCB6B91A88F54200FAEA40 /* STHTTPNetTask.h */,
+				76DCB6BA1A88F54200FAEA40 /* STHTTPNetTask.m */,
+				76DCB6BB1A88F54200FAEA40 /* STHTTPNetTaskQueueHandler.h */,
+				76DCB6BC1A88F54200FAEA40 /* STHTTPNetTaskQueueHandler.m */,
+				76DCB6BD1A88F54200FAEA40 /* STNetTask.h */,
+				76DCB6BE1A88F54200FAEA40 /* STNetTask.m */,
+				76DCB6BF1A88F54200FAEA40 /* STNetTaskChain.h */,
+				76DCB6C01A88F54200FAEA40 /* STNetTaskChain.m */,
+				76DCB6C11A88F54200FAEA40 /* STNetTaskQueue.h */,
+				76DCB6C21A88F54200FAEA40 /* STNetTaskQueue.m */,
+			);
+			path = STNetTaskQueue;
+			sourceTree = "<group>";
+		};
+		76DCB6C81A88F54E00FAEA40 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				76DCB6C91A88F54E00FAEA40 /* AFHTTPRequestOperation.h */,
+				76DCB6CA1A88F54E00FAEA40 /* AFHTTPRequestOperation.m */,
+				76DCB6CB1A88F54E00FAEA40 /* AFHTTPRequestOperationManager.h */,
+				76DCB6CC1A88F54E00FAEA40 /* AFHTTPRequestOperationManager.m */,
+				76DCB6CD1A88F54E00FAEA40 /* AFHTTPSessionManager.h */,
+				76DCB6CE1A88F54E00FAEA40 /* AFHTTPSessionManager.m */,
+				76DCB6CF1A88F54E00FAEA40 /* AFNetworking.h */,
+				76DCB6D01A88F54E00FAEA40 /* AFNetworkReachabilityManager.h */,
+				76DCB6D11A88F54E00FAEA40 /* AFNetworkReachabilityManager.m */,
+				76DCB6D21A88F54E00FAEA40 /* AFSecurityPolicy.h */,
+				76DCB6D31A88F54E00FAEA40 /* AFSecurityPolicy.m */,
+				76DCB6D41A88F54E00FAEA40 /* AFURLConnectionOperation.h */,
+				76DCB6D51A88F54E00FAEA40 /* AFURLConnectionOperation.m */,
+				76DCB6D61A88F54E00FAEA40 /* AFURLRequestSerialization.h */,
+				76DCB6D71A88F54E00FAEA40 /* AFURLRequestSerialization.m */,
+				76DCB6D81A88F54E00FAEA40 /* AFURLResponseSerialization.h */,
+				76DCB6D91A88F54E00FAEA40 /* AFURLResponseSerialization.m */,
+				76DCB6DA1A88F54E00FAEA40 /* AFURLSessionManager.h */,
+				76DCB6DB1A88F54E00FAEA40 /* AFURLSessionManager.m */,
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		76DCB68E1A88F4D000FAEA40 /* STNetTaskQueueExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76DCB6B21A88F4D000FAEA40 /* Build configuration list for PBXNativeTarget "STNetTaskQueueExample" */;
+			buildPhases = (
+				76DCB68B1A88F4D000FAEA40 /* Sources */,
+				76DCB68C1A88F4D000FAEA40 /* Frameworks */,
+				76DCB68D1A88F4D000FAEA40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = STNetTaskQueueExample;
+			productName = STNetTaskQueueExample;
+			productReference = 76DCB68F1A88F4D000FAEA40 /* STNetTaskQueueExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		76DCB6871A88F4D000FAEA40 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Sth4Me;
+				TargetAttributes = {
+					76DCB68E1A88F4D000FAEA40 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+				};
+			};
+			buildConfigurationList = 76DCB68A1A88F4D000FAEA40 /* Build configuration list for PBXProject "STNetTaskQueueExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 76DCB6861A88F4D000FAEA40;
+			productRefGroup = 76DCB6901A88F4D000FAEA40 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				76DCB68E1A88F4D000FAEA40 /* STNetTaskQueueExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		76DCB68D1A88F4D000FAEA40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		76DCB68B1A88F4D000FAEA40 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76DCB6E41A88F54E00FAEA40 /* AFURLSessionManager.m in Sources */,
+				76DCB6E11A88F54E00FAEA40 /* AFURLConnectionOperation.m in Sources */,
+				76DCB6E71A88F83600FAEA40 /* STOpenWeatherNetTask.m in Sources */,
+				76DCB6DC1A88F54E00FAEA40 /* AFHTTPRequestOperation.m in Sources */,
+				76DCB69B1A88F4D000FAEA40 /* ViewController.m in Sources */,
+				76DCB6DD1A88F54E00FAEA40 /* AFHTTPRequestOperationManager.m in Sources */,
+				76DCB6C71A88F54200FAEA40 /* STNetTaskQueue.m in Sources */,
+				76DCB6C41A88F54200FAEA40 /* STHTTPNetTaskQueueHandler.m in Sources */,
+				76DCB6DE1A88F54E00FAEA40 /* AFHTTPSessionManager.m in Sources */,
+				76DCB6981A88F4D000FAEA40 /* AppDelegate.m in Sources */,
+				76DCB6951A88F4D000FAEA40 /* main.m in Sources */,
+				76DCB6C31A88F54200FAEA40 /* STHTTPNetTask.m in Sources */,
+				76DCB6E01A88F54E00FAEA40 /* AFSecurityPolicy.m in Sources */,
+				76DCB6C51A88F54200FAEA40 /* STNetTask.m in Sources */,
+				76DCB6E21A88F54E00FAEA40 /* AFURLRequestSerialization.m in Sources */,
+				76DCB6DF1A88F54E00FAEA40 /* AFNetworkReachabilityManager.m in Sources */,
+				76DCB6E31A88F54E00FAEA40 /* AFURLResponseSerialization.m in Sources */,
+				76DCB6C61A88F54200FAEA40 /* STNetTaskChain.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		76DCB6B01A88F4D000FAEA40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		76DCB6B11A88F4D000FAEA40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		76DCB6B31A88F4D000FAEA40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = STNetTaskQueueExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		76DCB6B41A88F4D000FAEA40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = STNetTaskQueueExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76DCB68A1A88F4D000FAEA40 /* Build configuration list for PBXProject "STNetTaskQueueExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76DCB6B01A88F4D000FAEA40 /* Debug */,
+				76DCB6B11A88F4D000FAEA40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76DCB6B21A88F4D000FAEA40 /* Build configuration list for PBXNativeTarget "STNetTaskQueueExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76DCB6B31A88F4D000FAEA40 /* Debug */,
+				76DCB6B41A88F4D000FAEA40 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 76DCB6871A88F4D000FAEA40 /* Project object */;
+}
