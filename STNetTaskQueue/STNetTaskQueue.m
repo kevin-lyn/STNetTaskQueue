@@ -41,9 +41,7 @@ static STNetTaskQueue *sharedInstance;
 }
 
 - (id)init
-{
-    NSAssert(!sharedInstance, @"This should be a singleton class.");
-    
+{    
     if (self = [super init]) {
         self.tasks = [NSMutableDictionary new];
         self.taskDelegates = [NSMutableDictionary new];
