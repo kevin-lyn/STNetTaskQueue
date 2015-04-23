@@ -22,12 +22,14 @@
 
 - (NSDictionary *)parameters
 {
+    NSLog(@"Pack request parameters");
     return @{ @"lat": self.latitude,
               @"lon": self.longitude };
 }
 
 - (void)didResponseJSON:(NSDictionary *)response
 {
+    NSLog(@"Response: %@", response);
     _place = response[@"name"];
     _temperature = [response[@"main"][@"temp"] floatValue] / 10;
 }

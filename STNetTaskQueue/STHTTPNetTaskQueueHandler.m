@@ -40,24 +40,47 @@
     STHTTPNetTask *httpTask = (STHTTPNetTask *)task;
     NSDictionary *parameters = [httpTask parameters];
     
-    if ([httpTask method] == STHTTPNetTaskGet) {
-        [_httpManager GET:[httpTask uri] parameters:parameters success:success failure:failure];
-    }
-    else if ([httpTask method] == STHTTPNetTaskPost) {
-        NSDictionary *datas = [httpTask datas];
-        if (!datas.count) {
-            [_httpManager POST:[httpTask uri] parameters:parameters success:success failure:failure];
+    switch ([httpTask method]) {
+        case STHTTPNetTaskGet: {
+            [_httpManager GET:[httpTask uri] parameters:parameters success:success failure:failure];
         }
-        else {
-            [_httpManager POST:[httpTask uri] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                for (NSString *name in datas) {
-                    [formData appendPartWithFileData:datas[name] name:name fileName:@"st_file" mimeType:@"*/*"];
-                }
-            } success:success failure:failure];
+            break;
+        case STHTTPNetTaskPost: {
+            NSDictionary *datas = [httpTask datas];
+            if (!datas.count) {
+                [_httpManager POST:[httpTask uri] parameters:parameters success:success failure:failure];
+            }
+            else {
+                [_httpManager POST:[httpTask uri] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                    for (NSString *name in datas) {
+                        [formData appendPartWithFileData:datas[name] name:name fileName:@"st_file" mimeType:@"*/*"];
+                    }
+                } success:success failure:failure];
+            }
         }
-    }
-    else {
-        NSAssert(NO, @"Invalid STHTTPNetTaskMethod");
+            break;
+        case STHTTPNetTaskPut: {
+            [_httpManager PUT:[httpTask uri] parameters:parameters success:success failure:failure];
+        }
+            break;
+        case STHTTPNetTaskDelete: {
+            [_httpManager DELETE:[httpTask uri] parameters:parameters success:success failure:failure];
+        }
+            break;
+        case STHTTPNetTaskPatch: {
+            [_httpManager PATCH:[httpTask uri] parameters:parameters success:success failure:failure];
+        }
+            break;
+        case STHTTPNetTaskHead: {
+            [_httpManager HEAD:[httpTask uri] parameters:parameters success:^(NSURLSessionDataTask *task) {
+                [_queue didResponse:@{} taskId:taskId];
+            } failure:failure];
+        }
+            break;
+        default: {
+            NSAssert(NO, @"Invalid STHTTPNetTaskMethod");
+        }
+            break;
     }
 }
 

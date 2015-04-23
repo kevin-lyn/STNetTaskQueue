@@ -10,7 +10,11 @@
 
 typedef enum {
     STHTTPNetTaskGet,
-    STHTTPNetTaskPost
+    STHTTPNetTaskPost,
+    STHTTPNetTaskPut,
+    STHTTPNetTaskDelete,
+    STHTTPNetTaskHead,
+    STHTTPNetTaskPatch
 } STHTTPNetTaskMethod;
 
 @interface STHTTPNetTask : STNetTask
