@@ -5,6 +5,9 @@ If you don't want to put all the network reqeust logics in a "Manager" class, **
 
 **STHTTPNetTaskQueueHandler** is included, which is for HTTP based network reqeust. If you are looking for a socket or other protocol based handler, currently you should write your own net task queue handler and conform to **STNetTaskQueueHandler** protocol. **STHTTPNetTaskQeueuHandler** depends on [AFNetworking](https://github.com/AFNetworking/AFNetworking), which is included in example project.
 
+## Sequence Chart
+![STNetTaskQueue Sequence Chart](https://cloud.githubusercontent.com/assets/1491282/7292210/6d761f6a-e9cc-11e4-9620-0075082dcc8e.png)
+
 ## Get Started
 #### Step 1: Setup STNetTaskQueue after your app launch
 ```objective-c
@@ -88,4 +91,3 @@ _openWeatherTask.longitude = @"103.772962";
 ```
 
 You can see more details in example project. The example is tested with iOS SDK 8.1, XCode 6.1.1 and iPhone 6 simulator.
-
