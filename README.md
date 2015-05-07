@@ -12,7 +12,7 @@ If you don't want to put all the network reqeust logics in a "Manager" class, **
 #### Step 1: Setup STNetTaskQueue after your app launch
 ```objective-c
 NSURL *baseUrl = [NSURL URLWithString:@"http://api.openweathermap.org"];
-STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] initWithQueue:[STNetTaskQueue sharedQueue] baseURL:baseUrl];
+STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] initWithBaseURL:baseUrl];
 [STNetTaskQueue sharedQueue].handler = httpHandler;
 ```
 
