@@ -21,8 +21,7 @@
 {
     // Setup up shared STNetTaskQUeue
     NSURL *baseUrl = [NSURL URLWithString:@"http://api.openweathermap.org"];
-    STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] initWithQueue:[STNetTaskQueue sharedQueue]
-                                                                                      baseURL:baseUrl];
+    STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] initWithBaseURL:baseUrl];
     [STNetTaskQueue sharedQueue].handler = httpHandler;
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

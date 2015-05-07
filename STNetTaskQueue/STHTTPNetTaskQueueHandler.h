@@ -11,6 +11,6 @@
 
 @interface STHTTPNetTaskQueueHandler : NSObject<STNetTaskQueueHandler>
 
-- (instancetype)initWithQueue:(STNetTaskQueue *)queue baseURL:(NSURL *)baseURL;
+- (instancetype)initWithBaseURL:(NSURL *)baseURL;
 
 @end

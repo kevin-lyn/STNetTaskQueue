@@ -13,13 +13,11 @@
 @implementation STHTTPNetTaskQueueHandler
 {
     AFHTTPSessionManager *_httpManager;
-    STNetTaskQueue *_queue;
 }
 
-- (instancetype)initWithQueue:(STNetTaskQueue *)queue baseURL:(NSURL *)baseURL
+- (instancetype)initWithBaseURL:(NSURL *)baseURL
 {
     if (self = [super init]) {
-        _queue = queue;
         _httpManager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
     }
     return self;
@@ -30,11 +28,11 @@
     NSAssert([task isKindOfClass:[STHTTPNetTask class]], @"Should be subclass of STHTTPNetTask");
     
     void (^success)(NSURLSessionDataTask *, id) = ^(NSURLSessionDataTask *task, id responseObject) {
-        [_queue didResponse:responseObject taskId:taskId];
+        [netTaskQueue didResponse:responseObject taskId:taskId];
     };
     
     void (^failure)(NSURLSessionDataTask *, NSError *) = ^(NSURLSessionDataTask *task, NSError *error) {
-        [_queue didFailWithError:error taskId:taskId];
+        [netTaskQueue didFailWithError:error taskId:taskId];
     };
     
     STHTTPNetTask *httpTask = (STHTTPNetTask *)task;
@@ -73,7 +71,7 @@
             break;
         case STHTTPNetTaskHead: {
             [_httpManager HEAD:[httpTask uri] parameters:parameters success:^(NSURLSessionDataTask *task) {
-                [_queue didResponse:@{} taskId:taskId];
+                [netTaskQueue didResponse:@{} taskId:taskId];
             } failure:failure];
         }
             break;
