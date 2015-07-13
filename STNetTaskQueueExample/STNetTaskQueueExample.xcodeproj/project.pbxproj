@@ -1,0 +1,484 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2F307B01999BF5E23D5324F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C208AF3D418206A834AD082 /* libPods.a */; };
+		76F5A30D1B5412A200F5651B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A30C1B5412A200F5651B /* main.m */; };
+		76F5A3101B5412A200F5651B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A30F1B5412A200F5651B /* AppDelegate.m */; };
+		76F5A3131B5412A200F5651B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A3121B5412A200F5651B /* ViewController.m */; };
+		76F5A31B1B5412A200F5651B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F5A3191B5412A200F5651B /* LaunchScreen.xib */; };
+		76F5A3271B5412A200F5651B /* STNetTaskQueueExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A3261B5412A200F5651B /* STNetTaskQueueExampleTests.m */; };
+		76F5A3321B54165500F5651B /* STOpenWeatherNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A3311B54165500F5651B /* STOpenWeatherNetTask.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		76F5A3211B5412A200F5651B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76F5A2FF1B5412A200F5651B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 76F5A3061B5412A200F5651B;
+			remoteInfo = STNetTaskQueueExample;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4C208AF3D418206A834AD082 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6283166389805BFC302B5494 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		76F5A3071B5412A200F5651B /* STNetTaskQueueExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STNetTaskQueueExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76F5A30B1B5412A200F5651B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76F5A30C1B5412A200F5651B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		76F5A30E1B5412A200F5651B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		76F5A30F1B5412A200F5651B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		76F5A3111B5412A200F5651B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		76F5A3121B5412A200F5651B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		76F5A31A1B5412A200F5651B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		76F5A3201B5412A200F5651B /* STNetTaskQueueExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STNetTaskQueueExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76F5A3251B5412A200F5651B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76F5A3261B5412A200F5651B /* STNetTaskQueueExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueueExampleTests.m; sourceTree = "<group>"; };
+		76F5A3301B54165500F5651B /* STOpenWeatherNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOpenWeatherNetTask.h; sourceTree = "<group>"; };
+		76F5A3311B54165500F5651B /* STOpenWeatherNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOpenWeatherNetTask.m; sourceTree = "<group>"; };
+		DA96C126CD51641B7419C5A0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		76F5A3041B5412A200F5651B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F307B01999BF5E23D5324F7 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76F5A31D1B5412A200F5651B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3BD146A677E6BCD88A628CDD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6283166389805BFC302B5494 /* Pods.debug.xcconfig */,
+				DA96C126CD51641B7419C5A0 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		76F5A2FE1B5412A200F5651B = {
+			isa = PBXGroup;
+			children = (
+				76F5A3091B5412A200F5651B /* STNetTaskQueueExample */,
+				76F5A3231B5412A200F5651B /* STNetTaskQueueExampleTests */,
+				76F5A3081B5412A200F5651B /* Products */,
+				3BD146A677E6BCD88A628CDD /* Pods */,
+				AF405C6EEE863A2431743D1B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		76F5A3081B5412A200F5651B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				76F5A3071B5412A200F5651B /* STNetTaskQueueExample.app */,
+				76F5A3201B5412A200F5651B /* STNetTaskQueueExampleTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		76F5A3091B5412A200F5651B /* STNetTaskQueueExample */ = {
+			isa = PBXGroup;
+			children = (
+				76F5A30E1B5412A200F5651B /* AppDelegate.h */,
+				76F5A30F1B5412A200F5651B /* AppDelegate.m */,
+				76F5A3111B5412A200F5651B /* ViewController.h */,
+				76F5A3121B5412A200F5651B /* ViewController.m */,
+				76F5A3301B54165500F5651B /* STOpenWeatherNetTask.h */,
+				76F5A3311B54165500F5651B /* STOpenWeatherNetTask.m */,
+				76F5A3191B5412A200F5651B /* LaunchScreen.xib */,
+				76F5A30A1B5412A200F5651B /* Supporting Files */,
+			);
+			path = STNetTaskQueueExample;
+			sourceTree = "<group>";
+		};
+		76F5A30A1B5412A200F5651B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				76F5A30B1B5412A200F5651B /* Info.plist */,
+				76F5A30C1B5412A200F5651B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		76F5A3231B5412A200F5651B /* STNetTaskQueueExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				76F5A3261B5412A200F5651B /* STNetTaskQueueExampleTests.m */,
+				76F5A3241B5412A200F5651B /* Supporting Files */,
+			);
+			path = STNetTaskQueueExampleTests;
+			sourceTree = "<group>";
+		};
+		76F5A3241B5412A200F5651B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				76F5A3251B5412A200F5651B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF405C6EEE863A2431743D1B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C208AF3D418206A834AD082 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		76F5A3061B5412A200F5651B /* STNetTaskQueueExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76F5A32A1B5412A200F5651B /* Build configuration list for PBXNativeTarget "STNetTaskQueueExample" */;
+			buildPhases = (
+				730C60CFC22DA978694F0634 /* Check Pods Manifest.lock */,
+				76F5A3031B5412A200F5651B /* Sources */,
+				76F5A3041B5412A200F5651B /* Frameworks */,
+				76F5A3051B5412A200F5651B /* Resources */,
+				4706BC0CBCF70C722FEE49CD /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = STNetTaskQueueExample;
+			productName = STNetTaskQueueExample;
+			productReference = 76F5A3071B5412A200F5651B /* STNetTaskQueueExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		76F5A31F1B5412A200F5651B /* STNetTaskQueueExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76F5A32D1B5412A200F5651B /* Build configuration list for PBXNativeTarget "STNetTaskQueueExampleTests" */;
+			buildPhases = (
+				76F5A31C1B5412A200F5651B /* Sources */,
+				76F5A31D1B5412A200F5651B /* Frameworks */,
+				76F5A31E1B5412A200F5651B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				76F5A3221B5412A200F5651B /* PBXTargetDependency */,
+			);
+			name = STNetTaskQueueExampleTests;
+			productName = STNetTaskQueueExampleTests;
+			productReference = 76F5A3201B5412A200F5651B /* STNetTaskQueueExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		76F5A2FF1B5412A200F5651B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = Sth4Me;
+				TargetAttributes = {
+					76F5A3061B5412A200F5651B = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					76F5A31F1B5412A200F5651B = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 76F5A3061B5412A200F5651B;
+					};
+				};
+			};
+			buildConfigurationList = 76F5A3021B5412A200F5651B /* Build configuration list for PBXProject "STNetTaskQueueExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 76F5A2FE1B5412A200F5651B;
+			productRefGroup = 76F5A3081B5412A200F5651B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				76F5A3061B5412A200F5651B /* STNetTaskQueueExample */,
+				76F5A31F1B5412A200F5651B /* STNetTaskQueueExampleTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		76F5A3051B5412A200F5651B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76F5A31B1B5412A200F5651B /* LaunchScreen.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76F5A31E1B5412A200F5651B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4706BC0CBCF70C722FEE49CD /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		730C60CFC22DA978694F0634 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		76F5A3031B5412A200F5651B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76F5A3321B54165500F5651B /* STOpenWeatherNetTask.m in Sources */,
+				76F5A3131B5412A200F5651B /* ViewController.m in Sources */,
+				76F5A3101B5412A200F5651B /* AppDelegate.m in Sources */,
+				76F5A30D1B5412A200F5651B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		76F5A31C1B5412A200F5651B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				76F5A3271B5412A200F5651B /* STNetTaskQueueExampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		76F5A3221B5412A200F5651B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 76F5A3061B5412A200F5651B /* STNetTaskQueueExample */;
+			targetProxy = 76F5A3211B5412A200F5651B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		76F5A3191B5412A200F5651B /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76F5A31A1B5412A200F5651B /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		76F5A3281B5412A200F5651B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		76F5A3291B5412A200F5651B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		76F5A32B1B5412A200F5651B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6283166389805BFC302B5494 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = STNetTaskQueueExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		76F5A32C1B5412A200F5651B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA96C126CD51641B7419C5A0 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = STNetTaskQueueExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		76F5A32E1B5412A200F5651B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = STNetTaskQueueExampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STNetTaskQueueExample.app/STNetTaskQueueExample";
+			};
+			name = Debug;
+		};
+		76F5A32F1B5412A200F5651B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = STNetTaskQueueExampleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STNetTaskQueueExample.app/STNetTaskQueueExample";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		76F5A3021B5412A200F5651B /* Build configuration list for PBXProject "STNetTaskQueueExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76F5A3281B5412A200F5651B /* Debug */,
+				76F5A3291B5412A200F5651B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76F5A32A1B5412A200F5651B /* Build configuration list for PBXNativeTarget "STNetTaskQueueExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76F5A32B1B5412A200F5651B /* Debug */,
+				76F5A32C1B5412A200F5651B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		76F5A32D1B5412A200F5651B /* Build configuration list for PBXNativeTarget "STNetTaskQueueExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				76F5A32E1B5412A200F5651B /* Debug */,
+				76F5A32F1B5412A200F5651B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 76F5A2FF1B5412A200F5651B /* Project object */;
+}
