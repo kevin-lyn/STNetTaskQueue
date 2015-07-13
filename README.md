@@ -1,7 +1,7 @@
 # STNetTaskQueue
-Queue for managing network request
+Queue for managing network requests
 
-If you don't want to put all the network reqeust logics in a "Manager" class, **STNetTaskQueue** may be your choice. You can now handle each network reqeust with separated **STNetTask** instead.
+STNetTaskQueue may be your choice if you want to handle each network request stuff in separated STNetTask instead of having all the network requests logics in a "Manager" class.
 
 **STHTTPNetTaskQueueHandler** is included, which is for HTTP based network reqeust. If you are looking for a socket or other protocol based handler, currently you should write your own net task queue handler and conform to **STNetTaskQueueHandler** protocol. **STHTTPNetTaskQeueuHandler** depends on [AFNetworking](https://github.com/AFNetworking/AFNetworking), which is included in example project.
 
