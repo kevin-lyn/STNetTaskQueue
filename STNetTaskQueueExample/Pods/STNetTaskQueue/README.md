@@ -1,23 +1,27 @@
 # STNetTaskQueue
-Queue for managing network request
+Queue for managing network requests
 
-If you don't want to put all the network reqeust logics in a "Manager" class, **STNetTaskQueue** may be your choice. You can now handle each network reqeust with separated **STNetTask** instead.
+STNetTaskQueue may be your choice if you want to handle each network request stuff in separated STNetTask instead of having all the network requests logics in a "Manager" class.
 
 **STHTTPNetTaskQueueHandler** is included, which is for HTTP based network reqeust. If you are looking for a socket or other protocol based handler, currently you should write your own net task queue handler and conform to **STNetTaskQueueHandler** protocol. **STHTTPNetTaskQeueuHandler** depends on [AFNetworking](https://github.com/AFNetworking/AFNetworking), which is included in example project.
+
+## Features
+- Retry net task with specified max retry count.
+- Delegate for net task result according to "uri" of net task.
 
 ## Sequence Chart
 ![STNetTaskQueue Sequence Chart](https://cloud.githubusercontent.com/assets/1491282/7292210/6d761f6a-e9cc-11e4-9620-0075082dcc8e.png)
 
 ## Get Started
 #### Step 1: Setup STNetTaskQueue after your app launch
-```objective-c
+```objc
 NSURL *baseUrl = [NSURL URLWithString:@"http://api.openweathermap.org"];
 STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] initWithBaseURL:baseUrl];
 [STNetTaskQueue sharedQueue].handler = httpHandler;
 ```
 
 #### Step 2: Write your net task for each reqeust
-```objective-c
+```objc
 @interface STOpenWeatherNetTask : STHTTPNetTask
 
 @property (nonatomic, strong) NSString *latitude;
@@ -28,7 +32,7 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 @end
 ```
 
-```objective-c
+```objc
 @implementation STOpenWeatherNetTask
 
 - (STHTTPNetTaskMethod)method
@@ -39,6 +43,11 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 - (NSString *)uri
 {
     return @"data/2.5/weather";
+}
+
+- (NSUInteger)maxRetryCount
+{
+    return 3;
 }
 
 - (NSDictionary *)parameters
@@ -57,7 +66,7 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 ```
 
 #### Step 3: Go and get your response
-```objective-c
+```objc
 if (_openWeatherTask.pending) {
     return;
 }
@@ -70,7 +79,7 @@ _openWeatherTask.longitude = @"103.772962";
 [[STNetTaskQueue sharedQueue] addTask:_openWeatherTask];
 ```
 
-```objective-c
+```objc
 - (void)netTaskDidEnd:(STNetTask *)task
 {
     // It's necessary to detect if _openWeatherTask != task and return,
