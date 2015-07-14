@@ -12,19 +12,8 @@
 		76F5A3101B5412A200F5651B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A30F1B5412A200F5651B /* AppDelegate.m */; };
 		76F5A3131B5412A200F5651B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A3121B5412A200F5651B /* ViewController.m */; };
 		76F5A31B1B5412A200F5651B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 76F5A3191B5412A200F5651B /* LaunchScreen.xib */; };
-		76F5A3271B5412A200F5651B /* STNetTaskQueueExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A3261B5412A200F5651B /* STNetTaskQueueExampleTests.m */; };
 		76F5A3321B54165500F5651B /* STOpenWeatherNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A3311B54165500F5651B /* STOpenWeatherNetTask.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		76F5A3211B5412A200F5651B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 76F5A2FF1B5412A200F5651B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 76F5A3061B5412A200F5651B;
-			remoteInfo = STNetTaskQueueExample;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		4C208AF3D418206A834AD082 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -37,9 +26,6 @@
 		76F5A3111B5412A200F5651B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		76F5A3121B5412A200F5651B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		76F5A31A1B5412A200F5651B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		76F5A3201B5412A200F5651B /* STNetTaskQueueExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STNetTaskQueueExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		76F5A3251B5412A200F5651B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76F5A3261B5412A200F5651B /* STNetTaskQueueExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueueExampleTests.m; sourceTree = "<group>"; };
 		76F5A3301B54165500F5651B /* STOpenWeatherNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOpenWeatherNetTask.h; sourceTree = "<group>"; };
 		76F5A3311B54165500F5651B /* STOpenWeatherNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOpenWeatherNetTask.m; sourceTree = "<group>"; };
 		DA96C126CD51641B7419C5A0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -51,13 +37,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F307B01999BF5E23D5324F7 /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		76F5A31D1B5412A200F5651B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,7 +56,6 @@
 			isa = PBXGroup;
 			children = (
 				76F5A3091B5412A200F5651B /* STNetTaskQueueExample */,
-				76F5A3231B5412A200F5651B /* STNetTaskQueueExampleTests */,
 				76F5A3081B5412A200F5651B /* Products */,
 				3BD146A677E6BCD88A628CDD /* Pods */,
 				AF405C6EEE863A2431743D1B /* Frameworks */,
@@ -88,7 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				76F5A3071B5412A200F5651B /* STNetTaskQueueExample.app */,
-				76F5A3201B5412A200F5651B /* STNetTaskQueueExampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,23 +90,6 @@
 			children = (
 				76F5A30B1B5412A200F5651B /* Info.plist */,
 				76F5A30C1B5412A200F5651B /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		76F5A3231B5412A200F5651B /* STNetTaskQueueExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				76F5A3261B5412A200F5651B /* STNetTaskQueueExampleTests.m */,
-				76F5A3241B5412A200F5651B /* Supporting Files */,
-			);
-			path = STNetTaskQueueExampleTests;
-			sourceTree = "<group>";
-		};
-		76F5A3241B5412A200F5651B /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				76F5A3251B5412A200F5651B /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -164,24 +124,6 @@
 			productReference = 76F5A3071B5412A200F5651B /* STNetTaskQueueExample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		76F5A31F1B5412A200F5651B /* STNetTaskQueueExampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 76F5A32D1B5412A200F5651B /* Build configuration list for PBXNativeTarget "STNetTaskQueueExampleTests" */;
-			buildPhases = (
-				76F5A31C1B5412A200F5651B /* Sources */,
-				76F5A31D1B5412A200F5651B /* Frameworks */,
-				76F5A31E1B5412A200F5651B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				76F5A3221B5412A200F5651B /* PBXTargetDependency */,
-			);
-			name = STNetTaskQueueExampleTests;
-			productName = STNetTaskQueueExampleTests;
-			productReference = 76F5A3201B5412A200F5651B /* STNetTaskQueueExampleTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -193,10 +135,6 @@
 				TargetAttributes = {
 					76F5A3061B5412A200F5651B = {
 						CreatedOnToolsVersion = 6.4;
-					};
-					76F5A31F1B5412A200F5651B = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = 76F5A3061B5412A200F5651B;
 					};
 				};
 			};
@@ -214,7 +152,6 @@
 			projectRoot = "";
 			targets = (
 				76F5A3061B5412A200F5651B /* STNetTaskQueueExample */,
-				76F5A31F1B5412A200F5651B /* STNetTaskQueueExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -225,13 +162,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F5A31B1B5412A200F5651B /* LaunchScreen.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		76F5A31E1B5412A200F5651B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,23 +212,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		76F5A31C1B5412A200F5651B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				76F5A3271B5412A200F5651B /* STNetTaskQueueExampleTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		76F5A3221B5412A200F5651B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 76F5A3061B5412A200F5651B /* STNetTaskQueueExample */;
-			targetProxy = 76F5A3211B5412A200F5651B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		76F5A3191B5412A200F5651B /* LaunchScreen.xib */ = {
@@ -414,40 +328,6 @@
 			};
 			name = Release;
 		};
-		76F5A32E1B5412A200F5651B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = STNetTaskQueueExampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STNetTaskQueueExample.app/STNetTaskQueueExample";
-			};
-			name = Debug;
-		};
-		76F5A32F1B5412A200F5651B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = STNetTaskQueueExampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STNetTaskQueueExample.app/STNetTaskQueueExample";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -465,15 +345,6 @@
 			buildConfigurations = (
 				76F5A32B1B5412A200F5651B /* Debug */,
 				76F5A32C1B5412A200F5651B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		76F5A32D1B5412A200F5651B /* Build configuration list for PBXNativeTarget "STNetTaskQueueExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				76F5A32E1B5412A200F5651B /* Debug */,
-				76F5A32F1B5412A200F5651B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
