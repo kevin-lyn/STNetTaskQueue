@@ -12,6 +12,17 @@ STNetTaskQueue may be your choice if you want to handle each network request stu
 ## Sequence Chart
 ![STNetTaskQueue Sequence Chart](https://cloud.githubusercontent.com/assets/1491282/7292210/6d761f6a-e9cc-11e4-9620-0075082dcc8e.png)
 
+### Installation with CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Objective-C, which automates and simplifies the process of using 3rd-party libraries like AFNetworking in your projects. See the ["Getting Started" guide for more information](https://github.com/AFNetworking/AFNetworking/wiki/Getting-Started-with-AFNetworking).
+
+#### Podfile
+
+```ruby
+platform :ios, '7.0'
+pod 'STNetTaskQueue', '~> 0.0.1'
+```
+
 ## Get Started
 #### Step 1: Setup STNetTaskQueue after your app launch
 ```objc
