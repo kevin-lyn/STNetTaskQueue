@@ -25,4 +25,19 @@
     
 }
 
+- (void)didRetry
+{
+    
+}
+
+- (NSUInteger)maxRetryCount
+{
+    return 0;
+}
+
+- (BOOL)shouldRetryForError:(NSError *)error
+{
+    return YES;
+}
+
 @end

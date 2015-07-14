@@ -12,9 +12,14 @@
 
 @property (nonatomic, strong) NSError *error;
 @property (nonatomic, assign) BOOL pending;
+@property (nonatomic, assign) NSUInteger retryCount;
 
 - (NSString *)uri;
 - (void)didResponse:(NSObject *)response;
 - (void)didFail;
+- (void)didRetry;
+
+- (NSUInteger)maxRetryCount;
+- (BOOL)shouldRetryForError:(NSError *)error;
 
 @end

@@ -96,6 +96,17 @@ static STNetTaskQueue *sharedInstance;
     }];
 }
 
+- (BOOL)retryTask:(STNetTask *)task error:(NSError *)error
+{
+    if ([task shouldRetryForError:error] && task.retryCount < task.maxRetryCount) {
+        task.retryCount++;
+        [task didRetry];
+        [self addTask:task];
+        return YES;
+    }
+    return NO;
+}
+
 - (void)didResponse:(NSObject *)response taskId:(int)taskId
 {
     __weak STNetTaskQueue *weakSelf = self;
@@ -118,7 +129,13 @@ static STNetTaskQueue *sharedInstance;
             NSError *error = [NSError errorWithDomain:STNetTaskQueueErrorUnknown
                                                  code:-1
                                              userInfo:@{ @"msg": @"Unknown Error" }];
+            
+            if ([self retryTask:task error:error]) {
+                return;
+            }
+            
             task.error = error;
+            [task didFail];
         }
         
         [weakSelf netTaskDidEnd:task];
@@ -140,6 +157,10 @@ static STNetTaskQueue *sharedInstance;
                 return;
             }
             [weakSelf.tasks removeObjectForKey:@(taskId)];
+        }
+        
+        if ([self retryTask:task error:error]) {
+            return;
         }
         
         task.error = error;
