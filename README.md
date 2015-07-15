@@ -8,6 +8,7 @@ STNetTaskQueue may be your choice if you want to handle each network request stu
 ## Features
 - Retry net task with specified max retry count.
 - Delegate for net task result according to "uri" of net task.
+- More features are coming as STNetTaskQueue is extendible.
 
 ## Sequence Chart
 ![STNetTaskQueue Sequence Chart](https://cloud.githubusercontent.com/assets/1491282/7292210/6d761f6a-e9cc-11e4-9620-0075082dcc8e.png)
@@ -24,6 +25,7 @@ STNetTaskQueue may be your choice if you want to handle each network request stu
 platform :ios, '7.0'
 pod 'STNetTaskQueue', '~> 0.0.1'
 ```
+
 
 #### Step 1: Setup STNetTaskQueue after your app launch
 ```objc
