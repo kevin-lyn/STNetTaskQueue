@@ -14,6 +14,7 @@
     NSURL *_baseURL;
     NSURLSession *_urlSession;
     NSDictionary *_methodMap;
+    NSDictionary *_contentTypeMap;
     NSString *_formDataBoundary;
 }
 
@@ -28,6 +29,8 @@
                         @(STHTTPNetTaskPatch): @"PATCH",
                         @(STHTTPNetTaskPost): @"POST",
                         @(STHTTPNetTaskPut): @"PUT" };
+        _contentTypeMap = @{ @(STHTTPNetTaskRequestJSON): @"application/json; charset=utf-8",
+                             @(STHTTPNetTaskRequestKeyValueString): @"application/x-www-form-urlencoded" };
         _formDataBoundary = [NSString stringWithFormat:@"ST-Boundary-%@", [[NSUUID UUID] UUIDString]];
     }
     return self;
@@ -118,6 +121,7 @@
             NSDictionary *datas = httpTask.datas;
             if (!datas.count) {
                 request.HTTPBody = [self bodyDataFromParameters:parameters requestType:httpTask.requestType];
+                [request setValue:_contentTypeMap[@(httpTask.requestType)] forHTTPHeaderField:@"Content-Type"];
                 sessionTask = [_urlSession dataTaskWithRequest:request completionHandler:completionHandler];
             }
             else {
