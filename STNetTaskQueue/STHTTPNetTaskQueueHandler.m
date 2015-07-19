@@ -55,7 +55,9 @@
                     }
                     @catch (NSException *exception) {
                         NSLog(@"Response parsed error: %@", exception.debugDescription);
-                        error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError code:0 userInfo:nil];
+                        error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
+                                                    code:0
+                                                userInfo:@{ @"url": response.URL.absoluteString }];
                     }
                 }
                     break;
@@ -64,7 +66,9 @@
                     responseObj = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                     if (error) {
                         NSLog(@"Response parsed error: %@", error.debugDescription);
-                        error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError code:0 userInfo:nil];
+                        error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
+                                                    code:0
+                                                userInfo:@{ @"url": response.URL.absoluteString }];
                     }
                 }
                     break;
@@ -81,7 +85,8 @@
             if (!error) { // Response status code is not 200
                 error = [NSError errorWithDomain:STHTTPNetTaskServerError
                                             code:0
-                                        userInfo:@{ @"statusCode": @(httpResponse.statusCode) }];
+                                        userInfo:@{ @"statusCode": @(httpResponse.statusCode),
+                                                    @"url": response.URL.absoluteString }];
             }
             [netTaskQueue didFailWithError:error taskId:taskId];
         }
@@ -99,7 +104,9 @@
         case STHTTPNetTaskDelete: {
             NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:[_baseURL URLByAppendingPathComponent:httpTask.uri]
                                                         resolvingAgainstBaseURL:NO];
-            urlComponents.query = [self queryStringFromParameters:parameters];
+            if (parameters.count) {
+                urlComponents.query = [self queryStringFromParameters:parameters];
+            }
             request.URL = urlComponents.URL;
             sessionTask = [_urlSession dataTaskWithRequest:request completionHandler:completionHandler];
         }
@@ -138,9 +145,10 @@
     }
     
     NSMutableString *queryString = [NSMutableString string];
-    [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
-        value = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        [queryString appendFormat:@"%@=%@&", key, value];
+    [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL *stop) {
+        NSString *stringValue = [value description];
+        stringValue = [stringValue stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        [queryString appendFormat:@"%@=%@&", key, stringValue];
     }];
     [queryString deleteCharactersInRange:NSMakeRange(queryString.length - 1, 1)];
     return queryString;

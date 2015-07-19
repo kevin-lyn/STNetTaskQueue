@@ -12,6 +12,7 @@
 		765FF8A21B5B7B3100DE637E /* STTestPutNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF8A11B5B7B3100DE637E /* STTestPutNetTask.m */; };
 		765FF8AE1B5B840B00DE637E /* STTestPatchNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF8AD1B5B840B00DE637E /* STTestPatchNetTask.m */; };
 		765FF8B41B5B854A00DE637E /* STTestDeleteNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF8B31B5B854A00DE637E /* STTestDeleteNetTask.m */; };
+		765FF8B71B5B875800DE637E /* STTestDownloadNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF8B61B5B875800DE637E /* STTestDownloadNetTask.m */; };
 		7665028E1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665028D1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m */; };
 		7665029D1B554CA800B4F63D /* STHTTPNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502941B554CA800B4F63D /* STHTTPNetTask.m */; };
 		7665029E1B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502961B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m */; };
@@ -32,6 +33,8 @@
 		765FF8AD1B5B840B00DE637E /* STTestPatchNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestPatchNetTask.m; sourceTree = "<group>"; };
 		765FF8B21B5B854A00DE637E /* STTestDeleteNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestDeleteNetTask.h; sourceTree = "<group>"; };
 		765FF8B31B5B854A00DE637E /* STTestDeleteNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestDeleteNetTask.m; sourceTree = "<group>"; };
+		765FF8B51B5B875800DE637E /* STTestDownloadNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestDownloadNetTask.h; sourceTree = "<group>"; };
+		765FF8B61B5B875800DE637E /* STTestDownloadNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestDownloadNetTask.m; sourceTree = "<group>"; };
 		766502881B554C9600B4F63D /* STNetTaskQueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STNetTaskQueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7665028C1B554C9600B4F63D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7665028D1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueueTestHTTP.m; sourceTree = "<group>"; };
@@ -94,6 +97,8 @@
 				765FF8AD1B5B840B00DE637E /* STTestPatchNetTask.m */,
 				765FF8B21B5B854A00DE637E /* STTestDeleteNetTask.h */,
 				765FF8B31B5B854A00DE637E /* STTestDeleteNetTask.m */,
+				765FF8B51B5B875800DE637E /* STTestDownloadNetTask.h */,
+				765FF8B61B5B875800DE637E /* STTestDownloadNetTask.m */,
 			);
 			name = HTTP;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				7665029F1B554CA800B4F63D /* STNetTask.m in Sources */,
 				765FF89B1B5B565E00DE637E /* STTestGetNetTask.m in Sources */,
 				765FF89F1B5B763000DE637E /* STTestPostNetTask.m in Sources */,
+				765FF8B71B5B875800DE637E /* STTestDownloadNetTask.m in Sources */,
 				766502A11B554CA800B4F63D /* STNetTaskQueue.m in Sources */,
 				765FF8AE1B5B840B00DE637E /* STTestPatchNetTask.m in Sources */,
 			);

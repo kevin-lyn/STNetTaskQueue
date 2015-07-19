@@ -15,6 +15,7 @@
 #import "STTestPutNetTask.h"
 #import "STTestPatchNetTask.h"
 #import "STTestDeleteNetTask.h"
+#import "STTestDownloadNetTask.h"
 
 @interface STNetTaskQueueTestHTTP : XCTestCase <STNetTaskDelegate>
 
@@ -131,6 +132,20 @@
     [self waitForExpectationsWithTimeout:10 handler:nil];
 }
 
+- (void)testDownloadNetTask
+{
+    _expectation = [self expectationWithDescription:@"testDownloadAndUploadNetTask"];
+    
+    [self setUpNetTaskQueueWithBaseURLString:@"https://assets-cdn.github.com"];
+    
+    STTestDownloadNetTask *testDownloadTask = [STTestDownloadNetTask new];
+    [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:testDownloadTask.uri];
+    [[STNetTaskQueue sharedQueue] addTask:testDownloadTask];
+
+    
+    [self waitForExpectationsWithTimeout:20 handler:nil];
+}
+
 - (void)netTaskDidEnd:(STNetTask *)task
 {
     if (!_expectation) {
@@ -177,6 +192,13 @@
         [_expectation fulfill];
         if (task.error) {
             XCTFail(@"testDeleteNetTask failed");
+        }
+    }
+    else if ([task isKindOfClass:[STTestDownloadNetTask class]]) {
+        [_expectation fulfill];
+        STTestDownloadNetTask *testDownloadTask = (STTestDownloadNetTask *)task;
+        if (task.error || !testDownloadTask.image) {
+            XCTFail(@"testDownloadAndUploadNetTask failed");
         }
     }
 }
