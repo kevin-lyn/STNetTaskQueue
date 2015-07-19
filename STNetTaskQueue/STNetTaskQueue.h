@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "STNetTask.h"
 
-#define STNetTaskQueueErrorUnknown @"STNetTaskQueueErrorUnknown"
-
 @class STNetTaskQueue;
 
 @protocol STNetTaskDelegate <NSObject>
@@ -21,7 +19,6 @@
 
 @protocol STNetTaskQueueHandler <NSObject>
 
-// @return unique taskId of this task
 - (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue task:(STNetTask *)task taskId:(int)taskId;
 
 @end
@@ -33,7 +30,7 @@
 + (instancetype)sharedQueue;
 - (void)addTask:(STNetTask *)task;
 - (void)cancelTask:(STNetTask *)task;
-- (void)didResponse:(NSObject *)response taskId:(int)taskId;
+- (void)didResponse:(id)response taskId:(int)taskId;
 - (void)didFailWithError:(NSError *)error taskId:(int)taskId;
 - (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate uri:(NSString *)uri;
 

@@ -8,6 +8,8 @@
 
 #import "STNetTask.h"
 
+NSString *const STNetTaskUnknownError = @"STNetTaskUnknownError";
+
 @implementation STNetTask
 
 - (NSString *)uri
@@ -15,7 +17,7 @@
     return @"";
 }
 
-- (void)didResponse:(NSObject *)response
+- (void)didResponse:(id)response
 {
     
 }

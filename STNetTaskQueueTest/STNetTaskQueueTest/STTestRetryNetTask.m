@@ -17,12 +17,12 @@
 
 - (void)didRetry
 {
-    NSLog(@"retryCount: %ld", self.retryCount);
+    NSLog(@"retryCount: %tu", self.retryCount);
 }
 
 - (NSUInteger)maxRetryCount
 {
-    return 5;
+    return 3;
 }
 
 @end

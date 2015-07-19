@@ -7,28 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7665028E1B554C9600B4F63D /* STNetTaskQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665028D1B554C9600B4F63D /* STNetTaskQueueTest.m */; };
+		765FF89B1B5B565E00DE637E /* STTestGetNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF89A1B5B565E00DE637E /* STTestGetNetTask.m */; };
+		765FF89F1B5B763000DE637E /* STTestPostNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF89E1B5B763000DE637E /* STTestPostNetTask.m */; };
+		765FF8A21B5B7B3100DE637E /* STTestPutNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF8A11B5B7B3100DE637E /* STTestPutNetTask.m */; };
+		765FF8AE1B5B840B00DE637E /* STTestPatchNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF8AD1B5B840B00DE637E /* STTestPatchNetTask.m */; };
+		765FF8B41B5B854A00DE637E /* STTestDeleteNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF8B31B5B854A00DE637E /* STTestDeleteNetTask.m */; };
+		7665028E1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665028D1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m */; };
 		7665029D1B554CA800B4F63D /* STHTTPNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502941B554CA800B4F63D /* STHTTPNetTask.m */; };
 		7665029E1B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502961B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m */; };
 		7665029F1B554CA800B4F63D /* STNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502981B554CA800B4F63D /* STNetTask.m */; };
 		766502A01B554CA800B4F63D /* STNetTaskChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665029A1B554CA800B4F63D /* STNetTaskChain.m */; };
 		766502A11B554CA800B4F63D /* STNetTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665029C1B554CA800B4F63D /* STNetTaskQueue.m */; };
-		766502B61B554CF700B4F63D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502A41B554CF700B4F63D /* AFHTTPRequestOperation.m */; };
-		766502B71B554CF700B4F63D /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502A61B554CF700B4F63D /* AFHTTPRequestOperationManager.m */; };
-		766502B81B554CF700B4F63D /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502A81B554CF700B4F63D /* AFHTTPSessionManager.m */; };
-		766502B91B554CF700B4F63D /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502AB1B554CF700B4F63D /* AFNetworkReachabilityManager.m */; };
-		766502BA1B554CF700B4F63D /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502AD1B554CF700B4F63D /* AFSecurityPolicy.m */; };
-		766502BB1B554CF700B4F63D /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502AF1B554CF700B4F63D /* AFURLConnectionOperation.m */; };
-		766502BC1B554CF700B4F63D /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502B11B554CF700B4F63D /* AFURLRequestSerialization.m */; };
-		766502BD1B554CF700B4F63D /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502B31B554CF700B4F63D /* AFURLResponseSerialization.m */; };
-		766502BE1B554CF700B4F63D /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502B51B554CF700B4F63D /* AFURLSessionManager.m */; };
 		766502C11B55541F00B4F63D /* STTestRetryNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502C01B55541F00B4F63D /* STTestRetryNetTask.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		765FF8991B5B565E00DE637E /* STTestGetNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestGetNetTask.h; sourceTree = "<group>"; };
+		765FF89A1B5B565E00DE637E /* STTestGetNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestGetNetTask.m; sourceTree = "<group>"; };
+		765FF89D1B5B763000DE637E /* STTestPostNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestPostNetTask.h; sourceTree = "<group>"; };
+		765FF89E1B5B763000DE637E /* STTestPostNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestPostNetTask.m; sourceTree = "<group>"; };
+		765FF8A01B5B7B3100DE637E /* STTestPutNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestPutNetTask.h; sourceTree = "<group>"; };
+		765FF8A11B5B7B3100DE637E /* STTestPutNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestPutNetTask.m; sourceTree = "<group>"; };
+		765FF8AC1B5B840B00DE637E /* STTestPatchNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestPatchNetTask.h; sourceTree = "<group>"; };
+		765FF8AD1B5B840B00DE637E /* STTestPatchNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestPatchNetTask.m; sourceTree = "<group>"; };
+		765FF8B21B5B854A00DE637E /* STTestDeleteNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestDeleteNetTask.h; sourceTree = "<group>"; };
+		765FF8B31B5B854A00DE637E /* STTestDeleteNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestDeleteNetTask.m; sourceTree = "<group>"; };
 		766502881B554C9600B4F63D /* STNetTaskQueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STNetTaskQueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7665028C1B554C9600B4F63D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7665028D1B554C9600B4F63D /* STNetTaskQueueTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueueTest.m; sourceTree = "<group>"; };
+		7665028D1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueueTestHTTP.m; sourceTree = "<group>"; };
 		766502931B554CA800B4F63D /* STHTTPNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHTTPNetTask.h; sourceTree = "<group>"; };
 		766502941B554CA800B4F63D /* STHTTPNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHTTPNetTask.m; sourceTree = "<group>"; };
 		766502951B554CA800B4F63D /* STHTTPNetTaskQueueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHTTPNetTaskQueueHandler.h; sourceTree = "<group>"; };
@@ -39,25 +45,6 @@
 		7665029A1B554CA800B4F63D /* STNetTaskChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskChain.m; sourceTree = "<group>"; };
 		7665029B1B554CA800B4F63D /* STNetTaskQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTaskQueue.h; sourceTree = "<group>"; };
 		7665029C1B554CA800B4F63D /* STNetTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueue.m; sourceTree = "<group>"; };
-		766502A31B554CF700B4F63D /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
-		766502A41B554CF700B4F63D /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
-		766502A51B554CF700B4F63D /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
-		766502A61B554CF700B4F63D /* AFHTTPRequestOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperationManager.m; sourceTree = "<group>"; };
-		766502A71B554CF700B4F63D /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
-		766502A81B554CF700B4F63D /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
-		766502A91B554CF700B4F63D /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
-		766502AA1B554CF700B4F63D /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		766502AB1B554CF700B4F63D /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
-		766502AC1B554CF700B4F63D /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
-		766502AD1B554CF700B4F63D /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
-		766502AE1B554CF700B4F63D /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
-		766502AF1B554CF700B4F63D /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
-		766502B01B554CF700B4F63D /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
-		766502B11B554CF700B4F63D /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
-		766502B21B554CF700B4F63D /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		766502B31B554CF700B4F63D /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
-		766502B41B554CF700B4F63D /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
-		766502B51B554CF700B4F63D /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		766502BF1B55541F00B4F63D /* STTestRetryNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestRetryNetTask.h; sourceTree = "<group>"; };
 		766502C01B55541F00B4F63D /* STTestRetryNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestRetryNetTask.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -73,6 +60,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		765FF8971B5AAB7200DE637E /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				766502931B554CA800B4F63D /* STHTTPNetTask.h */,
+				766502941B554CA800B4F63D /* STHTTPNetTask.m */,
+				766502951B554CA800B4F63D /* STHTTPNetTaskQueueHandler.h */,
+				766502961B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m */,
+			);
+			name = HTTP;
+			sourceTree = "<group>";
+		};
+		765FF8981B5B562000DE637E /* NetTasks */ = {
+			isa = PBXGroup;
+			children = (
+				765FF89C1B5B58E500DE637E /* HTTP */,
+			);
+			name = NetTasks;
+			sourceTree = "<group>";
+		};
+		765FF89C1B5B58E500DE637E /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				766502BF1B55541F00B4F63D /* STTestRetryNetTask.h */,
+				766502C01B55541F00B4F63D /* STTestRetryNetTask.m */,
+				765FF8991B5B565E00DE637E /* STTestGetNetTask.h */,
+				765FF89A1B5B565E00DE637E /* STTestGetNetTask.m */,
+				765FF89D1B5B763000DE637E /* STTestPostNetTask.h */,
+				765FF89E1B5B763000DE637E /* STTestPostNetTask.m */,
+				765FF8A01B5B7B3100DE637E /* STTestPutNetTask.h */,
+				765FF8A11B5B7B3100DE637E /* STTestPutNetTask.m */,
+				765FF8AC1B5B840B00DE637E /* STTestPatchNetTask.h */,
+				765FF8AD1B5B840B00DE637E /* STTestPatchNetTask.m */,
+				765FF8B21B5B854A00DE637E /* STTestDeleteNetTask.h */,
+				765FF8B31B5B854A00DE637E /* STTestDeleteNetTask.m */,
+			);
+			name = HTTP;
+			sourceTree = "<group>";
+		};
 		7665027D1B554C6700B4F63D = {
 			isa = PBXGroup;
 			children = (
@@ -92,12 +117,10 @@
 		7665028A1B554C9600B4F63D /* STNetTaskQueueTest */ = {
 			isa = PBXGroup;
 			children = (
-				766502A21B554CF700B4F63D /* AFNetworking */,
 				766502921B554CA800B4F63D /* STNetTaskQueue */,
 				7665028B1B554C9600B4F63D /* Supporting Files */,
-				7665028D1B554C9600B4F63D /* STNetTaskQueueTest.m */,
-				766502BF1B55541F00B4F63D /* STTestRetryNetTask.h */,
-				766502C01B55541F00B4F63D /* STTestRetryNetTask.m */,
+				765FF8981B5B562000DE637E /* NetTasks */,
+				7665028D1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m */,
 			);
 			path = STNetTaskQueueTest;
 			sourceTree = "<group>";
@@ -113,10 +136,7 @@
 		766502921B554CA800B4F63D /* STNetTaskQueue */ = {
 			isa = PBXGroup;
 			children = (
-				766502931B554CA800B4F63D /* STHTTPNetTask.h */,
-				766502941B554CA800B4F63D /* STHTTPNetTask.m */,
-				766502951B554CA800B4F63D /* STHTTPNetTaskQueueHandler.h */,
-				766502961B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m */,
+				765FF8971B5AAB7200DE637E /* HTTP */,
 				766502971B554CA800B4F63D /* STNetTask.h */,
 				766502981B554CA800B4F63D /* STNetTask.m */,
 				766502991B554CA800B4F63D /* STNetTaskChain.h */,
@@ -127,33 +147,6 @@
 			name = STNetTaskQueue;
 			path = ../../STNetTaskQueue;
 			sourceTree = "<group>";
-		};
-		766502A21B554CF700B4F63D /* AFNetworking */ = {
-			isa = PBXGroup;
-			children = (
-				766502A31B554CF700B4F63D /* AFHTTPRequestOperation.h */,
-				766502A41B554CF700B4F63D /* AFHTTPRequestOperation.m */,
-				766502A51B554CF700B4F63D /* AFHTTPRequestOperationManager.h */,
-				766502A61B554CF700B4F63D /* AFHTTPRequestOperationManager.m */,
-				766502A71B554CF700B4F63D /* AFHTTPSessionManager.h */,
-				766502A81B554CF700B4F63D /* AFHTTPSessionManager.m */,
-				766502A91B554CF700B4F63D /* AFNetworking.h */,
-				766502AA1B554CF700B4F63D /* AFNetworkReachabilityManager.h */,
-				766502AB1B554CF700B4F63D /* AFNetworkReachabilityManager.m */,
-				766502AC1B554CF700B4F63D /* AFSecurityPolicy.h */,
-				766502AD1B554CF700B4F63D /* AFSecurityPolicy.m */,
-				766502AE1B554CF700B4F63D /* AFURLConnectionOperation.h */,
-				766502AF1B554CF700B4F63D /* AFURLConnectionOperation.m */,
-				766502B01B554CF700B4F63D /* AFURLRequestSerialization.h */,
-				766502B11B554CF700B4F63D /* AFURLRequestSerialization.m */,
-				766502B21B554CF700B4F63D /* AFURLResponseSerialization.h */,
-				766502B31B554CF700B4F63D /* AFURLResponseSerialization.m */,
-				766502B41B554CF700B4F63D /* AFURLSessionManager.h */,
-				766502B51B554CF700B4F63D /* AFURLSessionManager.m */,
-			);
-			name = AFNetworking;
-			path = /Users/kevinlin/Developer/Workspace/STNetTaskQueue/STNetTaskQueueExample/Pods/AFNetworking/AFNetworking;
-			sourceTree = "<absolute>";
 		};
 /* End PBXGroup section */
 
@@ -220,22 +213,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				766502BE1B554CF700B4F63D /* AFURLSessionManager.m in Sources */,
-				7665028E1B554C9600B4F63D /* STNetTaskQueueTest.m in Sources */,
+				765FF8B41B5B854A00DE637E /* STTestDeleteNetTask.m in Sources */,
+				7665028E1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m in Sources */,
 				7665029D1B554CA800B4F63D /* STHTTPNetTask.m in Sources */,
-				766502B91B554CF700B4F63D /* AFNetworkReachabilityManager.m in Sources */,
 				766502A01B554CA800B4F63D /* STNetTaskChain.m in Sources */,
-				766502BB1B554CF700B4F63D /* AFURLConnectionOperation.m in Sources */,
+				765FF8A21B5B7B3100DE637E /* STTestPutNetTask.m in Sources */,
 				766502C11B55541F00B4F63D /* STTestRetryNetTask.m in Sources */,
-				766502B81B554CF700B4F63D /* AFHTTPSessionManager.m in Sources */,
-				766502BC1B554CF700B4F63D /* AFURLRequestSerialization.m in Sources */,
 				7665029E1B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m in Sources */,
 				7665029F1B554CA800B4F63D /* STNetTask.m in Sources */,
+				765FF89B1B5B565E00DE637E /* STTestGetNetTask.m in Sources */,
+				765FF89F1B5B763000DE637E /* STTestPostNetTask.m in Sources */,
 				766502A11B554CA800B4F63D /* STNetTaskQueue.m in Sources */,
-				766502B71B554CF700B4F63D /* AFHTTPRequestOperationManager.m in Sources */,
-				766502BA1B554CF700B4F63D /* AFSecurityPolicy.m in Sources */,
-				766502BD1B554CF700B4F63D /* AFURLResponseSerialization.m in Sources */,
-				766502B61B554CF700B4F63D /* AFHTTPRequestOperation.m in Sources */,
+				765FF8AE1B5B840B00DE637E /* STTestPatchNetTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,12 +234,14 @@
 		766502821B554C6700B4F63D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 			};
 			name = Debug;
 		};
 		766502831B554C6700B4F63D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 			};
 			name = Release;
 		};
@@ -294,7 +285,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = STNetTaskQueueTest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -337,7 +328,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = STNetTaskQueueTest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -365,6 +356,7 @@
 				766502911B554C9600B4F63D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
