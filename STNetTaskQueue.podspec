@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name         = "STNetTaskQueue"
   s.version      = "0.0.2"
-  s.summary      = "Queue for managing network requests"
+  s.summary      = "STNetTaskQueue is a networking queue library for iOS and OS X. It's abstract and can be implemented in different protocols."
 
   s.description  = <<-DESC
-                   STNetTaskQueue may be your choice if you want to handle each network request stuff in separated STNetTask instead of having all the network requests logics in a "Manager" class
+                   STNetTaskQueue avoid you from directly dealing with "url", "request packing" and "response parsing". All networking tasks are described and processed by subclassing STNetTask, which provides you a clean code style in UI layer when handling networking.
                    DESC
 
   s.homepage     = "https://github.com/kevin0571/STNetTaskQueue"
