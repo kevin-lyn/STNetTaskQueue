@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "STNetTaskQueue"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Queue for managing network requests"
 
   s.description  = <<-DESC
@@ -13,7 +13,6 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/kevin0571/STNetTaskQueue.git", :tag => s.version }
-  s.dependency   "AFNetworking", "~> 2.0"
 
   s.source_files = "STNetTaskQueue/*.{h,m}"
   s.public_header_files = "STNetTaskQueue/*.h"
