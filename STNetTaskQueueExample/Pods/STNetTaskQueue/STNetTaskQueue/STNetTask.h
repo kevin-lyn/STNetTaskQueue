@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
+
+@class STNetTask;
+
+@protocol STNetTaskDelegate <NSObject>
+
+- (void)netTaskDidEnd:(STNetTask *)task;
+
+@end
+
 @interface STNetTask : NSObject
 
 @property (nonatomic, strong) NSError *error;
@@ -15,7 +25,7 @@
 @property (nonatomic, assign) NSUInteger retryCount;
 
 - (NSString *)uri;
-- (void)didResponse:(NSObject *)response;
+- (void)didResponse:(id)response;
 - (void)didFail;
 - (void)didRetry;
 

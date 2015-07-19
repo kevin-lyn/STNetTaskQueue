@@ -1,2 +1,2 @@
 platform :ios, '7.0'
-pod 'STNetTaskQueue', '~> 0.0.1'
+pod 'STNetTaskQueue', '~> 0.0.2'

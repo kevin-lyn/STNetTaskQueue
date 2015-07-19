@@ -8,20 +8,39 @@
 
 #import "STNetTask.h"
 
-typedef enum {
+FOUNDATION_EXPORT NSString *const STHTTPNetTaskServerError;
+FOUNDATION_EXPORT NSString *const STHTTPNetTaskResponseParsedError;
+
+typedef NS_ENUM(NSUInteger, STHTTPNetTaskMethod) {
     STHTTPNetTaskGet,
     STHTTPNetTaskPost,
     STHTTPNetTaskPut,
     STHTTPNetTaskDelete,
     STHTTPNetTaskHead,
     STHTTPNetTaskPatch
-} STHTTPNetTaskMethod;
+};
+
+typedef NS_ENUM(NSUInteger, STHTTPNetTaskRequestType) {
+    STHTTPNetTaskRequestJSON,
+    STHTTPNetTaskRequestKeyValueString,
+    STHTTPNetTaskRequestFormData
+};
+
+typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
+    STHTTPNetTaskResponseJSON,
+    STHTTPNetTaskResponseString,
+    STHTTPNetTaskResponseRawData
+};
 
 @interface STHTTPNetTask : STNetTask
 
 - (STHTTPNetTaskMethod)method;
+- (STHTTPNetTaskRequestType)requestType;
+- (STHTTPNetTaskResponseType)responseType;
 - (NSDictionary *)parameters;
 - (NSDictionary *)datas;
-- (void)didResponseJSON:(NSDictionary *)response;
+- (void)didResponseJSON:(NSDictionary *)json;
+- (void)didResponseString:(NSString *)string;
+- (void)didResponseData:(NSData *)data;
 
 @end

@@ -1,18 +1,34 @@
 # STNetTaskQueue
-Queue for managing network requests
+STNetTaskQueue is a networking queue library for iOS and OS X. It's abstract and can be implemented in different protocols.
 
-STNetTaskQueue may be your choice if you want to handle each network request stuff in separated STNetTask instead of having all the network requests logics in a "Manager" class.
+STNetTaskQueue avoid you from directly dealing with "url", "request packing" and "response parsing". All networking tasks are described and processed by subclassing STNetTask, which provides you a clean code style in UI layer when handling networking.
 
-**STHTTPNetTaskQueueHandler** is included, which is for HTTP based network reqeust. If you are looking for a socket or other protocol based handler, currently you should write your own net task queue handler and conform to **STNetTaskQueueHandler** protocol. **STHTTPNetTaskQeueuHandler** depends on [AFNetworking](https://github.com/AFNetworking/AFNetworking), which is included in example project.
+## STHTTPNetTaskQueueHandler
 
-## Features
-- Retry net task with specified max retry count.
-- Delegate for net task result according to "uri" of net task.
+STHTTPNetTaskQueueHandler is a HTTP based implementation of STNetTaskQueueHandler. It provides different ways to pack request and parse response, e.g. STHTTPNetTaskRequestJSON is for JSON format request body, STHTTPNetTaskResponseJSON is for JSON format response data and STHTTPNetTaskRequestFormData is for form data format request body which is mostly used for uploading file.
 
-## Sequence Chart
-![STNetTaskQueue Sequence Chart](https://cloud.githubusercontent.com/assets/1491282/7292210/6d761f6a-e9cc-11e4-9620-0075082dcc8e.png)
+## STNetTask
+
+STNetTask is abstract, it provides basic properties and callbacks for subclassing.
+
+## STNetTaskDelegate
+
+STNetTaskDelegate is the delegate protocol for observing result of STNetTask, mostly it is used in view controller. 
+
+## STNetTaskChain
+
+STNetTaskChain is a chain which processes an array of STNetTask serially. A net task chain is considered as successful only if all net tasks in the chain are end without error.
 
 ## Get Started
+
+### Podfile
+
+```ruby
+platform :ios, '7.0'
+pod 'STNetTaskQueue', '~> 0.0.2'
+```
+
+### Use STNetTaskQueue in your project
 #### Step 1: Setup STNetTaskQueue after your app launch
 ```objc
 NSURL *baseUrl = [NSURL URLWithString:@"http://api.openweathermap.org"];
@@ -20,7 +36,7 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 [STNetTaskQueue sharedQueue].handler = httpHandler;
 ```
 
-#### Step 2: Write your net task for each reqeust
+#### Step 2: Create your net task
 ```objc
 @interface STOpenWeatherNetTask : STHTTPNetTask
 
@@ -47,7 +63,7 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 
 - (NSUInteger)maxRetryCount
 {
-    return 3;
+    return 3; // Retry after error occurs
 }
 
 - (NSDictionary *)parameters
@@ -65,25 +81,28 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 @end
 ```
 
-#### Step 3: Go and get your response
+#### Step 3: Send net task and delegate for the result
 ```objc
-if (_openWeatherTask.pending) {
-    return;
+- (void)sendOpenWeatherTask
+{
+    if (_openWeatherTask.pending) {
+        return;
+    }
+    _openWeatherTask = [STOpenWeatherNetTask new];
+    _openWeatherTask.latitude = @"1.306038";
+    _openWeatherTask.longitude = @"103.772962";
+    // Task delegate will be a weak reference, so there is no need to remove it manually.
+    // It's appropriate to add task delegate here because duplicated task delegates will be ignored by STNetTaskQueue.
+    [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:_openWeatherTask.uri];
+    [[STNetTaskQueue sharedQueue] addTask:_openWeatherTask];
 }
-_openWeatherTask = [STOpenWeatherNetTask new];
-_openWeatherTask.latitude = @"1.306038";
-_openWeatherTask.longitude = @"103.772962";
-// Task delegate will be a weak reference, so no need to remove it manually.
-// Duplicated task delegates will be ignored by STNetTaskQueue, so it's fine to invoke addTaskDelegate here.
-[[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:_openWeatherTask.uri];
-[[STNetTaskQueue sharedQueue] addTask:_openWeatherTask];
 ```
 
 ```objc
 - (void)netTaskDidEnd:(STNetTask *)task
 {
-    // It's necessary to detect if _openWeatherTask != task and return,
-    // if you have mutiple instance/viewController deleagating the same uri.
+    // It's necessary to detect if _openWeatherTask != task,
+    // if you have mutiple viewControllers deleagating the same uri.
     if (_openWeatherTask != task) {
         return;
     }
@@ -98,5 +117,10 @@ _openWeatherTask.longitude = @"103.772962";
     _goBtn.hidden = YES;
 }
 ```
+For more details, download the example project or check out unit tests for usage references.
 
-You can see more details in example project. The example is tested with iOS SDK 8.1, XCode 6.1.1 and iPhone 6 simulator.
+## What's Next
+
+- More unit tests for STHTTPNetTaskQueueHandler.
+- Detailed documentation for STNetTaskQueue, STNetTask, STNetTaskChain.
+- Support other protocol based STNetTaskQueueHandler, e.g. STNetTaskQueueHandler for ProtocolBuffers.

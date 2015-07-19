@@ -107,7 +107,7 @@ static STNetTaskQueue *sharedInstance;
     return NO;
 }
 
-- (void)didResponse:(NSObject *)response taskId:(int)taskId
+- (void)didResponse:(id)response taskId:(int)taskId
 {
     __weak STNetTaskQueue *weakSelf = self;
     [self.queue addOperationWithBlock:^ {
@@ -125,10 +125,10 @@ static STNetTaskQueue *sharedInstance;
             [task didResponse:response];
         }
         @catch (NSException *exception) {
-            [weakSelf log:[NSString stringWithFormat:@"Exception in 'didResponse' - %@", [exception description]]];
-            NSError *error = [NSError errorWithDomain:STNetTaskQueueErrorUnknown
+            [weakSelf log:[NSString stringWithFormat:@"Exception in 'didResponse' - %@", exception.debugDescription]];
+            NSError *error = [NSError errorWithDomain:STNetTaskUnknownError
                                                  code:-1
-                                             userInfo:@{ @"msg": @"Unknown Error" }];
+                                             userInfo:@{ @"msg": exception.description }];
             
             if ([self retryTask:task error:error]) {
                 return;
