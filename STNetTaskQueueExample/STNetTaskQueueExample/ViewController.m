@@ -43,22 +43,27 @@
 
 - (void)goBtnDidTap
 {
+    [self sendOpenWeatherTask];
+}
+
+- (void)sendOpenWeatherTask
+{
     if (_openWeatherTask.pending) {
         return;
     }
     _openWeatherTask = [STOpenWeatherNetTask new];
     _openWeatherTask.latitude = @"1.306038";
     _openWeatherTask.longitude = @"103.772962";
-    // Task delegate will be a weak reference, so no need to remove it manually.
-    // Duplicated task delegates will be ignored by STNetTaskQueue, so it's fine to invoke addTaskDelegate here.
+    // Task delegate will be a weak reference, so there is no need to remove it manually.
+    // It's appropriate to add task delegate here because duplicated task delegates will be ignored by STNetTaskQueue.
     [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:_openWeatherTask.uri];
     [[STNetTaskQueue sharedQueue] addTask:_openWeatherTask];
 }
 
 - (void)netTaskDidEnd:(STNetTask *)task
 {
-    // It's necessary to detect if _openWeatherTask != task and return,
-    // if you have mutiple instance/viewController deleagating the same uri.
+    // It's necessary to detect if _openWeatherTask != task,
+    // if you have mutiple viewControllers deleagating the same uri.
     if (_openWeatherTask != task) {
         return;
     }

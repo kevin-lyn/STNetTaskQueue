@@ -20,6 +20,11 @@
     return @"data/2.5/weather";
 }
 
+- (NSUInteger)maxRetryCount
+{
+    return 3; // Retry after error occurs
+}
+
 - (NSDictionary *)parameters
 {
     NSLog(@"Pack request parameters");

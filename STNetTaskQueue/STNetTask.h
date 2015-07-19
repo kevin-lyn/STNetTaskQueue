@@ -10,6 +10,14 @@
 
 FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 
+@class STNetTask;
+
+@protocol STNetTaskDelegate <NSObject>
+
+- (void)netTaskDidEnd:(STNetTask *)task;
+
+@end
+
 @interface STNetTask : NSObject
 
 @property (nonatomic, strong) NSError *error;

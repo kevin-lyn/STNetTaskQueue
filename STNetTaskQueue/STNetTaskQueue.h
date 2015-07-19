@@ -11,12 +11,6 @@
 
 @class STNetTaskQueue;
 
-@protocol STNetTaskDelegate <NSObject>
-
-- (void)netTaskDidEnd:(STNetTask *)task;
-
-@end
-
 @protocol STNetTaskQueueHandler <NSObject>
 
 - (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue task:(STNetTask *)task taskId:(int)taskId;
