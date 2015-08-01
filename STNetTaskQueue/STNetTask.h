@@ -10,6 +10,12 @@
 
 FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 
+#ifdef RACObserve
+
+#define STNetTaskObserve(TASK) [[[RACObserve(TASK, finished) ignore:@NO] deliverOnMainThread] map:^id(id value) { return TASK; }]
+
+#endif
+
 @class STNetTask;
 
 @protocol STNetTaskDelegate <NSObject>
@@ -22,6 +28,7 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 
 @property (nonatomic, strong) NSError *error;
 @property (nonatomic, assign) BOOL pending;
+@property (nonatomic, assign) BOOL finished;
 @property (nonatomic, assign) NSUInteger retryCount;
 
 - (NSString *)uri;

@@ -57,6 +57,7 @@ static STNetTaskQueue *sharedInstance;
 - (void)addTask:(STNetTask *)task
 {
     NSAssert(self.handler, @"STNetTaskQueueHandler is not set.");
+    NSAssert(!task.finished, @"STNetTask is finished, please recreate a new net task.");
     
     task.pending = YES;
     __weak STNetTaskQueue *weakSelf = self;
@@ -173,6 +174,7 @@ static STNetTaskQueue *sharedInstance;
         
         [weakSelf netTaskDidEnd:task];
         task.pending = NO;
+        task.finished = YES;
         
         [weakSelf sendWatingTask];
     }];
@@ -202,6 +204,7 @@ static STNetTaskQueue *sharedInstance;
         [task didFail];
         [weakSelf netTaskDidEnd:task];
         task.pending = NO;
+        task.finished = YES;
         
         [weakSelf sendWatingTask];
     }];
