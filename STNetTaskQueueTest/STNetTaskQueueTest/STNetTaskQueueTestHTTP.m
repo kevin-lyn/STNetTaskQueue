@@ -16,6 +16,7 @@
 #import "STTestPatchNetTask.h"
 #import "STTestDeleteNetTask.h"
 #import "STTestDownloadNetTask.h"
+#import "STTestMaxConcurrentTasksCountNetTask.h"
 
 @interface STNetTaskQueueTestHTTP : XCTestCase <STNetTaskDelegate>
 
@@ -142,6 +143,26 @@
     [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:testDownloadTask.uri];
     [[STNetTaskQueue sharedQueue] addTask:testDownloadTask];
 
+    [self waitForExpectationsWithTimeout:20 handler:nil];
+}
+
+- (void)testMaxConcurrentTasksCountTask
+{
+    _expectation = [self expectationWithDescription:@"testMaxConcurrentTasksCount"];
+    
+    [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
+    [STNetTaskQueue sharedQueue].maxConcurrentTasksCount = 1;
+    
+    STTestMaxConcurrentTasksCountNetTask *task1 = [STTestMaxConcurrentTasksCountNetTask new];
+    task1.id = 1;
+    
+    STTestMaxConcurrentTasksCountNetTask *task2 = [STTestMaxConcurrentTasksCountNetTask new];
+    task2.id = 2;
+    // Should be sent out after task1 is finished
+    
+    [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:task1.uri];
+    [[STNetTaskQueue sharedQueue] addTask:task1];
+    [[STNetTaskQueue sharedQueue] addTask:task2];
     
     [self waitForExpectationsWithTimeout:20 handler:nil];
 }
@@ -199,6 +220,12 @@
         STTestDownloadNetTask *testDownloadTask = (STTestDownloadNetTask *)task;
         if (task.error || !testDownloadTask.image) {
             XCTFail(@"testDownloadAndUploadNetTask failed");
+        }
+    }
+    else if ([task isKindOfClass:[STTestMaxConcurrentTasksCountNetTask class]]) {
+        STTestMaxConcurrentTasksCountNetTask *testMaxConcurrentTasksCountTask = (STTestMaxConcurrentTasksCountNetTask *)task;
+        if (testMaxConcurrentTasksCountTask.id == 2) {
+            [_expectation fulfill];
         }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		76586ED01B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 76586ECF1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m */; };
 		765FF89B1B5B565E00DE637E /* STTestGetNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF89A1B5B565E00DE637E /* STTestGetNetTask.m */; };
 		765FF89F1B5B763000DE637E /* STTestPostNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF89E1B5B763000DE637E /* STTestPostNetTask.m */; };
 		765FF8A21B5B7B3100DE637E /* STTestPutNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF8A11B5B7B3100DE637E /* STTestPutNetTask.m */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		76586ECE1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestMaxConcurrentTasksCountNetTask.h; sourceTree = "<group>"; };
+		76586ECF1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestMaxConcurrentTasksCountNetTask.m; sourceTree = "<group>"; };
 		765FF8991B5B565E00DE637E /* STTestGetNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestGetNetTask.h; sourceTree = "<group>"; };
 		765FF89A1B5B565E00DE637E /* STTestGetNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestGetNetTask.m; sourceTree = "<group>"; };
 		765FF89D1B5B763000DE637E /* STTestPostNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestPostNetTask.h; sourceTree = "<group>"; };
@@ -99,6 +102,8 @@
 				765FF8B31B5B854A00DE637E /* STTestDeleteNetTask.m */,
 				765FF8B51B5B875800DE637E /* STTestDownloadNetTask.h */,
 				765FF8B61B5B875800DE637E /* STTestDownloadNetTask.m */,
+				76586ECE1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.h */,
+				76586ECF1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m */,
 			);
 			name = HTTP;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 				7665029F1B554CA800B4F63D /* STNetTask.m in Sources */,
 				765FF89B1B5B565E00DE637E /* STTestGetNetTask.m in Sources */,
 				765FF89F1B5B763000DE637E /* STTestPostNetTask.m in Sources */,
+				76586ED01B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m in Sources */,
 				765FF8B71B5B875800DE637E /* STTestDownloadNetTask.m in Sources */,
 				766502A11B554CA800B4F63D /* STNetTaskQueue.m in Sources */,
 				765FF8AE1B5B840B00DE637E /* STTestPatchNetTask.m in Sources */,

@@ -25,7 +25,8 @@ static STNetTaskQueue *sharedInstance;
 @property (atomic, strong) NSMutableDictionary *tasks; // <NSNumber, STNetTask>
 @property (atomic, strong) NSMutableDictionary *taskDelegates; // <NSString, NSArray<STNetTaskDelegate>>
 @property (atomic, strong) NSOperationQueue *queue;
-@property (nonatomic, assign) int currentTaskId;
+@property (atomic, strong) NSMutableArray *watingTasks; // <STNetTask>
+@property (atomic, assign) int currentTaskId;
 
 @end
 
@@ -48,6 +49,7 @@ static STNetTaskQueue *sharedInstance;
         self.queue = [NSOperationQueue new];
         self.queue.name = @"STNetTaskQueue";
         self.queue.maxConcurrentOperationCount = 1;
+        self.watingTasks = [NSMutableArray new];
     }
     return self;
 }
@@ -59,11 +61,19 @@ static STNetTaskQueue *sharedInstance;
     task.pending = YES;
     __weak STNetTaskQueue *weakSelf = self;
     [self.queue addOperationWithBlock:^ {
+        @synchronized(weakSelf.tasks) {
+            if (weakSelf.maxConcurrentTasksCount > 0 && weakSelf.tasks.count >= weakSelf.maxConcurrentTasksCount) {
+                [weakSelf.watingTasks addObject:task];
+                return;
+            }
+        }
+        
         int taskId;
         @synchronized(weakSelf) {
             weakSelf.currentTaskId++;
             taskId = weakSelf.currentTaskId;
         }
+        
         [weakSelf.handler netTaskQueue:weakSelf task:task taskId:taskId];
         @synchronized(weakSelf.tasks) {
             [weakSelf.tasks setObject:task forKey:@(taskId)];
@@ -80,8 +90,8 @@ static STNetTaskQueue *sharedInstance;
     __weak STNetTaskQueue *weakSelf = self;
     [self.queue addOperationWithBlock:^ {
         
+        NSNumber *taskIdToBeRemoved = nil;
         @synchronized(weakSelf.tasks) {
-            NSNumber *taskIdToBeRemoved = nil;
             for (NSNumber *taskId in weakSelf.tasks.allKeys) {
                 if ([weakSelf.tasks objectForKey:taskId] == task) {
                     taskIdToBeRemoved = taskId;
@@ -91,12 +101,22 @@ static STNetTaskQueue *sharedInstance;
             if (taskIdToBeRemoved) {
                 [weakSelf.tasks removeObjectForKey:taskIdToBeRemoved];
             }
-            task.pending = NO;
         }
+        
+        if (taskIdToBeRemoved) {
+            [weakSelf sendWatingTask];
+        }
+        else {
+            @synchronized(weakSelf.watingTasks) {
+                [weakSelf.watingTasks removeObject:task];
+            }
+        }
+        
+        task.pending = NO;
     }];
 }
 
-- (BOOL)retryTask:(STNetTask *)task error:(NSError *)error
+- (BOOL)retryTask:(STNetTask *)task withError:(NSError *)error
 {
     if ([task shouldRetryForError:error] && task.retryCount < task.maxRetryCount) {
         task.retryCount++;
@@ -105,6 +125,19 @@ static STNetTaskQueue *sharedInstance;
         return YES;
     }
     return NO;
+}
+
+- (void)sendWatingTask
+{
+    STNetTask *task;
+    @synchronized(self.watingTasks) {
+        if (!self.watingTasks.count) {
+            return;
+        }
+        task = self.watingTasks[0];
+        [self.watingTasks removeObjectAtIndex:0];
+    }
+    [self addTask:task];
 }
 
 - (void)didResponse:(id)response taskId:(int)taskId
@@ -130,7 +163,7 @@ static STNetTaskQueue *sharedInstance;
                                                  code:-1
                                              userInfo:@{ @"msg": exception.description }];
             
-            if ([self retryTask:task error:error]) {
+            if ([weakSelf retryTask:task withError:error]) {
                 return;
             }
             
@@ -140,6 +173,8 @@ static STNetTaskQueue *sharedInstance;
         
         [weakSelf netTaskDidEnd:task];
         task.pending = NO;
+        
+        [weakSelf sendWatingTask];
     }];
 }
 
@@ -159,7 +194,7 @@ static STNetTaskQueue *sharedInstance;
             [weakSelf.tasks removeObjectForKey:@(taskId)];
         }
         
-        if ([self retryTask:task error:error]) {
+        if ([weakSelf retryTask:task withError:error]) {
             return;
         }
         
@@ -167,6 +202,8 @@ static STNetTaskQueue *sharedInstance;
         [task didFail];
         [weakSelf netTaskDidEnd:task];
         task.pending = NO;
+        
+        [weakSelf sendWatingTask];
     }];
 }
 
