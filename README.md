@@ -31,7 +31,7 @@ STNetTaskChain is a chain which processes an array of STNetTask serially. A net 
 
 ```ruby
 platform :ios, '7.0'
-pod 'STNetTaskQueue', '~> 0.0.2'
+pod 'STNetTaskQueue'
 ```
 
 ### Use STNetTaskQueue in your project
