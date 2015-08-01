@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <ReactiveCocoa/ReactiveCocoa.h>
 #import "STNetTaskQueue.h"
 #import "STOpenWeatherNetTask.h"
 
@@ -44,6 +45,22 @@
 - (void)goBtnDidTap
 {
     [self sendOpenWeatherTask];
+    
+    /*
+     Work with ReactiveCocoa, get net task result with 'subscribeNext'.
+     Note that ReactiveCocoa.h should be imported before STNetTaskQueue.
+    
+    [STNetTaskObserve(_openWeatherTask) subscribeNext:^(STOpenWeatherNetTask *task) {
+        if (task.error) { // Would be network issue
+            _resultLabel.text = @"Network Unavailable";
+            _goBtn.hidden = YES;
+            return;
+        }
+        _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", task.place, task.temperature];
+        _goBtn.hidden = YES;
+    }];
+     
+     */
 }
 
 - (void)sendOpenWeatherTask

@@ -8,6 +8,7 @@ STNetTaskQueue avoid you from directly dealing with "url", "request packing" and
 - Max retry count for each STNetTask.
 - Net task is cancelable after added to STNetTaskQueue.
 - Multiple delegates for same net task.
+- Works with ReactiveCocoa, subscribeNext for net task result.
 
 ## STHTTPNetTaskQueueHandler
 
@@ -74,8 +75,7 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 
 - (NSDictionary *)parameters
 {
-    return @{ @"lat": self.latitude,
-              @"lon": self.longitude };
+    return @{ @"lat": self.latitude, @"lon": self.longitude };
 }
 
 - (void)didResponseJSON:(NSDictionary *)response
@@ -104,6 +104,22 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 }
 ```
 
+#### Work with ReactiveCocoa for getting net task result
+
+```objc
+[STNetTaskObserve(_openWeatherTask) subscribeNext:^(STOpenWeatherNetTask *task) {
+    if (task.error) { // Would be network issue
+        _resultLabel.text = @"Network Unavailable";
+        _goBtn.hidden = YES;
+        return;
+    }
+    _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", task.place, task.temperature];
+    _goBtn.hidden = YES;
+}];
+```
+
+#### Or use STNetTaskDelegate
+
 ```objc
 - (void)netTaskDidEnd:(STNetTask *)task
 {
@@ -112,13 +128,13 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
     if (_openWeatherTask != task) {
         return;
     }
-    
+
     if (task.error) { // Would be network issue
         _resultLabel.text = @"Network Unavailable";
         _goBtn.hidden = YES;
         return;
     }
-    
+
     _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", _openWeatherTask.place, _openWeatherTask.temperature];
     _goBtn.hidden = YES;
 }
