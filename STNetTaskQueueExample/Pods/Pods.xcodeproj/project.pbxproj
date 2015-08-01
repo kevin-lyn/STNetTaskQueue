@@ -7,219 +7,219 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AD94024268C5F912D97307B /* STNetTaskQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 6947337F7A4FEF0A33646206 /* STNetTaskQueue.h */; };
-		18B942DDFE916BB37AAD0C94 /* STHTTPNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E127F0A22B3B56FF881C71D /* STHTTPNetTask.m */; };
-		1F38D5C7A1389AC3AA5EDCC3 /* STNetTaskChain.m in Sources */ = {isa = PBXBuildFile; fileRef = B95D14B9E11BDF27EA49E395 /* STNetTaskChain.m */; };
-		3C15EEE7AB3ECB1EB2920317 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF72C685BCDF8FAE7F9FCF88 /* Foundation.framework */; };
-		3E43469264394EF2E0A0F685 /* Pods-STNetTaskQueue-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CF8F1BE1FC494731FFA9657A /* Pods-STNetTaskQueue-dummy.m */; };
-		938D297A4FBA06209D9A14BE /* STHTTPNetTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 74CE4D4F508196CABF61D149 /* STHTTPNetTask.h */; };
-		9C708F4983378DAE0E25FEA0 /* STNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 443D5DB17231E95A05F4B0B0 /* STNetTask.m */; };
-		ADFE0E74CC6FBF4EC30942CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF72C685BCDF8FAE7F9FCF88 /* Foundation.framework */; };
-		B41A850974ECDED73321570D /* STNetTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BC467A89EAAFE4C50DF8725 /* STNetTaskQueue.m */; };
-		B57FB727815B319338D51C16 /* STHTTPNetTaskQueueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = C9C5019EB3607999B228C937 /* STHTTPNetTaskQueueHandler.m */; };
-		C41FDA59637D15AC00AA2BAD /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FC16F73AA7A0CFC84F812D25 /* Pods-dummy.m */; };
-		D9F33D27AE47C13DC55E9416 /* STNetTaskChain.h in Headers */ = {isa = PBXBuildFile; fileRef = B0A7F99D0237EEE10C559840 /* STNetTaskChain.h */; };
-		EDC3D1B43C755392E412F945 /* STNetTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 98D9382F8FA608A711A36710 /* STNetTask.h */; };
-		F2EC20DCA20079ED93F714CD /* STHTTPNetTaskQueueHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 7E669B7BAEB35E188ED0ED81 /* STHTTPNetTaskQueueHandler.h */; };
+		063886F023DB59AD3D40B13A /* STNetTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5813151383C79EC724C58A55 /* STNetTaskQueue.m */; };
+		1EC28D098B311F90C7F95DEB /* STNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EB4638E45151C0AFC75E60 /* STNetTask.m */; };
+		1F427EBCE3977E3C95C4C500 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3EE7C8B618D1321ECE3098C /* Foundation.framework */; };
+		292A891AB4FDE22C6EC10890 /* STNetTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A8CA1DEFD721821972C29DD /* STNetTask.h */; };
+		3BE8CA5E42140CDD15516F62 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3EE7C8B618D1321ECE3098C /* Foundation.framework */; };
+		4F91C5A04722930D8AB292DB /* STHTTPNetTaskQueueHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = DC49CAE9F0DF217B531480C5 /* STHTTPNetTaskQueueHandler.h */; };
+		5F36A9ECD5B4E1F5F72526B7 /* STHTTPNetTaskQueueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FE25C851EED621F6888138C4 /* STHTTPNetTaskQueueHandler.m */; };
+		6C0C90AD4C8FCC2119D92FF9 /* STNetTaskQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 2649E31B3C17333682417AB5 /* STNetTaskQueue.h */; };
+		6E77F9D2657741A099227DEA /* STHTTPNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = A98D8EB6D2D5E63790AE3013 /* STHTTPNetTask.m */; };
+		93A7DB857F3F12C556EFD0B4 /* Pods-STNetTaskQueue-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFAA27D699732C2B2016B3A /* Pods-STNetTaskQueue-dummy.m */; };
+		A18D5280D45E2D4765FA1F6D /* STNetTaskChain.h in Headers */ = {isa = PBXBuildFile; fileRef = F25617C8DE56D91E828A9B92 /* STNetTaskChain.h */; };
+		D4CA6866D7C65261B21C5FE5 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 716F094E615AEDC59AF6DE72 /* Pods-dummy.m */; };
+		D959C86153A38D110EBCA5E8 /* STHTTPNetTask.h in Headers */ = {isa = PBXBuildFile; fileRef = E9DF447D53CF76D7335587BF /* STHTTPNetTask.h */; };
+		F6DF67515BF92CA2D2A0A7A9 /* STNetTaskChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 4261AFA01C046E05B0E868CC /* STNetTaskChain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		83B5AF830A5C3A1B9B16DEC2 /* PBXContainerItemProxy */ = {
+		A90F89B9C7CD15155EF68C72 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D7DE369B97EA2078B2ABE045 /* Project object */;
+			containerPortal = 88887B54637E75E9096DFFF3 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D7B8568C3914DAEF65806DAB;
+			remoteGlobalIDString = CB3F1F5F0A09E5885014A895;
 			remoteInfo = "Pods-STNetTaskQueue";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		11E3EE9BF87494C91088F96F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
-		1BC467A89EAAFE4C50DF8725 /* STNetTaskQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STNetTaskQueue.m; path = STNetTaskQueue/STNetTaskQueue.m; sourceTree = "<group>"; };
-		294D5F4FBE2F0DA0A7748179 /* Pods-STNetTaskQueue-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-STNetTaskQueue-prefix.pch"; sourceTree = "<group>"; };
-		2A4A79826AE993DB222961BC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
-		3FE85C07218698A9D0D625C7 /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		43C3D2BFF2572389E02644BA /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		443D5DB17231E95A05F4B0B0 /* STNetTask.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STNetTask.m; path = STNetTaskQueue/STNetTask.m; sourceTree = "<group>"; };
-		6947337F7A4FEF0A33646206 /* STNetTaskQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STNetTaskQueue.h; path = STNetTaskQueue/STNetTaskQueue.h; sourceTree = "<group>"; };
-		74CE4D4F508196CABF61D149 /* STHTTPNetTask.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STHTTPNetTask.h; path = STNetTaskQueue/STHTTPNetTask.h; sourceTree = "<group>"; };
-		7E669B7BAEB35E188ED0ED81 /* STHTTPNetTaskQueueHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STHTTPNetTaskQueueHandler.h; path = STNetTaskQueue/STHTTPNetTaskQueueHandler.h; sourceTree = "<group>"; };
-		8B04F998E0FEA8BF7E0FC201 /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
-		98D9382F8FA608A711A36710 /* STNetTask.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STNetTask.h; path = STNetTaskQueue/STNetTask.h; sourceTree = "<group>"; };
-		9A85EFF895931EC7C13D92B8 /* libPods-STNetTaskQueue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STNetTaskQueue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E127F0A22B3B56FF881C71D /* STHTTPNetTask.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STHTTPNetTask.m; path = STNetTaskQueue/STHTTPNetTask.m; sourceTree = "<group>"; };
-		B0A7F99D0237EEE10C559840 /* STNetTaskChain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STNetTaskChain.h; path = STNetTaskQueue/STNetTaskChain.h; sourceTree = "<group>"; };
-		B105B98A2C8B20B22E006ED5 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
-		B130885C524B5DAF7403CC53 /* Pods-STNetTaskQueue.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STNetTaskQueue.xcconfig"; sourceTree = "<group>"; };
-		B95D14B9E11BDF27EA49E395 /* STNetTaskChain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STNetTaskChain.m; path = STNetTaskQueue/STNetTaskChain.m; sourceTree = "<group>"; };
-		BF72C685BCDF8FAE7F9FCF88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		C0E3C85A51648B673999C0E1 /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
-		C9C5019EB3607999B228C937 /* STHTTPNetTaskQueueHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STHTTPNetTaskQueueHandler.m; path = STNetTaskQueue/STHTTPNetTaskQueueHandler.m; sourceTree = "<group>"; };
-		CA2D4D97A3B0638EDD66819B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF8F1BE1FC494731FFA9657A /* Pods-STNetTaskQueue-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-STNetTaskQueue-dummy.m"; sourceTree = "<group>"; };
-		EBDD85A1E5561ABC726816F5 /* Pods-STNetTaskQueue-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STNetTaskQueue-Private.xcconfig"; sourceTree = "<group>"; };
-		FC16F73AA7A0CFC84F812D25 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		1A8CA1DEFD721821972C29DD /* STNetTask.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STNetTask.h; path = STNetTaskQueue/STNetTask.h; sourceTree = "<group>"; };
+		2312F1051EAE9B1CD868B41C /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2649E31B3C17333682417AB5 /* STNetTaskQueue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STNetTaskQueue.h; path = STNetTaskQueue/STNetTaskQueue.h; sourceTree = "<group>"; };
+		27E5EE8882C4BF3D050950ED /* Pods-environment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-environment.h"; sourceTree = "<group>"; };
+		2B52C24BC1FC07DF3F189D81 /* Pods-STNetTaskQueue.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STNetTaskQueue.xcconfig"; sourceTree = "<group>"; };
+		34203F2C8CC289C379260A6C /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
+		36FD12DB94C9FD9129148A7C /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		3A581E1B039B90452836624F /* libPods-STNetTaskQueue.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-STNetTaskQueue.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		41EB4638E45151C0AFC75E60 /* STNetTask.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STNetTask.m; path = STNetTaskQueue/STNetTask.m; sourceTree = "<group>"; };
+		4261AFA01C046E05B0E868CC /* STNetTaskChain.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STNetTaskChain.m; path = STNetTaskQueue/STNetTaskChain.m; sourceTree = "<group>"; };
+		57D5A508D1333F59113AC54F /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
+		5813151383C79EC724C58A55 /* STNetTaskQueue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STNetTaskQueue.m; path = STNetTaskQueue/STNetTaskQueue.m; sourceTree = "<group>"; };
+		60AB35F6BFA8FEDEB1970AD5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		65B2BF8F7C9BAB5489BC523A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		716F094E615AEDC59AF6DE72 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		952054259D5DCC75FD439558 /* Pods-STNetTaskQueue-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STNetTaskQueue-Private.xcconfig"; sourceTree = "<group>"; };
+		A98D8EB6D2D5E63790AE3013 /* STHTTPNetTask.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STHTTPNetTask.m; path = STNetTaskQueue/STHTTPNetTask.m; sourceTree = "<group>"; };
+		A9CE876B15B4F90F8164C3C0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3EE7C8B618D1321ECE3098C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		DC49CAE9F0DF217B531480C5 /* STHTTPNetTaskQueueHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STHTTPNetTaskQueueHandler.h; path = STNetTaskQueue/STHTTPNetTaskQueueHandler.h; sourceTree = "<group>"; };
+		E9DF447D53CF76D7335587BF /* STHTTPNetTask.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STHTTPNetTask.h; path = STNetTaskQueue/STHTTPNetTask.h; sourceTree = "<group>"; };
+		F25617C8DE56D91E828A9B92 /* STNetTaskChain.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = STNetTaskChain.h; path = STNetTaskQueue/STNetTaskChain.h; sourceTree = "<group>"; };
+		F5ED17499EDBAB149276879F /* Pods-STNetTaskQueue-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-STNetTaskQueue-prefix.pch"; sourceTree = "<group>"; };
+		FAFAA27D699732C2B2016B3A /* Pods-STNetTaskQueue-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-STNetTaskQueue-dummy.m"; sourceTree = "<group>"; };
+		FE25C851EED621F6888138C4 /* STHTTPNetTaskQueueHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = STHTTPNetTaskQueueHandler.m; path = STNetTaskQueue/STHTTPNetTaskQueueHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1BF91261AD622C3D60390415 /* Frameworks */ = {
+		93BF6A559F84062507935CC6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADFE0E74CC6FBF4EC30942CB /* Foundation.framework in Frameworks */,
+				3BE8CA5E42140CDD15516F62 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		717186EDAAAF32F224CB5900 /* Frameworks */ = {
+		A848275AF7C446A00FF214C9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C15EEE7AB3ECB1EB2920317 /* Foundation.framework in Frameworks */,
+				1F427EBCE3977E3C95C4C500 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A3DEA925B3161F800C9721A /* Frameworks */ = {
+		2520598AF5E532A3B5D81739 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5F46D2E56B9F009ED6B53C3 /* iOS */,
+				A9CE876B15B4F90F8164C3C0 /* libPods.a */,
+				3A581E1B039B90452836624F /* libPods-STNetTaskQueue.a */,
 			);
-			name = Frameworks;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		3E44B43697C4283AE7AB30D2 /* Targets Support Files */ = {
+		58286B0E42A82E17456B8BA2 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				BE2551BDEAAC94C15D2CF453 /* Pods */,
+				D5976CB47E2D9E0C55986D44 /* Pods */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		5163B0B45796A2FB36404755 /* Support Files */ = {
+		71466B06C6BDF949508B05E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B130885C524B5DAF7403CC53 /* Pods-STNetTaskQueue.xcconfig */,
-				EBDD85A1E5561ABC726816F5 /* Pods-STNetTaskQueue-Private.xcconfig */,
-				CF8F1BE1FC494731FFA9657A /* Pods-STNetTaskQueue-dummy.m */,
-				294D5F4FBE2F0DA0A7748179 /* Pods-STNetTaskQueue-prefix.pch */,
+				929780E39D289B51B7D042FC /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		75A27B6D0DD1671D232EE059 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2B52C24BC1FC07DF3F189D81 /* Pods-STNetTaskQueue.xcconfig */,
+				952054259D5DCC75FD439558 /* Pods-STNetTaskQueue-Private.xcconfig */,
+				FAFAA27D699732C2B2016B3A /* Pods-STNetTaskQueue-dummy.m */,
+				F5ED17499EDBAB149276879F /* Pods-STNetTaskQueue-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Pods-STNetTaskQueue";
 			sourceTree = "<group>";
 		};
-		57BE149050FECCA36EE1D9E1 /* Products */ = {
+		7D2EDB8625F3CE7EACC96650 /* STNetTaskQueue */ = {
 			isa = PBXGroup;
 			children = (
-				CA2D4D97A3B0638EDD66819B /* libPods.a */,
-				9A85EFF895931EC7C13D92B8 /* libPods-STNetTaskQueue.a */,
+				E9DF447D53CF76D7335587BF /* STHTTPNetTask.h */,
+				A98D8EB6D2D5E63790AE3013 /* STHTTPNetTask.m */,
+				DC49CAE9F0DF217B531480C5 /* STHTTPNetTaskQueueHandler.h */,
+				FE25C851EED621F6888138C4 /* STHTTPNetTaskQueueHandler.m */,
+				1A8CA1DEFD721821972C29DD /* STNetTask.h */,
+				41EB4638E45151C0AFC75E60 /* STNetTask.m */,
+				F25617C8DE56D91E828A9B92 /* STNetTaskChain.h */,
+				4261AFA01C046E05B0E868CC /* STNetTaskChain.m */,
+				2649E31B3C17333682417AB5 /* STNetTaskQueue.h */,
+				5813151383C79EC724C58A55 /* STNetTaskQueue.m */,
+				75A27B6D0DD1671D232EE059 /* Support Files */,
 			);
-			name = Products;
+			path = STNetTaskQueue;
 			sourceTree = "<group>";
 		};
-		A5F46D2E56B9F009ED6B53C3 /* iOS */ = {
+		8AA7578FC9385B2651B989AE = {
 			isa = PBXGroup;
 			children = (
-				BF72C685BCDF8FAE7F9FCF88 /* Foundation.framework */,
+				2312F1051EAE9B1CD868B41C /* Podfile */,
+				71466B06C6BDF949508B05E9 /* Frameworks */,
+				C63C523170813E0E35B44CAB /* Pods */,
+				2520598AF5E532A3B5D81739 /* Products */,
+				58286B0E42A82E17456B8BA2 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		929780E39D289B51B7D042FC /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				D3EE7C8B618D1321ECE3098C /* Foundation.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		BE2551BDEAAC94C15D2CF453 /* Pods */ = {
+		C63C523170813E0E35B44CAB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C0E3C85A51648B673999C0E1 /* Pods-acknowledgements.markdown */,
-				43C3D2BFF2572389E02644BA /* Pods-acknowledgements.plist */,
-				FC16F73AA7A0CFC84F812D25 /* Pods-dummy.m */,
-				8B04F998E0FEA8BF7E0FC201 /* Pods-environment.h */,
-				B105B98A2C8B20B22E006ED5 /* Pods-resources.sh */,
-				2A4A79826AE993DB222961BC /* Pods.debug.xcconfig */,
-				11E3EE9BF87494C91088F96F /* Pods.release.xcconfig */,
+				7D2EDB8625F3CE7EACC96650 /* STNetTaskQueue */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D5976CB47E2D9E0C55986D44 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				34203F2C8CC289C379260A6C /* Pods-acknowledgements.markdown */,
+				57D5A508D1333F59113AC54F /* Pods-acknowledgements.plist */,
+				716F094E615AEDC59AF6DE72 /* Pods-dummy.m */,
+				27E5EE8882C4BF3D050950ED /* Pods-environment.h */,
+				36FD12DB94C9FD9129148A7C /* Pods-resources.sh */,
+				60AB35F6BFA8FEDEB1970AD5 /* Pods.debug.xcconfig */,
+				65B2BF8F7C9BAB5489BC523A /* Pods.release.xcconfig */,
 			);
 			name = Pods;
 			path = "Target Support Files/Pods";
 			sourceTree = "<group>";
 		};
-		C9B0D17E51AB4C1C06D0F51A = {
-			isa = PBXGroup;
-			children = (
-				3FE85C07218698A9D0D625C7 /* Podfile */,
-				0A3DEA925B3161F800C9721A /* Frameworks */,
-				DF7A55B2A7B6255342656683 /* Pods */,
-				57BE149050FECCA36EE1D9E1 /* Products */,
-				3E44B43697C4283AE7AB30D2 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		DF7A55B2A7B6255342656683 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				EE4D53A9E795F45CE9CF95CC /* STNetTaskQueue */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		EE4D53A9E795F45CE9CF95CC /* STNetTaskQueue */ = {
-			isa = PBXGroup;
-			children = (
-				74CE4D4F508196CABF61D149 /* STHTTPNetTask.h */,
-				9E127F0A22B3B56FF881C71D /* STHTTPNetTask.m */,
-				7E669B7BAEB35E188ED0ED81 /* STHTTPNetTaskQueueHandler.h */,
-				C9C5019EB3607999B228C937 /* STHTTPNetTaskQueueHandler.m */,
-				98D9382F8FA608A711A36710 /* STNetTask.h */,
-				443D5DB17231E95A05F4B0B0 /* STNetTask.m */,
-				B0A7F99D0237EEE10C559840 /* STNetTaskChain.h */,
-				B95D14B9E11BDF27EA49E395 /* STNetTaskChain.m */,
-				6947337F7A4FEF0A33646206 /* STNetTaskQueue.h */,
-				1BC467A89EAAFE4C50DF8725 /* STNetTaskQueue.m */,
-				5163B0B45796A2FB36404755 /* Support Files */,
-			);
-			path = STNetTaskQueue;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		8416316E398359FB79FA19C1 /* Headers */ = {
+		F1F47BA882A666F2D1036D06 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				938D297A4FBA06209D9A14BE /* STHTTPNetTask.h in Headers */,
-				F2EC20DCA20079ED93F714CD /* STHTTPNetTaskQueueHandler.h in Headers */,
-				EDC3D1B43C755392E412F945 /* STNetTask.h in Headers */,
-				D9F33D27AE47C13DC55E9416 /* STNetTaskChain.h in Headers */,
-				0AD94024268C5F912D97307B /* STNetTaskQueue.h in Headers */,
+				D959C86153A38D110EBCA5E8 /* STHTTPNetTask.h in Headers */,
+				4F91C5A04722930D8AB292DB /* STHTTPNetTaskQueueHandler.h in Headers */,
+				292A891AB4FDE22C6EC10890 /* STNetTask.h in Headers */,
+				A18D5280D45E2D4765FA1F6D /* STNetTaskChain.h in Headers */,
+				6C0C90AD4C8FCC2119D92FF9 /* STNetTaskQueue.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		AC59E3FE8B55C310F0B08E90 /* Pods */ = {
+		1CCF4A6126D1E2111D3C9305 /* Pods */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3532E06609A5F1FF2CE2500A /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildConfigurationList = 3ED3A3F506FA44228FC25D9D /* Build configuration list for PBXNativeTarget "Pods" */;
 			buildPhases = (
-				08C5AF2FEA9105185DDC0935 /* Sources */,
-				1BF91261AD622C3D60390415 /* Frameworks */,
+				E502E1128E049A5087A0AC49 /* Sources */,
+				93BF6A559F84062507935CC6 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7C863F97DD3E9FC38CBFC0F7 /* PBXTargetDependency */,
+				5D987F500E6FC4280E565F07 /* PBXTargetDependency */,
 			);
 			name = Pods;
 			productName = Pods;
-			productReference = CA2D4D97A3B0638EDD66819B /* libPods.a */;
+			productReference = A9CE876B15B4F90F8164C3C0 /* libPods.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		D7B8568C3914DAEF65806DAB /* Pods-STNetTaskQueue */ = {
+		CB3F1F5F0A09E5885014A895 /* Pods-STNetTaskQueue */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1B4FE57E2EBD40F943235516 /* Build configuration list for PBXNativeTarget "Pods-STNetTaskQueue" */;
+			buildConfigurationList = 1ED44434A033DD5C98285CE0 /* Build configuration list for PBXNativeTarget "Pods-STNetTaskQueue" */;
 			buildPhases = (
-				BD7EC03C1E752C7EBF0ED778 /* Sources */,
-				717186EDAAAF32F224CB5900 /* Frameworks */,
-				8416316E398359FB79FA19C1 /* Headers */,
+				E3DCF3D19793411691528519 /* Sources */,
+				A848275AF7C446A00FF214C9 /* Frameworks */,
+				F1F47BA882A666F2D1036D06 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -227,88 +227,88 @@
 			);
 			name = "Pods-STNetTaskQueue";
 			productName = "Pods-STNetTaskQueue";
-			productReference = 9A85EFF895931EC7C13D92B8 /* libPods-STNetTaskQueue.a */;
+			productReference = 3A581E1B039B90452836624F /* libPods-STNetTaskQueue.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D7DE369B97EA2078B2ABE045 /* Project object */ = {
+		88887B54637E75E9096DFFF3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0640;
 			};
-			buildConfigurationList = C6D60D54E56C59BA23CB6279 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = A2A5DECD39B81222A24A4FE4 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = C9B0D17E51AB4C1C06D0F51A;
-			productRefGroup = 57BE149050FECCA36EE1D9E1 /* Products */;
+			mainGroup = 8AA7578FC9385B2651B989AE;
+			productRefGroup = 2520598AF5E532A3B5D81739 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AC59E3FE8B55C310F0B08E90 /* Pods */,
-				D7B8568C3914DAEF65806DAB /* Pods-STNetTaskQueue */,
+				1CCF4A6126D1E2111D3C9305 /* Pods */,
+				CB3F1F5F0A09E5885014A895 /* Pods-STNetTaskQueue */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		08C5AF2FEA9105185DDC0935 /* Sources */ = {
+		E3DCF3D19793411691528519 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C41FDA59637D15AC00AA2BAD /* Pods-dummy.m in Sources */,
+				93A7DB857F3F12C556EFD0B4 /* Pods-STNetTaskQueue-dummy.m in Sources */,
+				6E77F9D2657741A099227DEA /* STHTTPNetTask.m in Sources */,
+				5F36A9ECD5B4E1F5F72526B7 /* STHTTPNetTaskQueueHandler.m in Sources */,
+				1EC28D098B311F90C7F95DEB /* STNetTask.m in Sources */,
+				F6DF67515BF92CA2D2A0A7A9 /* STNetTaskChain.m in Sources */,
+				063886F023DB59AD3D40B13A /* STNetTaskQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BD7EC03C1E752C7EBF0ED778 /* Sources */ = {
+		E502E1128E049A5087A0AC49 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3E43469264394EF2E0A0F685 /* Pods-STNetTaskQueue-dummy.m in Sources */,
-				18B942DDFE916BB37AAD0C94 /* STHTTPNetTask.m in Sources */,
-				B57FB727815B319338D51C16 /* STHTTPNetTaskQueueHandler.m in Sources */,
-				9C708F4983378DAE0E25FEA0 /* STNetTask.m in Sources */,
-				1F38D5C7A1389AC3AA5EDCC3 /* STNetTaskChain.m in Sources */,
-				B41A850974ECDED73321570D /* STNetTaskQueue.m in Sources */,
+				D4CA6866D7C65261B21C5FE5 /* Pods-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7C863F97DD3E9FC38CBFC0F7 /* PBXTargetDependency */ = {
+		5D987F500E6FC4280E565F07 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "Pods-STNetTaskQueue";
-			target = D7B8568C3914DAEF65806DAB /* Pods-STNetTaskQueue */;
-			targetProxy = 83B5AF830A5C3A1B9B16DEC2 /* PBXContainerItemProxy */;
+			target = CB3F1F5F0A09E5885014A895 /* Pods-STNetTaskQueue */;
+			targetProxy = A90F89B9C7CD15155EF68C72 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		21E7307A70655646C8CB78AA /* Release */ = {
+		07E074BF4C9B8FF6C6F86DDB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBDD85A1E5561ABC726816F5 /* Pods-STNetTaskQueue-Private.xcconfig */;
+			baseConfigurationReference = 60AB35F6BFA8FEDEB1970AD5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-STNetTaskQueue/Pods-STNetTaskQueue-prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
-		35B68E20529679420DF3AD81 /* Release */ = {
+		6CFB23704E510E76949CAE3C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 11E3EE9BF87494C91088F96F /* Pods.release.xcconfig */;
+			baseConfigurationReference = 65B2BF8F7C9BAB5489BC523A /* Pods.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -322,7 +322,73 @@
 			};
 			name = Release;
 		};
-		6BD18BE0B8F0EB757375A35E /* Debug */ = {
+		86F430D99A99D7511DBC71A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 952054259D5DCC75FD439558 /* Pods-STNetTaskQueue-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-STNetTaskQueue/Pods-STNetTaskQueue-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CD0E9C16C9F58073A72844DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 952054259D5DCC75FD439558 /* Pods-STNetTaskQueue-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Pods-STNetTaskQueue/Pods-STNetTaskQueue-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D994A9EFF4FD8221F88C4B4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DC8FE6BE54DA051CAC2A60DE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -361,103 +427,37 @@
 			};
 			name = Debug;
 		};
-		D5E853FBA3AC0A2A323F3F85 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A4A79826AE993DB222961BC /* Pods.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F0BF8BAD5AEF881E0E30F47A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		FC29714459A9921E19D95A71 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EBDD85A1E5561ABC726816F5 /* Pods-STNetTaskQueue-Private.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Pods-STNetTaskQueue/Pods-STNetTaskQueue-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1B4FE57E2EBD40F943235516 /* Build configuration list for PBXNativeTarget "Pods-STNetTaskQueue" */ = {
+		1ED44434A033DD5C98285CE0 /* Build configuration list for PBXNativeTarget "Pods-STNetTaskQueue" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FC29714459A9921E19D95A71 /* Debug */,
-				21E7307A70655646C8CB78AA /* Release */,
+				86F430D99A99D7511DBC71A6 /* Debug */,
+				CD0E9C16C9F58073A72844DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3532E06609A5F1FF2CE2500A /* Build configuration list for PBXNativeTarget "Pods" */ = {
+		3ED3A3F506FA44228FC25D9D /* Build configuration list for PBXNativeTarget "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D5E853FBA3AC0A2A323F3F85 /* Debug */,
-				35B68E20529679420DF3AD81 /* Release */,
+				07E074BF4C9B8FF6C6F86DDB /* Debug */,
+				6CFB23704E510E76949CAE3C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C6D60D54E56C59BA23CB6279 /* Build configuration list for PBXProject "Pods" */ = {
+		A2A5DECD39B81222A24A4FE4 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6BD18BE0B8F0EB757375A35E /* Debug */,
-				F0BF8BAD5AEF881E0E30F47A /* Release */,
+				DC8FE6BE54DA051CAC2A60DE /* Debug */,
+				D994A9EFF4FD8221F88C4B4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D7DE369B97EA2078B2ABE045 /* Project object */;
+	rootObject = 88887B54637E75E9096DFFF3 /* Project object */;
 }

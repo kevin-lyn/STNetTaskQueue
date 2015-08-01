@@ -1,10 +1,10 @@
 PODS:
-  - STNetTaskQueue (0.0.2)
+  - STNetTaskQueue (0.0.3)
 
 DEPENDENCIES:
-  - STNetTaskQueue (~> 0.0.2)
+  - STNetTaskQueue
 
 SPEC CHECKSUMS:
-  STNetTaskQueue: e6dfc1fd6c425c5acefd3239075b5a3f96769ca1
+  STNetTaskQueue: 9a25cbcd0d6dc211b65d171f9d38ce6665c40487
 
 COCOAPODS: 0.37.2

@@ -20,6 +20,7 @@
 @interface STNetTaskQueue : NSObject
 
 @property (nonatomic, strong) id<STNetTaskQueueHandler> handler;
+@property (nonatomic, assign) NSUInteger maxConcurrentTasksCount;
 
 + (instancetype)sharedQueue;
 - (void)addTask:(STNetTask *)task;
