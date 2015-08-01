@@ -3,6 +3,12 @@ STNetTaskQueue is a networking queue library for iOS and OS X. It's abstract and
 
 STNetTaskQueue avoid you from directly dealing with "url", "request packing" and "response parsing". All networking tasks are described and processed by subclassing STNetTask, which provides you a clean code style in UI layer when handling networking.
 
+## Features
+- Max concurrent tasks count in each STNetTaskQueue.
+- Max retry count for each STNetTask.
+- Net task is cancelable after added to STNetTaskQueue.
+- Multiple delegates for same net task.
+
 ## STHTTPNetTaskQueueHandler
 
 STHTTPNetTaskQueueHandler is a HTTP based implementation of STNetTaskQueueHandler. It provides different ways to pack request and parse response, e.g. STHTTPNetTaskRequestJSON is for JSON format request body, STHTTPNetTaskResponseJSON is for JSON format response data and STHTTPNetTaskRequestFormData is for form data format request body which is mostly used for uploading file.
