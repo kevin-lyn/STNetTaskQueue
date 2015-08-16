@@ -25,9 +25,9 @@
     return @{ @"title": self.title };
 }
 
-- (void)didResponseJSON:(NSDictionary *)json
+- (void)didResponseDictionary:(NSDictionary *)dictionary
 {
-    _post = json;
+    _post = dictionary;
 }
 
 @end

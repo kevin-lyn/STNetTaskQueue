@@ -20,9 +20,9 @@
     return [NSString stringWithFormat:@"posts/%d", self.id];
 }
 
-- (void)didResponseJSON:(NSDictionary *)json
+- (void)didResponseDictionary:(NSDictionary *)dictionary
 {
-    _post = json;
+    _post = dictionary;
 }
 
 @end

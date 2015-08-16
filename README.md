@@ -73,15 +73,20 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
     return 3; // Retry after error occurs
 }
 
+- (BOOL)shouldRetryForError:(NSError *)error
+{
+    return YES; // Retry for all kinds of errors
+}
+
 - (NSDictionary *)parameters
 {
     return @{ @"lat": self.latitude, @"lon": self.longitude };
 }
 
-- (void)didResponseJSON:(NSDictionary *)response
+- (void)didResponseDictionary:(NSDictionary *)dictionary
 {
-    _place = response[@"name"];
-    _temperature = [response[@"main"][@"temp"] floatValue] / 10;
+    _place = dictionary[@"name"];
+    _temperature = [dictionary[@"main"][@"temp"] floatValue] / 10;
 }
 
 @end
@@ -141,8 +146,21 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 ```
 For more details, download the example project or check out unit tests for usage references.
 
+### Set max concurrent tasks count of STNetTaskQueue
+Sometimes we need to set the concurrent image download tasks to avoid too much data coming at the same time.
+
+```objc
+STNetTaskQueue *downloadQueue = [STNetTaskQueue new];
+downloadQueue.handler = [[STHTTPNetTaskQueueHandler alloc] initWithBaseURL:[NSURL URLWithString:@"http://example.com"]];
+downloadQueue.maxConcurrentTasksCount = 2;
+/*
+[downloadQueue addTask:task1];
+[downloadQueue addTask:task2];
+[downloadQueue addTask:task3]; // task3 will be sent after task1 or task2 is finished.
+*/
+```
+
 ## What's Next
 
 - More unit tests for STHTTPNetTaskQueueHandler.
 - Detailed documentation for STNetTaskQueue, STNetTask, STNetTaskChain.
-- Support other protocol based STNetTaskQueueHandler, e.g. STNetTaskQueueHandler for ProtocolBuffers.

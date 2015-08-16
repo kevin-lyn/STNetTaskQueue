@@ -25,6 +25,11 @@
     return 3; // Retry after error occurs
 }
 
+- (BOOL)shouldRetryForError:(NSError *)error
+{
+    return YES; // Retry for all kinds of errors
+}
+
 - (NSDictionary *)parameters
 {
     NSLog(@"Pack request parameters");

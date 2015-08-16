@@ -27,9 +27,9 @@
               @"userId": @(self.userId) };
 }
 
-- (void)didResponseJSON:(NSDictionary *)json
+- (void)didResponseDictionary:(NSDictionary *)dictionary
 {
-    _post = json;
+    _post = dictionary;
 }
 
 @end

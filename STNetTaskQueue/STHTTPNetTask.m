@@ -41,7 +41,10 @@ NSString *const STHTTPNetTaskResponseParsedError = @"STHTTPNetTaskResponseParsed
 - (void)didResponse:(id)response
 {
     if ([response isKindOfClass:[NSDictionary class]]) {
-        [self didResponseJSON:response];
+        [self didResponseDictionary:response];
+    }
+    else if ([response isKindOfClass:[NSArray class]]) {
+        [self didResponseArray:response];
     }
     else if ([response isKindOfClass:[NSString class]]) {
         [self didResponseString:response];
@@ -54,7 +57,12 @@ NSString *const STHTTPNetTaskResponseParsedError = @"STHTTPNetTaskResponseParsed
     }
 }
 
-- (void)didResponseJSON:(NSDictionary *)json
+- (void)didResponseDictionary:(NSDictionary *)dictionary
+{
+    
+}
+
+- (void)didResponseArray:(NSArray *)array
 {
     
 }
