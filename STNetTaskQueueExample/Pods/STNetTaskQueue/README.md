@@ -8,6 +8,7 @@ STNetTaskQueue avoid you from directly dealing with "url", "request packing" and
 - Max retry count for each STNetTask.
 - Net task is cancelable after added to STNetTaskQueue.
 - Multiple delegates for same net task.
+- Works with ReactiveCocoa, subscribeNext for net task result.
 
 ## STHTTPNetTaskQueueHandler
 
@@ -72,16 +73,20 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
     return 3; // Retry after error occurs
 }
 
-- (NSDictionary *)parameters
+- (BOOL)shouldRetryForError:(NSError *)error
 {
-    return @{ @"lat": self.latitude,
-              @"lon": self.longitude };
+    return YES; // Retry for all kinds of errors
 }
 
-- (void)didResponseJSON:(NSDictionary *)response
+- (NSDictionary *)parameters
 {
-    _place = response[@"name"];
-    _temperature = [response[@"main"][@"temp"] floatValue] / 10;
+    return @{ @"lat": self.latitude, @"lon": self.longitude };
+}
+
+- (void)didResponseDictionary:(NSDictionary *)dictionary
+{
+    _place = dictionary[@"name"];
+    _temperature = [dictionary[@"main"][@"temp"] floatValue] / 10;
 }
 
 @end
@@ -104,6 +109,22 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 }
 ```
 
+#### Work with ReactiveCocoa for getting net task result
+
+```objc
+[STNetTaskObserve(_openWeatherTask) subscribeNext:^(STOpenWeatherNetTask *task) {
+    if (task.error) { // Would be network issue
+        _resultLabel.text = @"Network Unavailable";
+        _goBtn.hidden = YES;
+        return;
+    }
+    _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", task.place, task.temperature];
+    _goBtn.hidden = YES;
+}];
+```
+
+#### Or use STNetTaskDelegate
+
 ```objc
 - (void)netTaskDidEnd:(STNetTask *)task
 {
@@ -112,21 +133,34 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
     if (_openWeatherTask != task) {
         return;
     }
-    
+
     if (task.error) { // Would be network issue
         _resultLabel.text = @"Network Unavailable";
         _goBtn.hidden = YES;
         return;
     }
-    
+
     _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", _openWeatherTask.place, _openWeatherTask.temperature];
     _goBtn.hidden = YES;
 }
 ```
 For more details, download the example project or check out unit tests for usage references.
 
+### Set max concurrent tasks count of STNetTaskQueue
+Sometimes we need to set the concurrent image download tasks to avoid too much data coming at the same time.
+
+```objc
+STNetTaskQueue *downloadQueue = [STNetTaskQueue new];
+downloadQueue.handler = [[STHTTPNetTaskQueueHandler alloc] initWithBaseURL:[NSURL URLWithString:@"http://example.com"]];
+downloadQueue.maxConcurrentTasksCount = 2;
+/*
+[downloadQueue addTask:task1];
+[downloadQueue addTask:task2];
+[downloadQueue addTask:task3]; // task3 will be sent after task1 or task2 is finished.
+*/
+```
+
 ## What's Next
 
 - More unit tests for STHTTPNetTaskQueueHandler.
 - Detailed documentation for STNetTaskQueue, STNetTask, STNetTaskChain.
-- Support other protocol based STNetTaskQueueHandler, e.g. STNetTaskQueueHandler for ProtocolBuffers.

@@ -37,11 +37,11 @@
               @"lon": self.longitude };
 }
 
-- (void)didResponseJSON:(NSDictionary *)response
+- (void)didResponseDictionary:(NSDictionary *)dictionary
 {
-    NSLog(@"Response: %@", response);
-    _place = response[@"name"];
-    _temperature = [response[@"main"][@"temp"] floatValue] / 10;
+    NSLog(@"Response: %@", dictionary);
+    _place = dictionary[@"name"];
+    _temperature = [dictionary[@"main"][@"temp"] floatValue] / 10;
 }
 
 @end

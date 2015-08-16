@@ -6,7 +6,7 @@ PODS:
   - ReactiveCocoa/no-arc (2.5)
   - ReactiveCocoa/UI (2.5):
     - ReactiveCocoa/Core
-  - STNetTaskQueue (0.0.3)
+  - STNetTaskQueue (0.0.4)
 
 DEPENDENCIES:
   - ReactiveCocoa
@@ -14,6 +14,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
-  STNetTaskQueue: 9a25cbcd0d6dc211b65d171f9d38ce6665c40487
+  STNetTaskQueue: 12ffc521771ab1496e3ac4d2ab5d5337ee8ead69
 
 COCOAPODS: 0.37.2
