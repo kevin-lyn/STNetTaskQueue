@@ -89,7 +89,8 @@
                 error = [NSError errorWithDomain:STHTTPNetTaskServerError
                                             code:0
                                         userInfo:@{ @"statusCode": @(httpResponse.statusCode),
-                                                    @"url": response.URL.absoluteString }];
+                                                    @"url": response.URL.absoluteString,
+                                                    @"responseData": data }];
             }
             [netTaskQueue didFailWithError:error taskId:taskId];
         }
