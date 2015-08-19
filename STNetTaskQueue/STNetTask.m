@@ -42,4 +42,9 @@ NSString *const STNetTaskUnknownError = @"STNetTaskUnknownError";
     return YES;
 }
 
+- (NSTimeInterval)retryInterval
+{
+    return 0;
+}
+
 @end

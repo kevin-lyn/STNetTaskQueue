@@ -28,12 +28,17 @@ NSString *const STHTTPNetTaskResponseParsedError = @"STHTTPNetTaskResponseParsed
     return STHTTPNetTaskResponseJSON;
 }
 
-- (NSDictionary *)datas
+- (NSDictionary *)headers
 {
     return nil;
 }
 
 - (NSDictionary *)parameters
+{
+    return nil;
+}
+
+- (NSDictionary *)datas
 {
     return nil;
 }

@@ -25,4 +25,9 @@
     return 3;
 }
 
+- (NSTimeInterval)retryInterval
+{
+    return 1;
+}
+
 @end

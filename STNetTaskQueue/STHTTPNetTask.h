@@ -37,6 +37,7 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
 - (STHTTPNetTaskMethod)method;
 - (STHTTPNetTaskRequestType)requestType;
 - (STHTTPNetTaskResponseType)responseType;
+- (NSDictionary *)headers;
 - (NSDictionary *)parameters;
 - (NSDictionary *)datas;
 - (void)didResponseDictionary:(NSDictionary *)dictionary;
