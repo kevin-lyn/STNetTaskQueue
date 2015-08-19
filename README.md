@@ -78,6 +78,16 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
     return YES; // Retry for all kinds of errors
 }
 
+- (NSTimeInterval)retryInterval
+{
+    return 5; // Retry after 5 sections
+}
+
+- (NSDictionary *)headers
+{
+    return @{ @"custom_header": @"value" };
+}
+
 - (NSDictionary *)parameters
 {
     return @{ @"lat": self.latitude, @"lon": self.longitude };
