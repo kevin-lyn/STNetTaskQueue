@@ -30,6 +30,16 @@
     return YES; // Retry for all kinds of errors
 }
 
+- (NSTimeInterval)retryInterval
+{
+    return 5; // Retry after 5 sections
+}
+
+- (NSDictionary *)headers
+{
+    return @{ @"custom_header": @"value" };
+}
+
 - (NSDictionary *)parameters
 {
     NSLog(@"Pack request parameters");

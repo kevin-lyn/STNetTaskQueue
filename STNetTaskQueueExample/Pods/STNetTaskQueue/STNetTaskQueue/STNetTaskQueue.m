@@ -121,8 +121,10 @@ static STNetTaskQueue *sharedInstance;
 {
     if ([task shouldRetryForError:error] && task.retryCount < task.maxRetryCount) {
         task.retryCount++;
-        [task didRetry];
-        [self addTask:task];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(task.retryInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [task didRetry];
+            [self addTask:task];
+        });
         return YES;
     }
     return NO;

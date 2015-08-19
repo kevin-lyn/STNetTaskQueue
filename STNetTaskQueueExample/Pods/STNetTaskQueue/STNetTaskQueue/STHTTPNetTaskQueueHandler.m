@@ -89,17 +89,23 @@
                 error = [NSError errorWithDomain:STHTTPNetTaskServerError
                                             code:0
                                         userInfo:@{ @"statusCode": @(httpResponse.statusCode),
-                                                    @"url": response.URL.absoluteString }];
+                                                    @"url": response.URL.absoluteString,
+                                                    @"responseData": data }];
             }
             [netTaskQueue didFailWithError:error taskId:taskId];
         }
     };
     
+    NSDictionary *headers = httpTask.headers;
     NSDictionary *parameters = httpTask.parameters;
     
     NSURLSessionTask *sessionTask = nil;
     NSMutableURLRequest *request = [NSMutableURLRequest new];
     request.HTTPMethod = _methodMap[@(httpTask.method)];
+    
+    for (NSString *headerField in headers) {
+        [request setValue:headers[headerField] forHTTPHeaderField:headerField];
+    }
     
     switch (httpTask.method) {
         case STHTTPNetTaskGet:

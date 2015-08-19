@@ -38,5 +38,6 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 
 - (NSUInteger)maxRetryCount;
 - (BOOL)shouldRetryForError:(NSError *)error;
+- (NSTimeInterval)retryInterval;
 
 @end
