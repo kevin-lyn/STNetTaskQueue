@@ -80,7 +80,7 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 
 - (NSTimeInterval)retryInterval
 {
-    return 5; // Retry after 5 sections
+    return 5; // Retry after 5 seconds
 }
 
 - (NSDictionary *)headers
