@@ -8,8 +8,14 @@
 
 #import "STNetTask.h"
 
+// Error domains
 FOUNDATION_EXPORT NSString *const STHTTPNetTaskServerError;
 FOUNDATION_EXPORT NSString *const STHTTPNetTaskResponseParsedError;
+
+// Error "userInfo" key
+FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorStatusCodeUserInfoKey;
+FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorURLUserInfoKey;
+FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorResponseDataUserInfoKey;
 
 typedef NS_ENUM(NSUInteger, STHTTPNetTaskMethod) {
     STHTTPNetTaskGet,

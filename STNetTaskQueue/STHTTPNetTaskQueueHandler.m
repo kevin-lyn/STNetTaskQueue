@@ -88,9 +88,9 @@
             if (!error) { // Response status code is not 200
                 error = [NSError errorWithDomain:STHTTPNetTaskServerError
                                             code:0
-                                        userInfo:@{ @"statusCode": @(httpResponse.statusCode),
-                                                    @"url": response.URL.absoluteString,
-                                                    @"responseData": data }];
+                                        userInfo:@{ STHTTPNetTaskErrorStatusCodeUserInfoKey: @(httpResponse.statusCode),
+                                                    STHTTPNetTaskErrorURLUserInfoKey: response.URL.absoluteString,
+                                                    STHTTPNetTaskErrorResponseDataUserInfoKey: data }];
             }
             [netTaskQueue didFailWithError:error taskId:taskId];
         }

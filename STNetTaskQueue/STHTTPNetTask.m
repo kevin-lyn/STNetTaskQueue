@@ -10,6 +10,9 @@
 
 NSString *const STHTTPNetTaskServerError = @"STHTTPNetTaskServerError";
 NSString *const STHTTPNetTaskResponseParsedError = @"STHTTPNetTaskResponseParsedError";
+NSString *const STHTTPNetTaskErrorStatusCodeUserInfoKey = @"statusCode";
+NSString *const STHTTPNetTaskErrorURLUserInfoKey = @"url";
+NSString *const STHTTPNetTaskErrorResponseDataUserInfoKey = @"responseData";
 
 @implementation STHTTPNetTask
 
