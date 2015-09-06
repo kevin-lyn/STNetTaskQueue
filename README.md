@@ -6,10 +6,10 @@ STNetTaskQueue avoid you from directly dealing with "url", "request packing" and
 ## Glance
 ### Tired of this?
 ```objc
-    [network GET:@"data/2.5/weather" parameters:@{ @"latitude": location.latitude,
-                                                   @"longitude": location.longitude,
-                                                   @"user_info": location.userInfo,
-                                                   @"other_parameter": @"value" }];
+[network GET:@"data/2.5/weather" parameters:@{ @"latitude": location.latitude,
+                                               @"longitude": location.longitude,
+                                               @"user_info": location.userInfo,
+                                               @"other_parameter": @"value" }];
 ```
 ### What about this?
 ```objc
@@ -20,7 +20,7 @@ openWeatherTask.requestObject = location;
 STNetTaskQueue will get all non-readonly properties from "post" and pack them as parameters for you. See [Get Started](https://github.com/kevin0571/STNetTaskQueue#get-started) for more details.
 
 ## Features
-- Parameters auto packing for HTTP net task.
+- Auto packing parameters for HTTP net task.
 - Max concurrent tasks count in each STNetTaskQueue.
 - Max retry count for each STNetTask.
 - Net task is cancelable after added to STNetTaskQueue.
