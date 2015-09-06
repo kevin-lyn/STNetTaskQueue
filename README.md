@@ -6,8 +6,8 @@ STNetTaskQueue avoid you from directly dealing with "url", "request packing" and
 ## Glance
 ### Tired of this?
 ```objc
-[network GET:@"data/2.5/weather" parameters:@{ @"latitude": location.latitude,
-                                               @"longitude": location.longitude,
+[network GET:@"data/2.5/weather" parameters:@{ @"lat": location.lat,
+                                               @"lon": location.lon,
                                                @"user_info": location.userInfo,
                                                @"other_parameter": @"value" }];
 ```
@@ -64,8 +64,8 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 ```objc
 @interface STOpenWeatherNetTask : STHTTPNetTask
 
-@property (nonatomic, strong) NSString *latitude;
-@property (nonatomic, strong) NSString *longitude;
+@property (nonatomic, strong) NSString *lat;
+@property (nonatomic, strong) NSString *lon;
 @property (nonatomic, strong, readonly) NSString *place;
 @property (nonatomic, assign, readonly) float temperature;
 
@@ -133,18 +133,18 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
     }
     
     STLocation *location = [STLocation new];
-    location.latitude = @"this value is going to be overwritten";
-    location.longitude = @"this value is going to be overwritten";
+    location.lat = @"this value is going to be overwritten";
+    location.lon = @"this value is going to be overwritten";
     location.userInfo = @"user info";
     location.ignoredValue = 1;
     
     _openWeatherTask = [STOpenWeatherNetTask new];
     _openWeatherTask.requestObject = location;
-    _openWeatherTask.latitude = @"1.306038";
-    _openWeatherTask.longitude = @"103.772962";
+    _openWeatherTask.lat = @"1.306038";
+    _openWeatherTask.lon = @"103.772962";
     // STHTTPNetTask will pack all non-readonly properties from "requestObject", and then all non-readonly properties from net task, finally parameters returned by net task. Previous parameters might be overwritten if there are duplicated parameter names. Which means the final packed parameters would be: 
-    // @{ @"latitude": @"1.306038", 
-    //    @"longitude": @"103.772962",
+    // @{ @"lat": @"1.306038", 
+    //    @"lon": @"103.772962",
     //    @"user_info": @"user info",
     //    @"other_parameter": @"value" }
     
@@ -160,8 +160,8 @@ Conform STHTTPNetTaskRequestObject protocol
 ```objc
 @interface STLocation : NSObject<STHTTPNetTaskRequestObject>
 
-@property (nonatomic, strong) NSString *latitude;
-@property (nonatomic, strong) NSString *longitude;
+@property (nonatomic, strong) NSString *lat;
+@property (nonatomic, strong) NSString *lon;
 @property (nonatomic, strong) NSString *userInfo;
 @property (nonatomic, assign) int ignoredValue;
 @property (nonatomic, assign, readonly) BOOL readOnlyProperty; // Read only property will not be packed into parameters

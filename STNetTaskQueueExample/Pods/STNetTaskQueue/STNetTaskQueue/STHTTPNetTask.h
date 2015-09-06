@@ -8,8 +8,15 @@
 
 #import "STNetTask.h"
 
+// Error domains
 FOUNDATION_EXPORT NSString *const STHTTPNetTaskServerError;
 FOUNDATION_EXPORT NSString *const STHTTPNetTaskResponseParsedError;
+
+// Error "userInfo" key
+FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorStatusCodeUserInfoKey;
+FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorResponseDataUserInfoKey;
+
+FOUNDATION_EXPORT NSString *STHTTPNetTaskRequestObjectDefaultSeparator;
 
 typedef NS_ENUM(NSUInteger, STHTTPNetTaskMethod) {
     STHTTPNetTaskGet,
@@ -32,7 +39,19 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
     STHTTPNetTaskResponseRawData
 };
 
-@interface STHTTPNetTask : STNetTask
+@protocol STHTTPNetTaskRequestObject <NSObject>
+
+// Properties which should be ignored when packing parameters for reqeust
+- (NSArray *)ignoredProperties;
+
+@optional
+- (NSString *)parameterNameSeparator;
+
+@end
+
+@interface STHTTPNetTask : STNetTask<STHTTPNetTaskRequestObject>
+
+@property (nonatomic, strong) id<STHTTPNetTaskRequestObject> requestObject;
 
 - (STHTTPNetTaskMethod)method;
 - (STHTTPNetTaskRequestType)requestType;

@@ -20,36 +20,38 @@
     return @"data/2.5/weather";
 }
 
+// Optional. Retry 3 times after error occurs.
 - (NSUInteger)maxRetryCount
 {
-    return 3; // Retry after error occurs
+    return 3;
 }
 
+// Optional. Retry for all types of errors
 - (BOOL)shouldRetryForError:(NSError *)error
 {
-    return YES; // Retry for all kinds of errors
+    return YES;
 }
 
+// Optional. Retry after 5 seconds.
 - (NSTimeInterval)retryInterval
 {
-    return 5; // Retry after 5 seconds
+    return 5;
 }
 
+// Optional. Custom headers.
 - (NSDictionary *)headers
 {
     return @{ @"custom_header": @"value" };
 }
 
+// Optional. Add parameters which are not inclued in requestObject and net task properties.
 - (NSDictionary *)parameters
 {
-    NSLog(@"Pack request parameters");
-    return @{ @"lat": self.latitude,
-              @"lon": self.longitude };
+    return @{ @"other_parameter": @"value" };
 }
 
 - (void)didResponseDictionary:(NSDictionary *)dictionary
 {
-    NSLog(@"Response: %@", dictionary);
     _place = dictionary[@"name"];
     _temperature = [dictionary[@"main"][@"temp"] floatValue] / 10;
 }

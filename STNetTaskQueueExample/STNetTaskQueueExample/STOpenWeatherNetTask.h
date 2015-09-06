@@ -10,8 +10,8 @@
 
 @interface STOpenWeatherNetTask : STHTTPNetTask
 
-@property (nonatomic, strong) NSString *latitude;
-@property (nonatomic, strong) NSString *longitude;
+@property (nonatomic, strong) NSString *lat;
+@property (nonatomic, strong) NSString *lon;
 @property (nonatomic, strong, readonly) NSString *place;
 @property (nonatomic, assign, readonly) float temperature;
 

@@ -10,6 +10,7 @@
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import "STNetTaskQueue.h"
 #import "STOpenWeatherNetTask.h"
+#import "STLocation.h"
 
 @interface ViewController ()<STNetTaskDelegate>
 
@@ -68,9 +69,23 @@
     if (_openWeatherTask.pending) {
         return;
     }
+    
+    STLocation *location = [STLocation new];
+    location.lat = @"this value is going to be overwritten";
+    location.lon = @"this value is going to be overwritten";
+    location.userInfo = @"user info";
+    location.ignoredValue = 1;
+    
     _openWeatherTask = [STOpenWeatherNetTask new];
-    _openWeatherTask.latitude = @"1.306038";
-    _openWeatherTask.longitude = @"103.772962";
+    _openWeatherTask.requestObject = location;
+    _openWeatherTask.lat = @"1.306038";
+    _openWeatherTask.lon = @"103.772962";
+    // STHTTPNetTask will pack all non-readonly properties from "requestObject", and then all non-readonly properties from net task, finally parameters returned by net task. Previous parameters might be overwritten if there are duplicated parameter names. Which means the final packed parameters would be:
+    // @{ @"lat": @"1.306038",
+    //    @"lon": @"103.772962",
+    //    @"user_info": @"user info",
+    //    @"other_parameter": @"value" }
+    
     // Task delegate will be a weak reference, so there is no need to remove it manually.
     // It's appropriate to add task delegate here because duplicated task delegates will be ignored by STNetTaskQueue.
     [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:_openWeatherTask.uri];
