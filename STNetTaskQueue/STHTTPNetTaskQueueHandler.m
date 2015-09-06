@@ -8,6 +8,8 @@
 
 #import "STHTTPNetTaskQueueHandler.h"
 #import "STHTTPNetTask.h"
+#import "STHTTPNetTaskParametersPacker.h"
+#import "STNetTaskQueueLog.h"
 
 @implementation STHTTPNetTaskQueueHandler
 {
@@ -57,7 +59,7 @@
                         responseObj = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     }
                     @catch (NSException *exception) {
-                        NSLog(@"Response parsed error: %@", exception.debugDescription);
+                        [STNetTaskQueueLog log:@"Response parsed error: %@", exception.debugDescription];
                         error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
                                                     code:0
                                                 userInfo:@{ @"url": response.URL.absoluteString }];
@@ -68,7 +70,7 @@
                 default: {
                     responseObj = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
                     if (error) {
-                        NSLog(@"Response parsed error: %@", error.debugDescription);
+                        [STNetTaskQueueLog log:@"Response parsed error: %@", error.debugDescription];
                         error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
                                                     code:0
                                                 userInfo:@{ @"url": response.URL.absoluteString }];
@@ -89,15 +91,15 @@
                 error = [NSError errorWithDomain:STHTTPNetTaskServerError
                                             code:0
                                         userInfo:@{ STHTTPNetTaskErrorStatusCodeUserInfoKey: @(httpResponse.statusCode),
-                                                    STHTTPNetTaskErrorURLUserInfoKey: response.URL.absoluteString,
                                                     STHTTPNetTaskErrorResponseDataUserInfoKey: data }];
+                [STNetTaskQueueLog log:@"HTTP error with url: %@", httpResponse.URL.absoluteString];
             }
             [netTaskQueue didFailWithError:error taskId:taskId];
         }
     };
     
     NSDictionary *headers = httpTask.headers;
-    NSDictionary *parameters = httpTask.parameters;
+    NSDictionary *parameters = [[[STHTTPNetTaskParametersPacker alloc] initWithNetTask:httpTask] pack];
     
     NSURLSessionTask *sessionTask = nil;
     NSMutableURLRequest *request = [NSMutableURLRequest new];

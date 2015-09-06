@@ -191,7 +191,7 @@
         if (task.error ||
             ![testPostTask.post[@"title"] isEqualToString:testPostTask.title] ||
             ![testPostTask.post[@"body"] isEqualToString:testPostTask.body] ||
-            [testPostTask.post[@"userId"] intValue] != testPostTask.userId) {
+            [testPostTask.post[@"user_id"] intValue] != testPostTask.userId) {
             XCTFail(@"testPostNetTask failed");
         }
     }

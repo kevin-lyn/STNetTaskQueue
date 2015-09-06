@@ -21,6 +21,8 @@
 		766502A01B554CA800B4F63D /* STNetTaskChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665029A1B554CA800B4F63D /* STNetTaskChain.m */; };
 		766502A11B554CA800B4F63D /* STNetTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665029C1B554CA800B4F63D /* STNetTaskQueue.m */; };
 		766502C11B55541F00B4F63D /* STTestRetryNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502C01B55541F00B4F63D /* STTestRetryNetTask.m */; };
+		76C065EA1B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C065E91B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.m */; };
+		76C065ED1B9C44F90062AEC5 /* STNetTaskQueueLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C065EC1B9C44F90062AEC5 /* STNetTaskQueueLog.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,10 @@
 		7665029C1B554CA800B4F63D /* STNetTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueue.m; sourceTree = "<group>"; };
 		766502BF1B55541F00B4F63D /* STTestRetryNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestRetryNetTask.h; sourceTree = "<group>"; };
 		766502C01B55541F00B4F63D /* STTestRetryNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestRetryNetTask.m; sourceTree = "<group>"; };
+		76C065E81B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHTTPNetTaskParametersPacker.h; sourceTree = "<group>"; };
+		76C065E91B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHTTPNetTaskParametersPacker.m; sourceTree = "<group>"; };
+		76C065EB1B9C44F90062AEC5 /* STNetTaskQueueLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTaskQueueLog.h; sourceTree = "<group>"; };
+		76C065EC1B9C44F90062AEC5 /* STNetTaskQueueLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueueLog.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,8 @@
 				766502941B554CA800B4F63D /* STHTTPNetTask.m */,
 				766502951B554CA800B4F63D /* STHTTPNetTaskQueueHandler.h */,
 				766502961B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m */,
+				76C065E81B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.h */,
+				76C065E91B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.m */,
 			);
 			name = HTTP;
 			sourceTree = "<group>";
@@ -153,6 +161,8 @@
 				7665029A1B554CA800B4F63D /* STNetTaskChain.m */,
 				7665029B1B554CA800B4F63D /* STNetTaskQueue.h */,
 				7665029C1B554CA800B4F63D /* STNetTaskQueue.m */,
+				76C065EB1B9C44F90062AEC5 /* STNetTaskQueueLog.h */,
+				76C065EC1B9C44F90062AEC5 /* STNetTaskQueueLog.m */,
 			);
 			name = STNetTaskQueue;
 			path = ../../STNetTaskQueue;
@@ -229,10 +239,12 @@
 				766502A01B554CA800B4F63D /* STNetTaskChain.m in Sources */,
 				765FF8A21B5B7B3100DE637E /* STTestPutNetTask.m in Sources */,
 				766502C11B55541F00B4F63D /* STTestRetryNetTask.m in Sources */,
+				76C065ED1B9C44F90062AEC5 /* STNetTaskQueueLog.m in Sources */,
 				7665029E1B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m in Sources */,
 				7665029F1B554CA800B4F63D /* STNetTask.m in Sources */,
 				765FF89B1B5B565E00DE637E /* STTestGetNetTask.m in Sources */,
 				765FF89F1B5B763000DE637E /* STTestPostNetTask.m in Sources */,
+				76C065EA1B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.m in Sources */,
 				76586ED01B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m in Sources */,
 				765FF8B71B5B875800DE637E /* STTestDownloadNetTask.m in Sources */,
 				766502A11B554CA800B4F63D /* STNetTaskQueue.m in Sources */,

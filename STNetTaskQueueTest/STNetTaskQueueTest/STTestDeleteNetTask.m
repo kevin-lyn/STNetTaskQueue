@@ -20,4 +20,9 @@
     return [NSString stringWithFormat:@"posts/%d", self.id];
 }
 
+- (NSArray *)ignoredProperties
+{
+    return @[ @"id" ];
+}
+
 @end

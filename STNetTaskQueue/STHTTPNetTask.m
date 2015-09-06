@@ -11,8 +11,8 @@
 NSString *const STHTTPNetTaskServerError = @"STHTTPNetTaskServerError";
 NSString *const STHTTPNetTaskResponseParsedError = @"STHTTPNetTaskResponseParsedError";
 NSString *const STHTTPNetTaskErrorStatusCodeUserInfoKey = @"statusCode";
-NSString *const STHTTPNetTaskErrorURLUserInfoKey = @"url";
 NSString *const STHTTPNetTaskErrorResponseDataUserInfoKey = @"responseData";
+NSString *STHTTPNetTaskRequestObjectDefaultSeparator = @"_";
 
 @implementation STHTTPNetTask
 
@@ -83,6 +83,11 @@ NSString *const STHTTPNetTaskErrorResponseDataUserInfoKey = @"responseData";
 - (void)didResponseData:(NSData *)data
 {
     
+}
+
+- (NSArray *)ignoredProperties
+{
+    return nil;
 }
 
 @end

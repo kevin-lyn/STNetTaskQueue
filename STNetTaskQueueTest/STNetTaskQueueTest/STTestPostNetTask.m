@@ -20,13 +20,6 @@
     return @"posts";
 }
 
-- (NSDictionary *)parameters
-{
-    return @{ @"title": self.title,
-              @"body": self.body,
-              @"userId": @(self.userId) };
-}
-
 - (void)didResponseDictionary:(NSDictionary *)dictionary
 {
     _post = dictionary;

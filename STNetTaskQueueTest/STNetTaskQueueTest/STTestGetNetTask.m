@@ -25,4 +25,9 @@
     _post = dictionary;
 }
 
+- (NSArray *)ignoredProperties
+{
+    return @[ @"id" ];
+}
+
 @end

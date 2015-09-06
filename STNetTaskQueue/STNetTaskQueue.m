@@ -7,6 +7,7 @@
 //
 
 #import "STNetTaskQueue.h"
+#import "STNetTaskQueueLog.h"
 
 @interface STNetTaskDelegateWeakWrapper : NSObject
 
@@ -161,7 +162,7 @@ static STNetTaskQueue *sharedInstance;
             [task didResponse:response];
         }
         @catch (NSException *exception) {
-            [weakSelf log:[NSString stringWithFormat:@"Exception in 'didResponse' - %@", exception.debugDescription]];
+            [STNetTaskQueueLog log:@"Exception in 'didResponse' - %@", exception.debugDescription];
             NSError *error = [NSError errorWithDomain:STNetTaskUnknownError
                                                  code:-1
                                              userInfo:@{ @"msg": exception.description }];
@@ -187,7 +188,7 @@ static STNetTaskQueue *sharedInstance;
     __weak STNetTaskQueue *weakSelf = self;
     [self.queue addOperationWithBlock:^ {
         
-        [weakSelf log:error.debugDescription];
+        [STNetTaskQueueLog log:error.debugDescription];
         
         STNetTask *task = nil;
         @synchronized(weakSelf.tasks) {
@@ -252,11 +253,6 @@ static STNetTaskQueue *sharedInstance;
         
         [delegates addObject:weakWrapper];
     }
-}
-
-- (void)log:(NSString *)content
-{
-    NSLog(@"STNetTaskQueue: %@", content);
 }
 
 @end

@@ -20,14 +20,6 @@
     return [NSString stringWithFormat:@"posts/%d", self.id];
 }
 
-- (NSDictionary *)parameters
-{
-    return @{ @"id": @(self.id),
-              @"title": self.title,
-              @"body": self.body,
-              @"userId": @(self.userId) };
-}
-
 - (void)didResponseDictionary:(NSDictionary *)dictionary
 {
     _post = dictionary;
