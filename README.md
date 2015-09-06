@@ -3,7 +3,24 @@ STNetTaskQueue is a networking queue library for iOS and OS X. It's abstract and
 
 STNetTaskQueue avoid you from directly dealing with "url", "request packing" and "response parsing". All networking tasks are described and processed by subclassing STNetTask, which provides you a clean code style in UI layer when handling networking.
 
+## Glance
+### Tired of this?
+```objc
+    [network GET:@"data/2.5/weather" parameters:@{ @"latitude": location.latitude,
+                                                   @"longitude": location.longitude,
+                                                   @"user_info": location.userInfo,
+                                                   @"other_parameter": @"value" }];
+```
+### What about this?
+```objc
+STOpenWeatherNetTask *openWeatherTask = [STOpenWeatherNetTask new];
+openWeatherTask.requestObject = location;
+[[STNetTaskQueue sharedQueue] addTask:openWeatherTask];
+```
+STNetTaskQueue will get all non-readonly properties from "post" and pack them as parameters for you. See [Get Started](https://github.com/kevin0571/STNetTaskQueue#get-started) for more details.
+
 ## Features
+- Parameters auto packing for HTTP net task.
 - Max concurrent tasks count in each STNetTaskQueue.
 - Max retry count for each STNetTask.
 - Net task is cancelable after added to STNetTaskQueue.
@@ -68,29 +85,34 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
     return @"data/2.5/weather";
 }
 
+// Optional. Retry 3 times after error occurs.
 - (NSUInteger)maxRetryCount
 {
-    return 3; // Retry after error occurs
+    return 3;
 }
 
+// Optional. Retry for all types of errors
 - (BOOL)shouldRetryForError:(NSError *)error
 {
-    return YES; // Retry for all kinds of errors
+    return YES;
 }
 
+// Optional. Retry after 5 seconds.
 - (NSTimeInterval)retryInterval
 {
-    return 5; // Retry after 5 seconds
+    return 5;
 }
 
+// Optional. Custom headers.
 - (NSDictionary *)headers
 {
     return @{ @"custom_header": @"value" };
 }
 
+// Optional. Add parameters which are not inclued in requestObject and net task properties.
 - (NSDictionary *)parameters
 {
-    return @{ @"lat": self.latitude, @"lon": self.longitude };
+    return @{ @"other_parameter": @"value" };
 }
 
 - (void)didResponseDictionary:(NSDictionary *)dictionary
@@ -109,14 +131,60 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
     if (_openWeatherTask.pending) {
         return;
     }
+    
+    STLocation *location = [STLocation new];
+    location.latitude = @"this value is going to be overwritten";
+    location.longitude = @"this value is going to be overwritten";
+    location.userInfo = @"user info";
+    location.ignoredValue = 1;
+    
     _openWeatherTask = [STOpenWeatherNetTask new];
+    _openWeatherTask.requestObject = location;
     _openWeatherTask.latitude = @"1.306038";
     _openWeatherTask.longitude = @"103.772962";
+    // STHTTPNetTask will pack all non-readonly properties from "requestObject", and then all non-readonly properties from net task, finally parameters returned by net task. Previous parameters might be overwritten if there are duplicated parameter names. Which means the final packed parameters would be: 
+    // @{ @"latitude": @"1.306038", 
+    //    @"longitude": @"103.772962",
+    //    @"user_info": @"user info",
+    //    @"other_parameter": @"value" }
+    
     // Task delegate will be a weak reference, so there is no need to remove it manually.
     // It's appropriate to add task delegate here because duplicated task delegates will be ignored by STNetTaskQueue.
     [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:_openWeatherTask.uri];
     [[STNetTaskQueue sharedQueue] addTask:_openWeatherTask];
 }
+```
+
+#### Create a request object
+Conform STHTTPNetTaskRequestObject protocol
+```objc
+@interface STLocation : NSObject<STHTTPNetTaskRequestObject>
+
+@property (nonatomic, strong) NSString *latitude;
+@property (nonatomic, strong) NSString *longitude;
+@property (nonatomic, strong) NSString *userInfo;
+@property (nonatomic, assign) int ignoredValue;
+@property (nonatomic, assign, readonly) BOOL readOnlyProperty; // Read only property will not be packed into parameters
+
+@end
+```
+
+```objc
+@implementation STLocation
+
+// If you want to ignore some properties when packing the request object, return an array with property names.
+- (NSArray *)ignoredProperties
+{
+    return @[ @"ignoredValue" ];
+}
+
+// This is optional, if this is not implemented, underscore "_" will be used as separator when packing parameters. Which means if you use CamelCase naming for your property, it will be converted to lower cases string separated by "_", e.g. "userInfo" will be packed as "user_info" in parameters.
+- (NSString *)parameterNameSeparator
+{
+    return @"_"
+}
+
+@end
 ```
 
 #### Work with ReactiveCocoa for getting net task result
