@@ -17,7 +17,7 @@ STOpenWeatherNetTask *openWeatherTask = [STOpenWeatherNetTask new];
 openWeatherTask.requestObject = location;
 [[STNetTaskQueue sharedQueue] addTask:openWeatherTask];
 ```
-STNetTaskQueue will get all non-readonly properties from "post" and pack them as parameters for you. See [Get Started](https://github.com/kevin0571/STNetTaskQueue#get-started) for more details.
+STNetTaskQueue will get all non-readonly properties from "location" and pack them as parameters for you. See [Get Started](https://github.com/kevin0571/STNetTaskQueue#get-started) for more details.
 
 ## Features
 - Auto packing parameters for HTTP net task.
