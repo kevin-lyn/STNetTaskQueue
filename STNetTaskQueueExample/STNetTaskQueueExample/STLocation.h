@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) NSString *lat;
 @property (nonatomic, strong) NSString *lon;
-@property (nonatomic, strong) NSString *userInfo;
 @property (nonatomic, assign) int ignoredValue;
 @property (nonatomic, assign, readonly) BOOL readOnlyProperty; // Read only property will not be packed into parameters
 

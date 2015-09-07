@@ -7,11 +7,12 @@
 //
 
 #import "STHTTPNetTask.h"
+#import "STLocation.h"
 
 @interface STOpenWeatherNetTask : STHTTPNetTask
 
-@property (nonatomic, strong) NSString *lat;
-@property (nonatomic, strong) NSString *lon;
+@property (nonatomic, strong) STLocation *location;
+@property (nonatomic, strong) NSString *userInfo;
 @property (nonatomic, strong, readonly) NSString *place;
 @property (nonatomic, assign, readonly) float temperature;
 

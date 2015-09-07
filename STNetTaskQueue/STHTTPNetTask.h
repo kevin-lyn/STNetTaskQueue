@@ -51,8 +51,6 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
 
 @interface STHTTPNetTask : STNetTask<STHTTPNetTaskRequestObject>
 
-@property (nonatomic, strong) id<STHTTPNetTaskRequestObject> requestObject;
-
 - (STHTTPNetTaskMethod)method;
 - (STHTTPNetTaskRequestType)requestType;
 - (STHTTPNetTaskResponseType)responseType;

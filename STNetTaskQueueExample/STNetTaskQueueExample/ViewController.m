@@ -71,16 +71,14 @@
     }
     
     STLocation *location = [STLocation new];
-    location.lat = @"this value is going to be overwritten";
-    location.lon = @"this value is going to be overwritten";
-    location.userInfo = @"user info";
+    location.lat = @"1.306038";
+    location.lon = @"103.772962";
     location.ignoredValue = 1;
     
     _openWeatherTask = [STOpenWeatherNetTask new];
-    _openWeatherTask.requestObject = location;
-    _openWeatherTask.lat = @"1.306038";
-    _openWeatherTask.lon = @"103.772962";
-    // STHTTPNetTask will pack all non-readonly properties from "requestObject", and then all non-readonly properties from net task, finally parameters returned by net task. Previous parameters might be overwritten if there are duplicated parameter names. Which means the final packed parameters would be:
+    _openWeatherTask.location = location;
+    _openWeatherTask.userInfo = @"user info";
+    // STHTTPNetTask will pack non-readonly properties which is number, BOOL, NSString, NSDictionary, NSArray or object conforms to STHTTPNetTaskRequestObject, also parameters returned by overwritten method "parameters". Which means the final packed parameters would be:
     // @{ @"lat": @"1.306038",
     //    @"lon": @"103.772962",
     //    @"user_info": @"user info",
