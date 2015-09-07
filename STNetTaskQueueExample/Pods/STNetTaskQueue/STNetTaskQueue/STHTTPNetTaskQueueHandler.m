@@ -158,9 +158,14 @@
     
     NSMutableString *queryString = [NSMutableString string];
     [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL *stop) {
-        NSString *stringValue = [value description];
-        stringValue = [stringValue stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-        [queryString appendFormat:@"%@=%@&", key, stringValue];
+        if ([value isKindOfClass:[NSArray class]]) {
+            for (id element in value) {
+                [self appendToQueryString:queryString withKey:key value:[element description]];
+            }
+        }
+        else {
+            [self appendToQueryString:queryString withKey:key value:[value description]];
+        }
     }];
     [queryString deleteCharactersInRange:NSMakeRange(queryString.length - 1, 1)];
     return queryString;
@@ -184,8 +189,15 @@
         case STHTTPNetTaskRequestKeyValueString:
         default: {
             NSMutableString *bodyString = [NSMutableString string];
-            [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
-                [bodyString appendFormat:@"%@=%@&", key, value];
+            [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL *stop) {
+                if ([value isKindOfClass:[NSArray class]]) {
+                    for (id element in value) {
+                        [self appendToBodyString:bodyString withKey:key value:[element description]];
+                    }
+                }
+                else {
+                    [self appendToBodyString:bodyString withKey:key value:[value description]];
+                }
             }];
             [bodyString deleteCharactersInRange:NSMakeRange(bodyString.length - 1, 1)];
             bodyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
@@ -200,10 +212,15 @@
 {
     NSMutableData *formData = [NSMutableData data];
     
-    [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL *stop) {
-        [formData appendData:[[NSString stringWithFormat:@"--%@\r\n", _formDataBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [formData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
-        [formData appendData:[[NSString stringWithFormat:@"%@\r\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
+    [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL *stop) {
+        if ([value isKindOfClass:[NSArray class]]) {
+            for (id element in value) {
+                [self appendToFormData:formData withKey:key value:[element description]];
+            }
+        }
+        else {
+            [self appendToFormData:formData withKey:key value:[value description]];
+        }
     }];
     
     [datas enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSData *fileData, BOOL *stop) {
@@ -217,6 +234,24 @@
     [formData appendData:[[NSString stringWithFormat:@"--%@--\r\n", _formDataBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
     return formData;
+}
+
+- (void)appendToQueryString:(NSMutableString *)queryString withKey:(NSString *)key value:(NSString *)value
+{
+    value = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [queryString appendFormat:@"%@=%@&", key, value];
+}
+
+- (void)appendToBodyString:(NSMutableString *)bodyString withKey:(NSString *)key value:(NSString *)value
+{
+    [bodyString appendFormat:@"%@=%@&", key, value];
+}
+
+- (void)appendToFormData:(NSMutableData *)formData withKey:(NSString *)key value:(NSString *)value
+{
+    [formData appendData:[[NSString stringWithFormat:@"--%@\r\n", _formDataBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [formData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+    [formData appendData:[[NSString stringWithFormat:@"%@\r\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 @end

@@ -26,8 +26,6 @@
 {
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
-    // Pack parameters from request object of net task
-    [parameters addEntriesFromDictionary:[self parametersFromRequestObject:_netTask.requestObject]];
     // Pack parameters from net task
     [parameters addEntriesFromDictionary:[self parametersFromRequestObject:_netTask]];
     // Pack additional parameters
@@ -69,7 +67,8 @@
         }
         else {
             if (![propertyValue isKindOfClass:[NSNumber class]] &&
-                ![propertyValue isKindOfClass:[NSString class]]) {
+                ![propertyValue isKindOfClass:[NSString class]] &&
+                ![propertyValue isKindOfClass:[NSArray class]]) {
                 continue;
             }
             

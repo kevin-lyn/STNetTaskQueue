@@ -6,21 +6,21 @@ STNetTaskQueue avoid you from directly dealing with "url", "request packing" and
 ## Glance
 ### Tired of this?
 ```objc
-    [network GET:@"data/2.5/weather" parameters:@{ @"latitude": location.latitude,
-                                                   @"longitude": location.longitude,
-                                                   @"user_info": location.userInfo,
-                                                   @"other_parameter": @"value" }];
+[network GET:@"data/2.5/weather" parameters:@{ @"lat": location.lat,
+                                               @"lon": location.lon,
+                                               @"user_info": location.userInfo,
+                                               @"other_parameter": @"value" }];
 ```
 ### What about this?
 ```objc
 STOpenWeatherNetTask *openWeatherTask = [STOpenWeatherNetTask new];
-openWeatherTask.requestObject = location;
+openWeatherTask.location = location;
 [[STNetTaskQueue sharedQueue] addTask:openWeatherTask];
 ```
-STNetTaskQueue will get all non-readonly properties from "post" and pack them as parameters for you. See [Get Started](https://github.com/kevin0571/STNetTaskQueue#get-started) for more details.
+STNetTaskQueue will get all non-readonly properties from "location" and pack them to parameters for you. See [Get Started](https://github.com/kevin0571/STNetTaskQueue#get-started) for more details.
 
 ## Features
-- Parameters auto packing for HTTP net task.
+- Auto packing parameters for HTTP net task.
 - Max concurrent tasks count in each STNetTaskQueue.
 - Max retry count for each STNetTask.
 - Net task is cancelable after added to STNetTaskQueue.
@@ -64,8 +64,8 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 ```objc
 @interface STOpenWeatherNetTask : STHTTPNetTask
 
-@property (nonatomic, strong) NSString *latitude;
-@property (nonatomic, strong) NSString *longitude;
+@property (nonatomic, strong) STLocation *location;
+@property (nonatomic, strong) NSString *userInfo;
 @property (nonatomic, strong, readonly) NSString *place;
 @property (nonatomic, assign, readonly) float temperature;
 
@@ -133,18 +133,16 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
     }
     
     STLocation *location = [STLocation new];
-    location.latitude = @"this value is going to be overwritten";
-    location.longitude = @"this value is going to be overwritten";
-    location.userInfo = @"user info";
+    location.lat = @"1.306038";
+    location.lon = @"103.772962";
     location.ignoredValue = 1;
     
     _openWeatherTask = [STOpenWeatherNetTask new];
-    _openWeatherTask.requestObject = location;
-    _openWeatherTask.latitude = @"1.306038";
-    _openWeatherTask.longitude = @"103.772962";
-    // STHTTPNetTask will pack all non-readonly properties from "requestObject", and then all non-readonly properties from net task, finally parameters returned by net task. Previous parameters might be overwritten if there are duplicated parameter names. Which means the final packed parameters would be: 
-    // @{ @"latitude": @"1.306038", 
-    //    @"longitude": @"103.772962",
+    _openWeatherTask.location = location;
+    _openWeatherTask.userInfo = @"user info";
+    // STHTTPNetTask will pack non-readonly properties which is number, BOOL, NSString, NSDictionary, NSArray or object conforms to STHTTPNetTaskRequestObject, also parameters returned by overwritten method "parameters". Which means the final packed parameters would be:
+    // @{ @"lat": @"1.306038",
+    //    @"lon": @"103.772962",
     //    @"user_info": @"user info",
     //    @"other_parameter": @"value" }
     
@@ -160,9 +158,8 @@ Conform STHTTPNetTaskRequestObject protocol
 ```objc
 @interface STLocation : NSObject<STHTTPNetTaskRequestObject>
 
-@property (nonatomic, strong) NSString *latitude;
-@property (nonatomic, strong) NSString *longitude;
-@property (nonatomic, strong) NSString *userInfo;
+@property (nonatomic, strong) NSString *lat;
+@property (nonatomic, strong) NSString *lon;
 @property (nonatomic, assign) int ignoredValue;
 @property (nonatomic, assign, readonly) BOOL readOnlyProperty; // Read only property will not be packed into parameters
 
@@ -181,7 +178,7 @@ Conform STHTTPNetTaskRequestObject protocol
 // This is optional, if this is not implemented, underscore "_" will be used as separator when packing parameters. Which means if you use CamelCase naming for your property, it will be converted to lower cases string separated by "_", e.g. "userInfo" will be packed as "user_info" in parameters.
 - (NSString *)parameterNameSeparator
 {
-    return @"_"
+    return @"_";
 }
 
 @end
