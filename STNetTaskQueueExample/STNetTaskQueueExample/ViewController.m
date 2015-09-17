@@ -51,13 +51,16 @@
      Work with ReactiveCocoa, get net task result with 'subscribeNext'.
      Note that ReactiveCocoa.h should be imported before STNetTaskQueue.
     
-    [STNetTaskObserve(_openWeatherTask) subscribeNext:^(STOpenWeatherNetTask *task) {
-        if (task.error) { // Would be network issue
+    [STNetTaskObserve(_openWeatherTask) subscribeCompleted:^(
+        if (!_openWeatherTask.finished) { // Detect "finished" if _openWeatherTask may have a chance to be canceled.
+            return;
+        }
+        if (_openWeatherTask.error) { // Would be network issue
             _resultLabel.text = @"Network Unavailable";
             _goBtn.hidden = YES;
             return;
         }
-        _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", task.place, task.temperature];
+        _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", _openWeatherTask.place, _openWeatherTask.temperature];
         _goBtn.hidden = YES;
     }];
      
