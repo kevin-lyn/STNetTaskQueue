@@ -56,7 +56,12 @@
                     break;
                 case STHTTPNetTaskResponseString: {
                     @try {
-                        responseObj = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                        if (data.length) {
+                            responseObj = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                        }
+                        else {
+                            responseObj = @"";
+                        }
                     }
                     @catch (NSException *exception) {
                         [STNetTaskQueueLog log:@"Response parsed error: %@", exception.debugDescription];
@@ -68,12 +73,17 @@
                     break;
                 case STHTTPNetTaskResponseJSON:
                 default: {
-                    responseObj = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                    if (error) {
-                        [STNetTaskQueueLog log:@"Response parsed error: %@", error.debugDescription];
-                        error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
-                                                    code:0
-                                                userInfo:@{ @"url": response.URL.absoluteString }];
+                    if (data.length) {
+                        responseObj = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                        if (error) {
+                            [STNetTaskQueueLog log:@"Response parsed error: %@", error.debugDescription];
+                            error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
+                                                        code:0
+                                                    userInfo:@{ @"url": response.URL.absoluteString }];
+                        }
+                    }
+                    else {
+                        responseObj = @{};
                     }
                 }
                     break;
