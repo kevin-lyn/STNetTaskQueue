@@ -25,7 +25,7 @@ STNetTaskQueue will get all non-readonly properties from "location" and pack the
 - Max retry count for each STNetTask.
 - Net task is cancelable after added to STNetTaskQueue.
 - Multiple delegates for same net task.
-- Works with ReactiveCocoa, subscribeNext for net task result.
+- Works with ReactiveCocoa, subscribeCompleted for net task result.
 
 ## STHTTPNetTaskQueueHandler
 
