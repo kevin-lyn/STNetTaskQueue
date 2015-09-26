@@ -78,7 +78,7 @@ static STNetTaskQueue *sharedInstance;
         
         [weakSelf.handler netTaskQueue:weakSelf task:task taskId:taskId];
         @synchronized(weakSelf.tasks) {
-            [weakSelf.tasks setObject:task forKey:@(taskId)];
+            weakSelf.tasks[@(taskId)] = task;
         }
     }];
 }
@@ -95,7 +95,7 @@ static STNetTaskQueue *sharedInstance;
         NSNumber *taskIdToBeRemoved = nil;
         @synchronized(weakSelf.tasks) {
             for (NSNumber *taskId in weakSelf.tasks.allKeys) {
-                if ([weakSelf.tasks objectForKey:taskId] == task) {
+                if (weakSelf.tasks[taskId] == task) {
                     taskIdToBeRemoved = taskId;
                     break;
                 }
@@ -151,7 +151,7 @@ static STNetTaskQueue *sharedInstance;
         
         STNetTask *task = nil;
         @synchronized(weakSelf.tasks) {
-            task = [weakSelf.tasks objectForKey:@(taskId)];
+            task = weakSelf.tasks[@(taskId)];
             if (!task) {
                 return;
             }
@@ -192,7 +192,7 @@ static STNetTaskQueue *sharedInstance;
         
         STNetTask *task = nil;
         @synchronized(weakSelf.tasks) {
-            task = [weakSelf.tasks objectForKey:@(taskId)];
+            task = weakSelf.tasks[@(taskId)];
             if (!task) {
                 return;
             }
@@ -215,7 +215,7 @@ static STNetTaskQueue *sharedInstance;
 
 - (void)netTaskDidEnd:(STNetTask *)task
 {
-    NSArray *delegates = [self.taskDelegates objectForKey:task.uri];
+    NSArray *delegates = self.taskDelegates[task.uri];
     for (STNetTaskDelegateWeakWrapper *weakWrapper in delegates) {
         dispatch_async(dispatch_get_main_queue(), ^ {
             [weakWrapper.delegate netTaskDidEnd:task];
@@ -225,34 +225,59 @@ static STNetTaskQueue *sharedInstance;
 
 - (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate uri:(NSString *)uri
 {
-    NSAssert([NSThread isMainThread], @"addTaskDelegate: must be involked in main thread.");
-    NSAssert(delegate && uri, @"addTaskDelegate: trying to addTaskDelegate with nil delegate or uri.");
-    
-    NSMutableArray *delegates = [self.taskDelegates objectForKey:uri];
-    if (!delegates) {
-        delegates = [NSMutableArray new];
-        [self.taskDelegates setObject:delegates forKey:uri];
+    @synchronized(self) {
+        NSMutableArray *delegates = self.taskDelegates[uri];
+        if (!delegates) {
+            delegates = [NSMutableArray new];
+            self.taskDelegates[uri] = delegates;
+        }
+        
+        NSInteger indexOfDelegate = [self indexOfTaskDelegate:delegate inDelegates:delegates];
+        if (indexOfDelegate == NSNotFound) {
+            STNetTaskDelegateWeakWrapper *weakWrapper = [STNetTaskDelegateWeakWrapper new];
+            weakWrapper.delegate = delegate;
+            [delegates addObject:weakWrapper];
+        }
     }
-    
-    BOOL delegateExisted = NO;
+}
+
+- (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate
+{
+    @synchronized(self) {
+        for (NSString *uri in self.taskDelegates) {
+            [self removeTaskDelegate:delegate uri:uri];
+        }
+    }
+}
+
+- (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate uri:(NSString *)uri
+{
+    @synchronized(self) {
+        NSMutableArray *delegates = self.taskDelegates[uri];
+        NSInteger indexOfDelegate = [self indexOfTaskDelegate:delegate inDelegates:delegates];
+        if (indexOfDelegate != NSNotFound) {
+            [delegates removeObjectAtIndex:indexOfDelegate];
+        }
+    }
+}
+
+- (NSInteger)indexOfTaskDelegate:(id<STNetTaskDelegate>)delegate inDelegates:(NSMutableArray *)delegates
+{
+    NSInteger index = NSNotFound;
     NSMutableArray *toBeDeleted = [NSMutableArray new];
+    NSInteger i = 0;
     for (STNetTaskDelegateWeakWrapper *weakWrapper in delegates) {
         if (weakWrapper.delegate == delegate) {
-            delegateExisted = YES;
+            index = i;
         }
         if (!weakWrapper.delegate) {
             [toBeDeleted addObject:weakWrapper];
         }
+        i++;
     }
     
     [delegates removeObjectsInArray:toBeDeleted];
-    
-    if (!delegateExisted) {
-        STNetTaskDelegateWeakWrapper *weakWrapper = [STNetTaskDelegateWeakWrapper new];
-        weakWrapper.delegate = delegate;
-        
-        [delegates addObject:weakWrapper];
-    }
+    return index;
 }
 
 @end

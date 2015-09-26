@@ -63,9 +63,14 @@ static NSString * STBase64String(NSString *string)
 
 - (instancetype)initWithBaseURL:(NSURL *)baseURL
 {
+    return [self initWithBaseURL:baseURL configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+}
+
+- (instancetype)initWithBaseURL:(NSURL *)baseURL configuration:(NSURLSessionConfiguration *)configuration
+{
     if (self = [super init]) {
         _baseURL = baseURL;
-        _urlSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        _urlSession = [NSURLSession sessionWithConfiguration:configuration];
         _methodMap = @{ @(STHTTPNetTaskGet): @"GET",
                         @(STHTTPNetTaskDelete): @"DELETE",
                         @(STHTTPNetTaskHead): @"HEAD",
