@@ -11,6 +11,47 @@
 #import "STHTTPNetTaskParametersPacker.h"
 #import "STNetTaskQueueLog.h"
 
+static uint8_t const STBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+static NSString * STBase64String(NSString *string)
+{
+    NSMutableString *encodedString = [NSMutableString new];
+    
+    NSData *data = [NSData dataWithBytes:string.UTF8String length:[string lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
+    NSUInteger length = data.length;
+    uint8_t *bytes = (uint8_t *)data.bytes;
+    
+    for (NSUInteger i = 0; i < length; i += 3) {
+        uint8_t byte = bytes[i];
+        int tableIndex = (byte & 0xFC) >> 2;
+        [encodedString appendFormat:@"%c", STBase64EncodingTable[tableIndex]];
+        tableIndex = (byte & 0x03) << 4;
+        
+        if (i + 1 < length) {
+            byte = bytes[i + 1];
+            tableIndex |= (byte & 0xF0) >> 4;
+            [encodedString appendFormat:@"%c", STBase64EncodingTable[tableIndex]];
+            tableIndex = (byte & 0x0F) << 2;
+            
+            if (i + 2 < length) {
+                byte = bytes[i + 2];
+                tableIndex |= (byte & 0xC0) >> 6;
+                [encodedString appendFormat:@"%c", STBase64EncodingTable[tableIndex]];
+                
+                tableIndex = (byte & 0x3F);
+                [encodedString appendFormat:@"%c", STBase64EncodingTable[tableIndex]];
+            }
+            else {
+                [encodedString appendFormat:@"%c=", STBase64EncodingTable[tableIndex]];
+            }
+        }
+        else {
+            [encodedString appendFormat:@"%c=", STBase64EncodingTable[tableIndex]];
+        }
+    }
+    
+    return [NSString stringWithString:encodedString];
+}
+
 @implementation STHTTPNetTaskQueueHandler
 {
     NSURL *_baseURL;
@@ -43,6 +84,21 @@
     NSAssert([task isKindOfClass:[STHTTPNetTask class]], @"Net task should be subclass of STHTTPNetTask");
     
     STHTTPNetTask *httpTask = (STHTTPNetTask *)task;
+    NSDictionary *headers = httpTask.headers;
+    NSDictionary *parameters = [[[STHTTPNetTaskParametersPacker alloc] initWithNetTask:httpTask] pack];
+    
+    NSURLSessionTask *sessionTask = nil;
+    NSMutableURLRequest *request = [NSMutableURLRequest new];
+    request.HTTPMethod = _methodMap[@(httpTask.method)];
+    
+    for (NSString *headerField in headers) {
+        [request setValue:headers[headerField] forHTTPHeaderField:headerField];
+    }
+    
+    if (_baseURL.user.length || _baseURL.password.length) {
+        NSString *credentials = [NSString stringWithFormat:@"%@:%@", _baseURL.user, _baseURL.password];
+        [request setValue:[NSString stringWithFormat:@"Basic %@", STBase64String(credentials)] forHTTPHeaderField:@"Authorization"];
+    }
     
     void (^completionHandler)(NSData *, NSURLResponse *, NSError *) = ^(NSData *data, NSURLResponse *response, NSError *error) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
@@ -102,22 +158,11 @@
                                             code:0
                                         userInfo:@{ STHTTPNetTaskErrorStatusCodeUserInfoKey: @(httpResponse.statusCode),
                                                     STHTTPNetTaskErrorResponseDataUserInfoKey: data }];
-                [STNetTaskQueueLog log:@"HTTP error with url: %@", httpResponse.URL.absoluteString];
+                [STNetTaskQueueLog log:@"HTTP error with url: %@\nMethod: %@\nPayload: %@", httpResponse.URL.absoluteString, _methodMap[@(httpTask.method)], parameters];
             }
             [netTaskQueue didFailWithError:error taskId:taskId];
         }
     };
-    
-    NSDictionary *headers = httpTask.headers;
-    NSDictionary *parameters = [[[STHTTPNetTaskParametersPacker alloc] initWithNetTask:httpTask] pack];
-    
-    NSURLSessionTask *sessionTask = nil;
-    NSMutableURLRequest *request = [NSMutableURLRequest new];
-    request.HTTPMethod = _methodMap[@(httpTask.method)];
-    
-    for (NSString *headerField in headers) {
-        [request setValue:headers[headerField] forHTTPHeaderField:headerField];
-    }
     
     switch (httpTask.method) {
         case STHTTPNetTaskGet:
