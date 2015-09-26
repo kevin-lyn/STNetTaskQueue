@@ -1,4 +1,4 @@
-# STNetTaskQueue
+# STNetTaskQueue ![CI Status](https://img.shields.io/travis/kevin0571/STNetTaskQueue.svg?style=flat) ![Version](http://img.shields.io/cocoapods/v/STNetTaskQueue.svg?style=flag) ![License](https://img.shields.io/cocoapods/l/STNetTaskQueue.svg?style=flag)
 STNetTaskQueue is a networking queue library for iOS and OS X. It's abstract and can be implemented in different protocols.
 
 STNetTaskQueue avoid you from directly dealing with "url", "request packing" and "response parsing". All networking tasks are described and processed by subclassing STNetTask, which provides you a clean code style in UI layer when handling networking.
