@@ -98,17 +98,14 @@
         return propertyName;
     }
     
-    NSMutableString *parameterName = [NSMutableString new];
-    NSCharacterSet *uppercase = [NSCharacterSet uppercaseLetterCharacterSet];
-    for (NSUInteger i = 0; i < propertyName.length; i++) {
-        unichar ch = [propertyName characterAtIndex:i];
-        if ([uppercase characterIsMember:ch]) {
-            [parameterName appendFormat:@"%@%C", (i == 0 ? @"" : separator), (unichar)tolower((int)ch)];
-        }
-        else {
-            [parameterName appendFormat:@"%C", ch];
-        }
-    }
+    static NSRegularExpression *parameterNameRegex;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        parameterNameRegex = [NSRegularExpression regularExpressionWithPattern:@"([a-z])([A-Z])" options:kNilOptions error:NULL];
+    });
+    
+    NSString *parameterName = [parameterNameRegex stringByReplacingMatchesInString:propertyName options:kNilOptions range:NSMakeRange(0, propertyName.length) withTemplate:[NSString stringWithFormat:@"$1%@$2", separator]];
+    parameterName = parameterName.lowercaseString;
     return parameterName;
 }
 
