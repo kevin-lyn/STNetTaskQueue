@@ -31,10 +31,10 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 
 @interface STNetTask : NSObject
 
-@property (nonatomic, strong) NSError *error;
-@property (nonatomic, assign) BOOL pending;
-@property (nonatomic, assign) BOOL finished;
-@property (nonatomic, assign) NSUInteger retryCount;
+@property (atomic, strong) NSError *error;
+@property (atomic, assign) BOOL pending;
+@property (atomic, assign) BOOL finished;
+@property (atomic, assign) NSUInteger retryCount;
 
 - (NSString *)uri;
 - (void)didResponse:(id)response;

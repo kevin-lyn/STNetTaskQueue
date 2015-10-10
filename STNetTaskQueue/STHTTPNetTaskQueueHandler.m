@@ -84,7 +84,7 @@ static NSString * STBase64String(NSString *string)
     return self;
 }
 
-- (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue task:(STNetTask *)task taskId:(int)taskId
+- (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue handleTask:(STNetTask *)task
 {
     NSAssert([task isKindOfClass:[STHTTPNetTask class]], @"Net task should be subclass of STHTTPNetTask");
     
@@ -151,10 +151,10 @@ static NSString * STBase64String(NSString *string)
             }
             
             if (error) {
-                [netTaskQueue didFailWithError:error taskId:taskId];
+                [netTaskQueue task:task didFailWithError:error];
             }
             else {
-                [netTaskQueue didResponse:responseObj taskId:taskId];
+                [netTaskQueue task:task didResponse:responseObj];
             }
         }
         else {
@@ -165,7 +165,7 @@ static NSString * STBase64String(NSString *string)
                                                     STHTTPNetTaskErrorResponseDataUserInfoKey: data }];
                 [STNetTaskQueueLog log:@"HTTP error with url: %@\nMethod: %@\nPayload: %@", httpResponse.URL.absoluteString, _methodMap[@(httpTask.method)], parameters];
             }
-            [netTaskQueue didFailWithError:error taskId:taskId];
+            [netTaskQueue task:task didFailWithError:error];
         }
     };
     

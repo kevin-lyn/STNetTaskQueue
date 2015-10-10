@@ -13,7 +13,7 @@
 
 @protocol STNetTaskQueueHandler <NSObject>
 
-- (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue task:(STNetTask *)task taskId:(int)taskId;
+- (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue handleTask:(STNetTask *)task;
 
 @end
 
@@ -32,8 +32,8 @@
 - (void)cancelTask:(STNetTask *)task;
 
 // Only used in "STNetTaskQueueHandler".
-- (void)didResponse:(id)response taskId:(int)taskId;
-- (void)didFailWithError:(NSError *)error taskId:(int)taskId;
+- (void)task:(STNetTask *)task didResponse:(id)response;
+- (void)task:(STNetTask *)task didFailWithError:(NSError *)error;
 
 // Add a task delegate to "STNetTaskQueue",
 // it's a weak reference and adding duplicated delegate with same uri will be ignored.

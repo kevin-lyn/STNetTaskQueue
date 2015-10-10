@@ -19,15 +19,13 @@
 
 @end
 
-static STNetTaskQueue *sharedInstance;
-
 @interface STNetTaskQueue()
 
-@property (atomic, strong) NSMutableDictionary *tasks; // <NSNumber, STNetTask>
-@property (atomic, strong) NSMutableDictionary *taskDelegates; // <NSString, NSArray<STNetTaskDelegate>>
-@property (atomic, strong) NSOperationQueue *queue;
-@property (atomic, strong) NSMutableArray *watingTasks; // <STNetTask>
-@property (atomic, assign) int currentTaskId;
+@property (nonatomic, strong) NSThread *thred;
+@property (nonatomic, strong) NSRecursiveLock *lock;
+@property (nonatomic, strong) NSMutableDictionary *taskDelegates; // <NSString, NSArray<STNetTaskDelegateWeakWrapper>>
+@property (nonatomic, strong) NSMutableArray *tasks; // <STNetTask>
+@property (nonatomic, strong) NSMutableArray *watingTasks; // <STNetTask>
 
 @end
 
@@ -35,52 +33,58 @@ static STNetTaskQueue *sharedInstance;
 
 + (instancetype)sharedQueue
 {
+    static STNetTaskQueue *sharedQueue;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [self new];
+        sharedQueue = [self new];
     });
-    return sharedInstance;
+    return sharedQueue;
 }
 
 - (id)init
 {    
     if (self = [super init]) {
-        self.tasks = [NSMutableDictionary new];
+        self.thred = [[NSThread alloc] initWithTarget:self selector:@selector(threadEntryPoint) object:nil];
+        self.thred.name = NSStringFromClass(self.class);
+        [self.thred start];
+        self.lock = [NSRecursiveLock new];
+        self.lock.name = [NSString stringWithFormat:@"%@Lock", NSStringFromClass(self.class)];
         self.taskDelegates = [NSMutableDictionary new];
-        self.queue = [NSOperationQueue new];
-        self.queue.name = @"STNetTaskQueue";
-        self.queue.maxConcurrentOperationCount = 1;
+        self.tasks = [NSMutableArray new];
         self.watingTasks = [NSMutableArray new];
     }
     return self;
 }
 
+- (void)threadEntryPoint
+{
+    @autoreleasepool {
+        NSRunLoop *runloop = [NSRunLoop currentRunLoop];
+        [runloop addPort:[NSPort port] forMode:NSDefaultRunLoopMode]; // Just for keeping the runloop
+        [runloop run];
+    }
+}
+
 - (void)addTask:(STNetTask *)task
 {
     NSAssert(self.handler, @"STNetTaskQueueHandler is not set.");
-    NSAssert(!task.finished, @"STNetTask is finished, please recreate a new net task.");
-    
+    NSAssert(!task.finished, @"STNetTask is finished, please recreate a net task.");
+    if (task.pending) {
+        return;
+    }
     task.pending = YES;
-    __weak STNetTaskQueue *weakSelf = self;
-    [self.queue addOperationWithBlock:^ {
-        @synchronized(weakSelf.tasks) {
-            if (weakSelf.maxConcurrentTasksCount > 0 && weakSelf.tasks.count >= weakSelf.maxConcurrentTasksCount) {
-                [weakSelf.watingTasks addObject:task];
-                return;
-            }
-        }
-        
-        int taskId;
-        @synchronized(weakSelf) {
-            weakSelf.currentTaskId++;
-            taskId = weakSelf.currentTaskId;
-        }
-        
-        [weakSelf.handler netTaskQueue:weakSelf task:task taskId:taskId];
-        @synchronized(weakSelf.tasks) {
-            weakSelf.tasks[@(taskId)] = task;
-        }
-    }];
+    [self performSelector:@selector(_addTask:) onThread:self.thred withObject:task waitUntilDone:NO modes:@[ NSRunLoopCommonModes ]];
+}
+
+- (void)_addTask:(STNetTask *)task
+{
+    if (self.maxConcurrentTasksCount > 0 && self.tasks.count >= self.maxConcurrentTasksCount) {
+        [self.watingTasks addObject:task];
+        return;
+    }
+
+    [self.tasks addObject:task];
+    [self.handler netTaskQueue:self handleTask:task];
 }
 
 - (void)cancelTask:(STNetTask *)task
@@ -88,177 +92,169 @@ static STNetTaskQueue *sharedInstance;
     if (!task) {
         return;
     }
-    
-    __weak STNetTaskQueue *weakSelf = self;
-    [self.queue addOperationWithBlock:^ {
-        
-        NSNumber *taskIdToBeRemoved = nil;
-        @synchronized(weakSelf.tasks) {
-            for (NSNumber *taskId in weakSelf.tasks.allKeys) {
-                if (weakSelf.tasks[taskId] == task) {
-                    taskIdToBeRemoved = taskId;
-                    break;
-                }
-            }
-            if (taskIdToBeRemoved) {
-                [weakSelf.tasks removeObjectForKey:taskIdToBeRemoved];
-            }
-        }
-        
-        if (taskIdToBeRemoved) {
-            [weakSelf sendWatingTask];
-        }
-        else {
-            @synchronized(weakSelf.watingTasks) {
-                [weakSelf.watingTasks removeObject:task];
-            }
-        }
-        
-        task.pending = NO;
-    }];
+    [self performSelector:@selector(_cancelTask:) onThread:self.thred withObject:task waitUntilDone:NO];
 }
 
-- (BOOL)retryTask:(STNetTask *)task withError:(NSError *)error
+- (void)_cancelTask:(STNetTask *)task
+{
+    [self.tasks removeObject:task];
+    [self.watingTasks removeObject:task];
+    task.pending = NO;
+}
+
+- (BOOL)_retryTask:(STNetTask *)task withError:(NSError *)error
 {
     if ([task shouldRetryForError:error] && task.retryCount < task.maxRetryCount) {
         task.retryCount++;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(task.retryInterval * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [task didRetry];
-            [self addTask:task];
-        });
+        [self performSelector:@selector(_retryTask:) withObject:task afterDelay:task.retryInterval];
         return YES;
     }
     return NO;
 }
 
-- (void)sendWatingTask
+- (void)_retryTask:(STNetTask *)task
 {
-    STNetTask *task;
-    @synchronized(self.watingTasks) {
-        if (!self.watingTasks.count) {
-            return;
-        }
-        task = self.watingTasks[0];
-        [self.watingTasks removeObjectAtIndex:0];
-    }
+    [task didRetry];
     [self addTask:task];
 }
 
-- (void)didResponse:(id)response taskId:(int)taskId
+- (void)_sendWatingTasks
 {
-    __weak STNetTaskQueue *weakSelf = self;
-    [self.queue addOperationWithBlock:^ {
-        
-        STNetTask *task = nil;
-        @synchronized(weakSelf.tasks) {
-            task = weakSelf.tasks[@(taskId)];
-            if (!task) {
-                return;
-            }
-            [weakSelf.tasks removeObjectForKey:@(taskId)];
-        }
-        
-        @try {
-            [task didResponse:response];
-        }
-        @catch (NSException *exception) {
-            [STNetTaskQueueLog log:@"Exception in 'didResponse' - %@", exception.debugDescription];
-            NSError *error = [NSError errorWithDomain:STNetTaskUnknownError
-                                                 code:-1
-                                             userInfo:@{ @"msg": exception.description }];
-            
-            if ([weakSelf retryTask:task withError:error]) {
-                return;
-            }
-            
-            task.error = error;
-            [task didFail];
-        }
-        
-        [weakSelf netTaskDidEnd:task];
-        task.pending = NO;
-        task.finished = YES;
-        
-        [weakSelf sendWatingTask];
-    }];
+    if (!self.watingTasks.count) {
+        return;
+    }
+    STNetTask *task = self.watingTasks.firstObject;
+    [self.watingTasks removeObjectAtIndex:0];
+    [self addTask:task];
 }
 
-- (void)didFailWithError:(NSError *)error taskId:(int)taskId
+- (void)task:(STNetTask *)task didResponse:(id)response
 {
-    __weak STNetTaskQueue *weakSelf = self;
-    [self.queue addOperationWithBlock:^ {
+    [self performSelector:@selector(_taskDidResponse:) onThread:self.thred withObject:@{ @"task": task, @"response": response } waitUntilDone:NO];
+}
+
+- (void)_taskDidResponse:(NSDictionary *)params
+{
+    STNetTask *task = params[@"task"];
+    id response = params[@"response"];
+    
+    if (![self.tasks containsObject:task]) {
+        return;
+    }
+    [self.tasks removeObject:task];
+    
+    @try {
+        [task didResponse:response];
+    }
+    @catch (NSException *exception) {
+        [STNetTaskQueueLog log:@"Exception in 'didResponse' - %@", exception.debugDescription];
+        NSError *error = [NSError errorWithDomain:STNetTaskUnknownError
+                                             code:-1
+                                         userInfo:@{ @"msg": exception.description }];
         
-        [STNetTaskQueueLog log:error.debugDescription];
-        
-        STNetTask *task = nil;
-        @synchronized(weakSelf.tasks) {
-            task = weakSelf.tasks[@(taskId)];
-            if (!task) {
-                return;
-            }
-            [weakSelf.tasks removeObjectForKey:@(taskId)];
-        }
-        
-        if ([weakSelf retryTask:task withError:error]) {
+        if ([self _retryTask:task withError:error]) {
             return;
         }
         
         task.error = error;
         [task didFail];
-        [weakSelf netTaskDidEnd:task];
-        task.pending = NO;
-        task.finished = YES;
-        
-        [weakSelf sendWatingTask];
-    }];
+    }
+    
+    task.pending = NO;
+    task.finished = YES;
+    
+    [self _netTaskDidEnd:task];
+    
+    [self _sendWatingTasks];
 }
 
-- (void)netTaskDidEnd:(STNetTask *)task
+- (void)task:(STNetTask *)task didFailWithError:(NSError *)error
 {
+    [self performSelector:@selector(_taskDidFailWithError:) onThread:self.thred withObject:@{ @"task": task, @"error": error } waitUntilDone:NO];
+}
+
+- (void)_taskDidFailWithError:(NSDictionary *)params
+{
+    STNetTask *task = params[@"task"];
+    NSError *error = params[@"error"];
+    
+    if (![self.tasks containsObject:task]) {
+        return;
+    }
+    [self.tasks removeObject:task];
+    
+    [STNetTaskQueueLog log:error.debugDescription];
+    
+    if ([self _retryTask:task withError:error]) {
+        return;
+    }
+    
+    task.error = error;
+    [task didFail];
+    task.pending = NO;
+    task.finished = YES;
+    
+    [self _netTaskDidEnd:task];
+    
+    [self _sendWatingTasks];
+}
+
+- (void)_netTaskDidEnd:(STNetTask *)task
+{
+    [self.lock lock];
+    
     NSArray *delegates = self.taskDelegates[task.uri];
     for (STNetTaskDelegateWeakWrapper *weakWrapper in delegates) {
         dispatch_async(dispatch_get_main_queue(), ^ {
             [weakWrapper.delegate netTaskDidEnd:task];
         });
     }
+    
+    [self.lock unlock];
 }
 
 - (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate uri:(NSString *)uri
 {
-    @synchronized(self) {
-        NSMutableArray *delegates = self.taskDelegates[uri];
-        if (!delegates) {
-            delegates = [NSMutableArray new];
-            self.taskDelegates[uri] = delegates;
-        }
-        
-        NSInteger indexOfDelegate = [self indexOfTaskDelegate:delegate inDelegates:delegates];
-        if (indexOfDelegate == NSNotFound) {
-            STNetTaskDelegateWeakWrapper *weakWrapper = [STNetTaskDelegateWeakWrapper new];
-            weakWrapper.delegate = delegate;
-            [delegates addObject:weakWrapper];
-        }
+    [self.lock lock];
+    
+    NSMutableArray *delegates = self.taskDelegates[uri];
+    if (!delegates) {
+        delegates = [NSMutableArray new];
+        self.taskDelegates[uri] = delegates;
     }
+    
+    NSInteger indexOfDelegate = [self indexOfTaskDelegate:delegate inDelegates:delegates];
+    if (indexOfDelegate == NSNotFound) {
+        STNetTaskDelegateWeakWrapper *weakWrapper = [STNetTaskDelegateWeakWrapper new];
+        weakWrapper.delegate = delegate;
+        [delegates addObject:weakWrapper];
+    }
+    
+    [self.lock unlock];
 }
 
 - (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate
 {
-    @synchronized(self) {
-        for (NSString *uri in self.taskDelegates) {
-            [self removeTaskDelegate:delegate uri:uri];
-        }
+    [self.lock lock];
+    
+    for (NSString *uri in self.taskDelegates) {
+        [self removeTaskDelegate:delegate uri:uri];
     }
+    
+    [self.lock unlock];
 }
 
 - (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate uri:(NSString *)uri
 {
-    @synchronized(self) {
-        NSMutableArray *delegates = self.taskDelegates[uri];
-        NSInteger indexOfDelegate = [self indexOfTaskDelegate:delegate inDelegates:delegates];
-        if (indexOfDelegate != NSNotFound) {
-            [delegates removeObjectAtIndex:indexOfDelegate];
-        }
+    [self.lock lock];
+    
+    NSMutableArray *delegates = self.taskDelegates[uri];
+    NSInteger indexOfDelegate = [self indexOfTaskDelegate:delegate inDelegates:delegates];
+    if (indexOfDelegate != NSNotFound) {
+        [delegates removeObjectAtIndex:indexOfDelegate];
     }
+    
+    [self.lock unlock];
 }
 
 - (NSInteger)indexOfTaskDelegate:(id<STNetTaskDelegate>)delegate inDelegates:(NSMutableArray *)delegates
