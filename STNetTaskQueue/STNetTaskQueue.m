@@ -9,13 +9,13 @@
 #import "STNetTaskQueue.h"
 #import "STNetTaskQueueLog.h"
 
-@interface STNetTaskDelegateWeakWrapper : NSObject
+@interface STNetTaskDelegateWeakReference : NSObject
 
 @property (nonatomic, weak) id<STNetTaskDelegate> delegate;
 
 @end
 
-@implementation STNetTaskDelegateWeakWrapper
+@implementation STNetTaskDelegateWeakReference
 
 @end
 
@@ -23,7 +23,7 @@
 
 @property (nonatomic, strong) NSThread *thred;
 @property (nonatomic, strong) NSRecursiveLock *lock;
-@property (nonatomic, strong) NSMutableDictionary *taskDelegates; // <NSString, NSArray<STNetTaskDelegateWeakWrapper>>
+@property (nonatomic, strong) NSMutableDictionary *taskDelegates; // <NSString, NSArray<STNetTaskDelegateWeakReference>>
 @property (nonatomic, strong) NSMutableArray *tasks; // <STNetTask>
 @property (nonatomic, strong) NSMutableArray *watingTasks; // <STNetTask>
 
@@ -201,9 +201,9 @@
     [self.lock lock];
     
     NSArray *delegates = self.taskDelegates[task.uri];
-    for (STNetTaskDelegateWeakWrapper *weakWrapper in delegates) {
+    for (STNetTaskDelegateWeakReference *weakReference in delegates) {
         dispatch_async(dispatch_get_main_queue(), ^ {
-            [weakWrapper.delegate netTaskDidEnd:task];
+            [weakReference.delegate netTaskDidEnd:task];
         });
     }
     
@@ -222,9 +222,9 @@
     
     NSInteger indexOfDelegate = [self indexOfTaskDelegate:delegate inDelegates:delegates];
     if (indexOfDelegate == NSNotFound) {
-        STNetTaskDelegateWeakWrapper *weakWrapper = [STNetTaskDelegateWeakWrapper new];
-        weakWrapper.delegate = delegate;
-        [delegates addObject:weakWrapper];
+        STNetTaskDelegateWeakReference *weakReference = [STNetTaskDelegateWeakReference new];
+        weakReference.delegate = delegate;
+        [delegates addObject:weakReference];
     }
     
     [self.lock unlock];
@@ -259,12 +259,12 @@
     NSInteger index = NSNotFound;
     NSMutableArray *toBeDeleted = [NSMutableArray new];
     NSInteger i = 0;
-    for (STNetTaskDelegateWeakWrapper *weakWrapper in delegates) {
-        if (weakWrapper.delegate == delegate) {
+    for (STNetTaskDelegateWeakReference *weakReference in delegates) {
+        if (weakReference.delegate == delegate) {
             index = i;
         }
-        if (!weakWrapper.delegate) {
-            [toBeDeleted addObject:weakWrapper];
+        if (!weakReference.delegate) {
+            [toBeDeleted addObject:weakReference];
         }
         i++;
     }
