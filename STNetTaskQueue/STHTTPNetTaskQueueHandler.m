@@ -163,7 +163,7 @@ static NSString * STBase64String(NSString *string)
                                             code:0
                                         userInfo:@{ STHTTPNetTaskErrorStatusCodeUserInfoKey: @(httpResponse.statusCode),
                                                     STHTTPNetTaskErrorResponseDataUserInfoKey: data }];
-                [STNetTaskQueueLog log:@"HTTP error with url: %@\nMethod: %@\nPayload: %@", httpResponse.URL.absoluteString, _methodMap[@(httpTask.method)], parameters];
+                [STNetTaskQueueLog log:httpTask.description];
             }
             [netTaskQueue task:task didFailWithError:error];
         }
