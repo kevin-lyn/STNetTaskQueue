@@ -70,7 +70,7 @@
     NSAssert(self.handler, @"STNetTaskQueueHandler is not set.");
     NSAssert(!task.finished, @"STNetTask is finished, please recreate a net task.");
     task.pending = YES;
-    [self performSelector:@selector(_addTask:) onThread:self.thred withObject:task waitUntilDone:NO modes:@[ NSRunLoopCommonModes ]];
+    [self performSelector:@selector(_addTask:) onThread:self.thred withObject:task waitUntilDone:NO];
 }
 
 - (void)_addTask:(STNetTask *)task
