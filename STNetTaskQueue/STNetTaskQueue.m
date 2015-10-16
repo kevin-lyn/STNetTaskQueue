@@ -97,6 +97,8 @@
     [self.tasks removeObject:task];
     [self.watingTasks removeObject:task];
     task.pending = NO;
+    
+    [self.handler netTaskQueue:self didCancelTask:task];
 }
 
 - (BOOL)_retryTask:(STNetTask *)task withError:(NSError *)error

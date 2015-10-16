@@ -207,7 +207,20 @@ static NSString * STBase64String(NSString *string)
             break;
     }
     
+    [httpTask setValue:sessionTask forKey:@"sessionTask"];
     [sessionTask resume];
+}
+
+- (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue didCancelTask:(STNetTask *)task
+{
+    NSAssert([task isKindOfClass:[STHTTPNetTask class]], @"Net task should be subclass of STHTTPNetTask");
+    
+    STHTTPNetTask *httpTask = (STHTTPNetTask *)task;
+    
+    NSURLSessionTask *sessionTask = [httpTask valueForKey:@"sessionTask"];
+    [sessionTask cancel];
+    
+    [httpTask setValue:nil forKey:@"sessionTask"];
 }
 
 - (NSString *)queryStringFromParameters:(NSDictionary *)parameters

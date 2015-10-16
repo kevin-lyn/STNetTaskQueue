@@ -56,6 +56,24 @@
     [self waitForExpectationsWithTimeout:10 handler:nil];
 }
 
+- (void)testCancelNetTask
+{
+    [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
+    
+    _expectation = [self expectationWithDescription:@"testRetryNetTask"];
+    
+    STTestRetryNetTask *testRetryTask = [STTestRetryNetTask new];
+    [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:testRetryTask.uri];
+    [[STNetTaskQueue sharedQueue] addTask:testRetryTask];
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[STNetTaskQueue sharedQueue] cancelTask:testRetryTask];
+        [_expectation fulfill];
+    });
+
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
 - (void)testGetNetTask
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];

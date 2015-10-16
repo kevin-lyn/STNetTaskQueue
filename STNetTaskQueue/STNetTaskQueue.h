@@ -14,6 +14,7 @@
 @protocol STNetTaskQueueHandler <NSObject>
 
 - (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue handleTask:(STNetTask *)task;
+- (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue didCancelTask:(STNetTask *)task;
 
 @end
 
