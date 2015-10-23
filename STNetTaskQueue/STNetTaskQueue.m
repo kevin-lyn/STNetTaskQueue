@@ -9,21 +9,11 @@
 #import "STNetTaskQueue.h"
 #import "STNetTaskQueueLog.h"
 
-@interface STNetTaskDelegateWeakReference : NSObject
-
-@property (nonatomic, weak) id<STNetTaskDelegate> delegate;
-
-@end
-
-@implementation STNetTaskDelegateWeakReference
-
-@end
-
 @interface STNetTaskQueue()
 
 @property (nonatomic, strong) NSThread *thred;
 @property (nonatomic, strong) NSRecursiveLock *lock;
-@property (nonatomic, strong) NSMutableDictionary *taskDelegates; // <NSString, NSArray<STNetTaskDelegateWeakReference>>
+@property (nonatomic, strong) NSMutableDictionary *taskDelegates; // <NSString, NSHashTable<STNetTaskDelegate>>
 @property (nonatomic, strong) NSMutableArray *tasks; // <STNetTask>
 @property (nonatomic, strong) NSMutableArray *watingTasks; // <STNetTask>
 
@@ -202,32 +192,30 @@
 {
     [self.lock lock];
     
-    NSArray *delegates = self.taskDelegates[task.uri];
-    for (STNetTaskDelegateWeakReference *weakReference in delegates) {
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            [weakReference.delegate netTaskDidEnd:task];
-        });
-    }
+    NSHashTable *delegates = self.taskDelegates[task.uri];
+    NSArray *allDelegates = [NSArray arrayWithArray:delegates.allObjects];
     
     [self.lock unlock];
+    
+    if (allDelegates.count) {
+        dispatch_async(dispatch_get_main_queue(), ^ {
+            for (id<STNetTaskDelegate> delegate in allDelegates) {
+                [delegate netTaskDidEnd:task];
+            }
+        });
+    }
 }
 
 - (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate uri:(NSString *)uri
 {
     [self.lock lock];
     
-    NSMutableArray *delegates = self.taskDelegates[uri];
+    NSHashTable *delegates = self.taskDelegates[uri];
     if (!delegates) {
-        delegates = [NSMutableArray new];
+        delegates = [NSHashTable weakObjectsHashTable];
         self.taskDelegates[uri] = delegates;
     }
-    
-    NSInteger indexOfDelegate = [self indexOfTaskDelegate:delegate inDelegates:delegates];
-    if (indexOfDelegate == NSNotFound) {
-        STNetTaskDelegateWeakReference *weakReference = [STNetTaskDelegateWeakReference new];
-        weakReference.delegate = delegate;
-        [delegates addObject:weakReference];
-    }
+    [delegates addObject:delegate];
     
     [self.lock unlock];
 }
@@ -247,32 +235,10 @@
 {
     [self.lock lock];
     
-    NSMutableArray *delegates = self.taskDelegates[uri];
-    NSInteger indexOfDelegate = [self indexOfTaskDelegate:delegate inDelegates:delegates];
-    if (indexOfDelegate != NSNotFound) {
-        [delegates removeObjectAtIndex:indexOfDelegate];
-    }
+    NSHashTable *delegates = self.taskDelegates[uri];
+    [delegates removeObject:delegate];
     
     [self.lock unlock];
-}
-
-- (NSInteger)indexOfTaskDelegate:(id<STNetTaskDelegate>)delegate inDelegates:(NSMutableArray *)delegates
-{
-    NSInteger index = NSNotFound;
-    NSMutableArray *toBeDeleted = [NSMutableArray new];
-    NSInteger i = 0;
-    for (STNetTaskDelegateWeakReference *weakReference in delegates) {
-        if (weakReference.delegate == delegate) {
-            index = i;
-        }
-        if (!weakReference.delegate) {
-            [toBeDeleted addObject:weakReference];
-        }
-        i++;
-    }
-    
-    [delegates removeObjectsInArray:toBeDeleted];
-    return index;
 }
 
 @end
