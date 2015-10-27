@@ -46,6 +46,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [self.handler netTaskQueueDidBecomeInactive:self];
+}
+
 - (void)threadEntryPoint
 {
     @autoreleasepool {

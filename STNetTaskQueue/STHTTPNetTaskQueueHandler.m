@@ -10,6 +10,7 @@
 #import "STHTTPNetTask.h"
 #import "STHTTPNetTaskParametersPacker.h"
 #import "STNetTaskQueueLog.h"
+#import <objc/runtime.h>
 
 static uint8_t const STBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 static NSString * STBase64String(NSString *string)
@@ -52,6 +53,49 @@ static NSString * STBase64String(NSString *string)
     return [NSString stringWithString:encodedString];
 }
 
+@interface NSURLSessionTask (STHTTPNetTaskQueueHandler)
+
+@property (nonatomic, strong, readonly) NSData *data;
+@property (nonatomic, copy) void(^completionBlock)(NSURLSessionTask *, NSError *);
+
+- (void)appendData:(NSData *)data;
+
+@end
+
+@implementation NSURLSessionTask (STHTTPNetTaskQueueHandler)
+
+- (void)appendData:(NSData *)data
+{
+    NSMutableData *mutableData = objc_getAssociatedObject(self, @selector(data));
+    if (!mutableData) {
+        mutableData = [NSMutableData new];
+        objc_setAssociatedObject(self, @selector(data), mutableData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    [mutableData appendData:data];
+}
+
+- (NSData *)data
+{
+    NSMutableData *data = objc_getAssociatedObject(self, @selector(data));
+    return [NSData dataWithData:data];
+}
+
+- (void)setCompletionBlock:(void (^)(NSURLSessionTask *, NSError *))completionBlock
+{
+    objc_setAssociatedObject(self, @selector(completionBlock), completionBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+
+- (void (^)(NSURLSessionTask *, NSError *))completionBlock
+{
+    return objc_getAssociatedObject(self, @selector(completionBlock));
+}
+
+@end
+
+@interface STHTTPNetTaskQueueHandler () <NSURLSessionDataDelegate>
+
+@end
+
 @implementation STHTTPNetTaskQueueHandler
 {
     NSURL *_baseURL;
@@ -70,7 +114,7 @@ static NSString * STBase64String(NSString *string)
 {
     if (self = [super init]) {
         _baseURL = baseURL;
-        _urlSession = [NSURLSession sessionWithConfiguration:configuration];
+        _urlSession = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
         _methodMap = @{ @(STHTTPNetTaskGet): @"GET",
                         @(STHTTPNetTaskDelete): @"DELETE",
                         @(STHTTPNetTaskHead): @"HEAD",
@@ -105,8 +149,48 @@ static NSString * STBase64String(NSString *string)
         [request setValue:[NSString stringWithFormat:@"Basic %@", STBase64String(credentials)] forHTTPHeaderField:@"Authorization"];
     }
     
-    void (^completionHandler)(NSData *, NSURLResponse *, NSError *) = ^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
+    switch (httpTask.method) {
+        case STHTTPNetTaskGet:
+        case STHTTPNetTaskHead:
+        case STHTTPNetTaskDelete: {
+            NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:[_baseURL URLByAppendingPathComponent:httpTask.uri]
+                                                        resolvingAgainstBaseURL:NO];
+            if (parameters.count) {
+                urlComponents.query = [self queryStringFromParameters:parameters];
+            }
+            request.URL = urlComponents.URL;
+            sessionTask = [_urlSession dataTaskWithRequest:request];
+        }
+            break;
+        case STHTTPNetTaskPost:
+        case STHTTPNetTaskPut:
+        case STHTTPNetTaskPatch: {
+            request.URL = [_baseURL URLByAppendingPathComponent:httpTask.uri];
+            NSDictionary *datas = httpTask.datas;
+            if (!datas.count) {
+                request.HTTPBody = [self bodyDataFromParameters:parameters requestType:httpTask.requestType];
+                [request setValue:_contentTypeMap[@(httpTask.requestType)] forHTTPHeaderField:@"Content-Type"];
+                sessionTask = [_urlSession dataTaskWithRequest:request];
+            }
+            else {
+                NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", _formDataBoundary];
+                [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+                sessionTask = [_urlSession uploadTaskWithRequest:request
+                                                        fromData:[self formDataFromParameters:parameters datas:datas]];
+            }
+        }
+            break;
+        default: {
+            NSAssert(NO, @"Invalid STHTTPNetTaskMethod");
+        }
+            break;
+    }
+    
+    [httpTask setValue:sessionTask forKey:@"sessionTask"];
+    
+    sessionTask.completionBlock = ^(NSURLSessionTask *sessionTask, NSError *error) {
+        NSData *data = sessionTask.data;
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)sessionTask.response;
         if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 300) {
             id responseObj = nil;
             NSError *error = nil;
@@ -128,7 +212,7 @@ static NSString * STBase64String(NSString *string)
                         [STNetTaskQueueLog log:@"Response parsed error: %@", exception.debugDescription];
                         error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
                                                     code:0
-                                                userInfo:@{ @"url": response.URL.absoluteString }];
+                                                userInfo:@{ @"url": httpResponse.URL.absoluteString }];
                     }
                 }
                     break;
@@ -140,7 +224,7 @@ static NSString * STBase64String(NSString *string)
                             [STNetTaskQueueLog log:@"Response parsed error: %@", error.debugDescription];
                             error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
                                                         code:0
-                                                    userInfo:@{ @"url": response.URL.absoluteString }];
+                                                    userInfo:@{ @"url": httpResponse.URL.absoluteString }];
                         }
                     }
                     else {
@@ -168,46 +252,6 @@ static NSString * STBase64String(NSString *string)
             [netTaskQueue task:task didFailWithError:error];
         }
     };
-    
-    switch (httpTask.method) {
-        case STHTTPNetTaskGet:
-        case STHTTPNetTaskHead:
-        case STHTTPNetTaskDelete: {
-            NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:[_baseURL URLByAppendingPathComponent:httpTask.uri]
-                                                        resolvingAgainstBaseURL:NO];
-            if (parameters.count) {
-                urlComponents.query = [self queryStringFromParameters:parameters];
-            }
-            request.URL = urlComponents.URL;
-            sessionTask = [_urlSession dataTaskWithRequest:request completionHandler:completionHandler];
-        }
-            break;
-        case STHTTPNetTaskPost:
-        case STHTTPNetTaskPut:
-        case STHTTPNetTaskPatch: {
-            request.URL = [_baseURL URLByAppendingPathComponent:httpTask.uri];
-            NSDictionary *datas = httpTask.datas;
-            if (!datas.count) {
-                request.HTTPBody = [self bodyDataFromParameters:parameters requestType:httpTask.requestType];
-                [request setValue:_contentTypeMap[@(httpTask.requestType)] forHTTPHeaderField:@"Content-Type"];
-                sessionTask = [_urlSession dataTaskWithRequest:request completionHandler:completionHandler];
-            }
-            else {
-                NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", _formDataBoundary];
-                [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
-                sessionTask = [_urlSession uploadTaskWithRequest:request
-                                                        fromData:[self formDataFromParameters:parameters datas:datas]
-                                               completionHandler:completionHandler];
-            }
-        }
-            break;
-        default: {
-            NSAssert(NO, @"Invalid STHTTPNetTaskMethod");
-        }
-            break;
-    }
-    
-    [httpTask setValue:sessionTask forKey:@"sessionTask"];
     [sessionTask resume];
 }
 
@@ -221,6 +265,21 @@ static NSString * STBase64String(NSString *string)
     [sessionTask cancel];
     
     [httpTask setValue:nil forKey:@"sessionTask"];
+}
+
+- (void)netTaskQueueDidBecomeInactive:(STNetTaskQueue *)netTaskQueue
+{
+    [_urlSession invalidateAndCancel];
+}
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+{
+    [dataTask appendData:data];
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    task.completionBlock(task, error);
 }
 
 - (NSString *)queryStringFromParameters:(NSDictionary *)parameters
