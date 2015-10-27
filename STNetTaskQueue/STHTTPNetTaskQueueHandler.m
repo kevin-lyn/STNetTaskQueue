@@ -170,14 +170,13 @@ static NSString * STBase64String(NSString *string)
             if (!datas.count) {
                 request.HTTPBody = [self bodyDataFromParameters:parameters requestType:httpTask.requestType];
                 [request setValue:_contentTypeMap[@(httpTask.requestType)] forHTTPHeaderField:@"Content-Type"];
-                sessionTask = [_urlSession dataTaskWithRequest:request];
             }
             else {
+                request.HTTPBody = [self formDataFromParameters:parameters datas:datas];
                 NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", _formDataBoundary];
                 [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
-                sessionTask = [_urlSession uploadTaskWithRequest:request
-                                                        fromData:[self formDataFromParameters:parameters datas:datas]];
             }
+            sessionTask = [_urlSession dataTaskWithRequest:request];
         }
             break;
         default: {
