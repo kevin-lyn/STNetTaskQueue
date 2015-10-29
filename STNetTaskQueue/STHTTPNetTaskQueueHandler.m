@@ -53,92 +53,71 @@ static NSString * STBase64String(NSString *string)
     return [NSString stringWithString:encodedString];
 }
 
-@interface NSURLSessionTask (STHTTPNetTaskQueueHandler)
+@class STHTTPNetTaskQueueHandlerOperation;
 
-@property (nonatomic, strong, readonly) NSData *data;
-@property (nonatomic, copy) void(^completionBlock)(NSURLSessionTask *, NSError *);
+@interface NSURLSessionTask (STHTTPNetTaskQueueHandlerOperation)
 
-- (void)appendData:(NSData *)data;
+@property (nonatomic, strong) STHTTPNetTaskQueueHandlerOperation *operation;
 
 @end
 
-@implementation NSURLSessionTask (STHTTPNetTaskQueueHandler)
+@implementation NSURLSessionTask (STHTTPNetTaskQueueHandlerOperation)
 
-- (void)appendData:(NSData *)data
+- (void)setOperation:(STHTTPNetTaskQueueHandlerOperation *)operation
 {
-    NSMutableData *mutableData = objc_getAssociatedObject(self, @selector(data));
-    if (!mutableData) {
-        mutableData = [NSMutableData new];
-        objc_setAssociatedObject(self, @selector(data), mutableData, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
-    [mutableData appendData:data];
+    objc_setAssociatedObject(self, @selector(operation), operation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-- (NSData *)data
+- (STHTTPNetTaskQueueHandlerOperation *)operation
 {
-    NSMutableData *data = objc_getAssociatedObject(self, @selector(data));
-    return [NSData dataWithData:data];
-}
-
-- (void)setCompletionBlock:(void (^)(NSURLSessionTask *, NSError *))completionBlock
-{
-    objc_setAssociatedObject(self, @selector(completionBlock), completionBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
-}
-
-- (void (^)(NSURLSessionTask *, NSError *))completionBlock
-{
-    return objc_getAssociatedObject(self, @selector(completionBlock));
+    return objc_getAssociatedObject(self, @selector(operation));
 }
 
 @end
 
-@interface STHTTPNetTaskQueueHandler () <NSURLSessionDataDelegate>
+static NSDictionary *STHTTPNetTaskMethodMap;
+static NSDictionary *STHTTPNetTaskContentTypeMap;
+static NSString *STHTTPNetTaskFormDataBoundary;
+
+@interface STHTTPNetTaskQueueHandlerOperation : NSObject <NSURLSessionDataDelegate>
+
+@property (nonatomic, strong) STNetTaskQueue *queue;
+@property (nonatomic, strong) STHTTPNetTask *task;
+@property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, strong) NSURL *baseURL;
+
+- (void)start;
 
 @end
 
-@implementation STHTTPNetTaskQueueHandler
+@implementation STHTTPNetTaskQueueHandlerOperation
 {
-    NSURL *_baseURL;
-    NSURLSession *_urlSession;
-    NSDictionary *_methodMap;
-    NSDictionary *_contentTypeMap;
-    NSString *_formDataBoundary;
+    NSMutableData *_data;
 }
 
-- (instancetype)initWithBaseURL:(NSURL *)baseURL
++ (void)load
 {
-    return [self initWithBaseURL:baseURL configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    STHTTPNetTaskMethodMap = @{ @(STHTTPNetTaskGet): @"GET",
+                                @(STHTTPNetTaskDelete): @"DELETE",
+                                @(STHTTPNetTaskHead): @"HEAD",
+                                @(STHTTPNetTaskPatch): @"PATCH",
+                                @(STHTTPNetTaskPost): @"POST",
+                                @(STHTTPNetTaskPut): @"PUT" };
+    STHTTPNetTaskContentTypeMap = @{ @(STHTTPNetTaskRequestJSON): @"application/json; charset=utf-8",
+                                     @(STHTTPNetTaskRequestKeyValueString): @"application/x-www-form-urlencoded" };
+    STHTTPNetTaskFormDataBoundary = [NSString stringWithFormat:@"ST-Boundary-%@", [[NSUUID UUID] UUIDString]];
 }
 
-- (instancetype)initWithBaseURL:(NSURL *)baseURL configuration:(NSURLSessionConfiguration *)configuration
+- (void)start
 {
-    if (self = [super init]) {
-        _baseURL = baseURL;
-        _urlSession = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-        _methodMap = @{ @(STHTTPNetTaskGet): @"GET",
-                        @(STHTTPNetTaskDelete): @"DELETE",
-                        @(STHTTPNetTaskHead): @"HEAD",
-                        @(STHTTPNetTaskPatch): @"PATCH",
-                        @(STHTTPNetTaskPost): @"POST",
-                        @(STHTTPNetTaskPut): @"PUT" };
-        _contentTypeMap = @{ @(STHTTPNetTaskRequestJSON): @"application/json; charset=utf-8",
-                             @(STHTTPNetTaskRequestKeyValueString): @"application/x-www-form-urlencoded" };
-        _formDataBoundary = [NSString stringWithFormat:@"ST-Boundary-%@", [[NSUUID UUID] UUIDString]];
-    }
-    return self;
-}
-
-- (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue handleTask:(STNetTask *)task
-{
-    NSAssert([task isKindOfClass:[STHTTPNetTask class]], @"Net task should be subclass of STHTTPNetTask");
+    _data = [NSMutableData new];
     
-    STHTTPNetTask *httpTask = (STHTTPNetTask *)task;
-    NSDictionary *headers = httpTask.headers;
-    NSDictionary *parameters = [[[STHTTPNetTaskParametersPacker alloc] initWithNetTask:httpTask] pack];
+    NSDictionary *headers = self.task.headers;
+    NSDictionary *parameters = [[[STHTTPNetTaskParametersPacker alloc] initWithNetTask:_task] pack];
     
     NSURLSessionTask *sessionTask = nil;
     NSMutableURLRequest *request = [NSMutableURLRequest new];
-    request.HTTPMethod = _methodMap[@(httpTask.method)];
+    request.HTTPMethod = STHTTPNetTaskMethodMap[@(_task.method)];
     
     for (NSString *headerField in headers) {
         [request setValue:headers[headerField] forHTTPHeaderField:headerField];
@@ -149,34 +128,34 @@ static NSString * STBase64String(NSString *string)
         [request setValue:[NSString stringWithFormat:@"Basic %@", STBase64String(credentials)] forHTTPHeaderField:@"Authorization"];
     }
     
-    switch (httpTask.method) {
+    switch (_task.method) {
         case STHTTPNetTaskGet:
         case STHTTPNetTaskHead:
         case STHTTPNetTaskDelete: {
-            NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:[_baseURL URLByAppendingPathComponent:httpTask.uri]
+            NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:[_baseURL URLByAppendingPathComponent:_task.uri]
                                                         resolvingAgainstBaseURL:NO];
             if (parameters.count) {
                 urlComponents.query = [self queryStringFromParameters:parameters];
             }
             request.URL = urlComponents.URL;
-            sessionTask = [_urlSession dataTaskWithRequest:request];
+            sessionTask = [_session dataTaskWithRequest:request];
         }
             break;
         case STHTTPNetTaskPost:
         case STHTTPNetTaskPut:
         case STHTTPNetTaskPatch: {
-            request.URL = [_baseURL URLByAppendingPathComponent:httpTask.uri];
-            NSDictionary *datas = httpTask.datas;
+            request.URL = [_baseURL URLByAppendingPathComponent:_task.uri];
+            NSDictionary *datas = _task.datas;
             if (!datas.count) {
-                request.HTTPBody = [self bodyDataFromParameters:parameters requestType:httpTask.requestType];
-                [request setValue:_contentTypeMap[@(httpTask.requestType)] forHTTPHeaderField:@"Content-Type"];
+                request.HTTPBody = [self bodyDataFromParameters:parameters requestType:_task.requestType];
+                [request setValue:STHTTPNetTaskContentTypeMap[@(_task.requestType)] forHTTPHeaderField:@"Content-Type"];
             }
             else {
                 request.HTTPBody = [self formDataFromParameters:parameters datas:datas];
-                NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", _formDataBoundary];
+                NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", STHTTPNetTaskFormDataBoundary];
                 [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
             }
-            sessionTask = [_urlSession dataTaskWithRequest:request];
+            sessionTask = [_session dataTaskWithRequest:request];
         }
             break;
         default: {
@@ -185,101 +164,86 @@ static NSString * STBase64String(NSString *string)
             break;
     }
     
-    [httpTask setValue:sessionTask forKey:@"sessionTask"];
+    [_task setValue:sessionTask forKey:@"sessionTask"];
     
-    sessionTask.completionBlock = ^(NSURLSessionTask *sessionTask, NSError *error) {
-        NSData *data = sessionTask.data;
-        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)sessionTask.response;
-        if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 300) {
-            id responseObj = nil;
-            NSError *error = nil;
-            switch (httpTask.responseType) {
-                case STHTTPNetTaskResponseRawData: {
-                    responseObj = data;
-                }
-                    break;
-                case STHTTPNetTaskResponseString: {
-                    @try {
-                        if (data.length) {
-                            responseObj = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                        }
-                        else {
-                            responseObj = @"";
-                        }
+    sessionTask.operation = self;
+    [sessionTask resume];
+}
+
+#pragma mark - NSURLSessionDataDelegate
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+{
+    [_data appendData:data];
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    NSData *data = [NSData dataWithData:_data];
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
+    if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 300) {
+        id responseObj = nil;
+        NSError *error = nil;
+        switch (_task.responseType) {
+            case STHTTPNetTaskResponseRawData: {
+                responseObj = data;
+            }
+                break;
+            case STHTTPNetTaskResponseString: {
+                @try {
+                    if (data.length) {
+                        responseObj = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     }
-                    @catch (NSException *exception) {
-                        [STNetTaskQueueLog log:@"Response parsed error: %@", exception.debugDescription];
+                    else {
+                        responseObj = @"";
+                    }
+                }
+                @catch (NSException *exception) {
+                    [STNetTaskQueueLog log:@"Response parsed error: %@", exception.debugDescription];
+                    error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
+                                                code:0
+                                            userInfo:@{ @"url": httpResponse.URL.absoluteString }];
+                }
+            }
+                break;
+            case STHTTPNetTaskResponseJSON:
+            default: {
+                if (data.length) {
+                    responseObj = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                    if (error) {
+                        [STNetTaskQueueLog log:@"Response parsed error: %@", error.debugDescription];
                         error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
                                                     code:0
                                                 userInfo:@{ @"url": httpResponse.URL.absoluteString }];
                     }
                 }
-                    break;
-                case STHTTPNetTaskResponseJSON:
-                default: {
-                    if (data.length) {
-                        responseObj = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                        if (error) {
-                            [STNetTaskQueueLog log:@"Response parsed error: %@", error.debugDescription];
-                            error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
-                                                        code:0
-                                                    userInfo:@{ @"url": httpResponse.URL.absoluteString }];
-                        }
-                    }
-                    else {
-                        responseObj = @{};
-                    }
+                else {
+                    responseObj = @{};
                 }
-                    break;
             }
-            
-            if (error) {
-                [netTaskQueue task:task didFailWithError:error];
-            }
-            else {
-                [netTaskQueue task:task didResponse:responseObj];
-            }
+                break;
+        }
+        
+        if (error) {
+            [_queue task:_task didFailWithError:error];
         }
         else {
-            if (!error) { // Response status code is not 200
-                error = [NSError errorWithDomain:STHTTPNetTaskServerError
-                                            code:0
-                                        userInfo:@{ STHTTPNetTaskErrorStatusCodeUserInfoKey: @(httpResponse.statusCode),
-                                                    STHTTPNetTaskErrorResponseDataUserInfoKey: data }];
-                [STNetTaskQueueLog log:httpTask.description];
-            }
-            [netTaskQueue task:task didFailWithError:error];
+            [_queue task:_task didResponse:responseObj];
         }
-    };
-    [sessionTask resume];
+    }
+    else {
+        if (!error) { // Response status code is not 200
+            error = [NSError errorWithDomain:STHTTPNetTaskServerError
+                                        code:0
+                                    userInfo:@{ STHTTPNetTaskErrorStatusCodeUserInfoKey: @(httpResponse.statusCode),
+                                                STHTTPNetTaskErrorResponseDataUserInfoKey: data }];
+            [STNetTaskQueueLog log:_task.description];
+        }
+        [_queue task:_task didFailWithError:error];
+    }
 }
 
-- (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue didCancelTask:(STNetTask *)task
-{
-    NSAssert([task isKindOfClass:[STHTTPNetTask class]], @"Net task should be subclass of STHTTPNetTask");
-    
-    STHTTPNetTask *httpTask = (STHTTPNetTask *)task;
-    
-    NSURLSessionTask *sessionTask = [httpTask valueForKey:@"sessionTask"];
-    [sessionTask cancel];
-    
-    [httpTask setValue:nil forKey:@"sessionTask"];
-}
-
-- (void)netTaskQueueDidBecomeInactive:(STNetTaskQueue *)netTaskQueue
-{
-    [_urlSession invalidateAndCancel];
-}
-
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
-{
-    [dataTask appendData:data];
-}
-
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
-{
-    task.completionBlock(task, error);
-}
+#pragma mark - Data construct methods
 
 - (NSString *)queryStringFromParameters:(NSDictionary *)parameters
 {
@@ -355,14 +319,14 @@ static NSString * STBase64String(NSString *string)
     }];
     
     [datas enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSData *fileData, BOOL *stop) {
-        [formData appendData:[[NSString stringWithFormat:@"--%@\r\n", _formDataBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [formData appendData:[[NSString stringWithFormat:@"--%@\r\n", STHTTPNetTaskFormDataBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
         [formData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", key, key] dataUsingEncoding:NSUTF8StringEncoding]];
         [formData appendData:[[NSString stringWithFormat:@"Content-Type: %@\r\n\r\n", @"*/*"] dataUsingEncoding:NSUTF8StringEncoding]];
         [formData appendData:fileData];
         [formData appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     }];
     
-    [formData appendData:[[NSString stringWithFormat:@"--%@--\r\n", _formDataBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [formData appendData:[[NSString stringWithFormat:@"--%@--\r\n", STHTTPNetTaskFormDataBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
     return formData;
 }
@@ -374,9 +338,79 @@ static NSString * STBase64String(NSString *string)
 
 - (void)appendToFormData:(NSMutableData *)formData withKey:(NSString *)key value:(NSString *)value
 {
-    [formData appendData:[[NSString stringWithFormat:@"--%@\r\n", _formDataBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [formData appendData:[[NSString stringWithFormat:@"--%@\r\n", STHTTPNetTaskFormDataBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [formData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
     [formData appendData:[[NSString stringWithFormat:@"%@\r\n", value] dataUsingEncoding:NSUTF8StringEncoding]];
+}
+
+@end
+
+@interface STHTTPNetTaskQueueHandler () <NSURLSessionDataDelegate>
+
+@end
+
+@implementation STHTTPNetTaskQueueHandler
+{
+    NSURL *_baseURL;
+    NSURLSession *_urlSession;
+}
+
+- (instancetype)initWithBaseURL:(NSURL *)baseURL
+{
+    return [self initWithBaseURL:baseURL configuration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+}
+
+- (instancetype)initWithBaseURL:(NSURL *)baseURL configuration:(NSURLSessionConfiguration *)configuration
+{
+    if (self = [super init]) {
+        _baseURL = baseURL;
+        _urlSession = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    }
+    return self;
+}
+
+#pragma mark - STNetTaskQueueHandler
+
+- (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue handleTask:(STNetTask *)task
+{
+    NSAssert([task isKindOfClass:[STHTTPNetTask class]], @"Net task should be subclass of STHTTPNetTask");
+    
+    STHTTPNetTaskQueueHandlerOperation *operation = [STHTTPNetTaskQueueHandlerOperation new];
+    operation.queue = netTaskQueue;
+    operation.task = (STHTTPNetTask *)task;
+    operation.baseURL = _baseURL;
+    operation.session = _urlSession;
+    
+    [operation start];
+}
+
+- (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue didCancelTask:(STNetTask *)task
+{
+    NSAssert([task isKindOfClass:[STHTTPNetTask class]], @"Net task should be subclass of STHTTPNetTask");
+    
+    STHTTPNetTask *httpTask = (STHTTPNetTask *)task;
+    
+    NSURLSessionTask *sessionTask = [httpTask valueForKey:@"sessionTask"];
+    [sessionTask cancel];
+    
+    [httpTask setValue:nil forKey:@"sessionTask"];
+}
+
+- (void)netTaskQueueDidBecomeInactive:(STNetTaskQueue *)netTaskQueue
+{
+    [_urlSession invalidateAndCancel];
+}
+
+#pragma mark - NSURLSessionDataDelegate
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+{
+    [dataTask.operation URLSession:session dataTask:dataTask didReceiveData:data];
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    [task.operation URLSession:session task:task didCompleteWithError:error];
 }
 
 @end
