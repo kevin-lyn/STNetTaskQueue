@@ -291,11 +291,11 @@ static NSString * STBase64String(NSString *string)
     [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL *stop) {
         if ([value isKindOfClass:[NSArray class]]) {
             for (id element in value) {
-                [self appendToQueryString:queryString withKey:key value:[element description]];
+                [self appendKeyValueToString:queryString withKey:key value:[element description]];
             }
         }
         else {
-            [self appendToQueryString:queryString withKey:key value:[value description]];
+            [self appendKeyValueToString:queryString withKey:key value:[value description]];
         }
     }];
     [queryString deleteCharactersInRange:NSMakeRange(queryString.length - 1, 1)];
@@ -323,11 +323,11 @@ static NSString * STBase64String(NSString *string)
             [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL *stop) {
                 if ([value isKindOfClass:[NSArray class]]) {
                     for (id element in value) {
-                        [self appendToBodyString:bodyString withKey:key value:[element description]];
+                        [self appendKeyValueToString:bodyString withKey:key value:[element description]];
                     }
                 }
                 else {
-                    [self appendToBodyString:bodyString withKey:key value:[value description]];
+                    [self appendKeyValueToString:bodyString withKey:key value:[value description]];
                 }
             }];
             [bodyString deleteCharactersInRange:NSMakeRange(bodyString.length - 1, 1)];
@@ -367,15 +367,9 @@ static NSString * STBase64String(NSString *string)
     return formData;
 }
 
-- (void)appendToQueryString:(NSMutableString *)queryString withKey:(NSString *)key value:(NSString *)value
+- (void)appendKeyValueToString:(NSMutableString *)string withKey:(NSString *)key value:(NSString *)value
 {
-    value = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    [queryString appendFormat:@"%@=%@&", key, value];
-}
-
-- (void)appendToBodyString:(NSMutableString *)bodyString withKey:(NSString *)key value:(NSString *)value
-{
-    [bodyString appendFormat:@"%@=%@&", key, value];
+    [string appendFormat:@"%@=%@&", key, value];
 }
 
 - (void)appendToFormData:(NSMutableData *)formData withKey:(NSString *)key value:(NSString *)value
