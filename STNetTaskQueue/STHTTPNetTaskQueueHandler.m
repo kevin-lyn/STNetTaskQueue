@@ -185,43 +185,22 @@ static NSString *STHTTPNetTaskFormDataBoundary;
         id responseObj = nil;
         NSError *error = nil;
         switch (_task.responseType) {
-            case STHTTPNetTaskResponseRawData: {
+            case STHTTPNetTaskResponseRawData:
                 responseObj = data;
-            }
                 break;
-            case STHTTPNetTaskResponseString: {
-                @try {
-                    if (data.length) {
-                        responseObj = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                    }
-                    else {
-                        responseObj = @"";
-                    }
-                }
-                @catch (NSException *exception) {
-                    [STNetTaskQueueLog log:@"Response parsed error: %@", exception.debugDescription];
-                    error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
-                                                code:0
-                                            userInfo:@{ @"url": httpResponse.URL.absoluteString }];
-                }
-            }
+            case STHTTPNetTaskResponseString:
+                responseObj = [self stringFromData:data];
                 break;
             case STHTTPNetTaskResponseJSON:
-            default: {
-                if (data.length) {
-                    responseObj = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                    if (error) {
-                        [STNetTaskQueueLog log:@"Response parsed error: %@", error.debugDescription];
-                        error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
-                                                    code:0
-                                                userInfo:@{ @"url": httpResponse.URL.absoluteString }];
-                    }
-                }
-                else {
-                    responseObj = @{};
-                }
-            }
+            default:
+                responseObj = [self JSONFromData:data];
                 break;
+        }
+        
+        if (!responseObj) {
+            error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
+                                        code:0
+                                    userInfo:@{ @"url": httpResponse.URL.absoluteString }];
         }
         
         if (error) {
@@ -232,7 +211,7 @@ static NSString *STHTTPNetTaskFormDataBoundary;
         }
     }
     else {
-        if (!error) { // Response status code is not 200
+        if (!error) { // Response status code is not 20x
             error = [NSError errorWithDomain:STHTTPNetTaskServerError
                                         code:0
                                     userInfo:@{ STHTTPNetTaskErrorStatusCodeUserInfoKey: @(httpResponse.statusCode),
@@ -243,7 +222,32 @@ static NSString *STHTTPNetTaskFormDataBoundary;
     }
 }
 
-#pragma mark - Data construct methods
+#pragma makr - Response data parsing methods
+
+- (NSString *)stringFromData:(NSData *)data
+{
+    @try {
+        NSString *string = data.length ? [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] : @"";
+        return string;
+    }
+    @catch (NSException *exception) {
+        [STNetTaskQueueLog log:@"String parsed error: %@", exception.debugDescription];
+        return nil;
+    }
+}
+
+- (id)JSONFromData:(NSData *)data
+{
+    NSError *error;
+    id JSON = data.length ? [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error] : @{};
+    if (error) {
+        [STNetTaskQueueLog log:@"JSON parsed error: %@", error.debugDescription];
+        return nil;
+    }
+    return JSON;
+}
+
+#pragma mark - Request data constructing methods
 
 - (NSString *)queryStringFromParameters:(NSDictionary *)parameters
 {
