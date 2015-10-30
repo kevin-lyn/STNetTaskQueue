@@ -220,6 +220,8 @@ static NSString *STHTTPNetTaskFormDataBoundary;
         }
         [_queue task:_task didFailWithError:error];
     }
+    
+    task.operation = nil; // Release the operation
 }
 
 #pragma makr - Response data parsing methods
