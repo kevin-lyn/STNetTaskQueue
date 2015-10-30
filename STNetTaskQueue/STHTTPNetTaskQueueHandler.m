@@ -82,8 +82,8 @@ static NSString *STHTTPNetTaskFormDataBoundary;
 @interface STHTTPNetTaskQueueHandlerOperation : NSObject <NSURLSessionDataDelegate>
 
 @property (nonatomic, strong) STNetTaskQueue *queue;
-@property (nonatomic, strong) STHTTPNetTask *task;
-@property (nonatomic, weak) NSURLSession *session;
+@property (nonatomic, weak) STHTTPNetTask *task;
+@property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) NSURL *baseURL;
 
 - (void)start;
