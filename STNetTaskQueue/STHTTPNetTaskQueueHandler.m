@@ -83,7 +83,7 @@ static NSString *STHTTPNetTaskFormDataBoundary;
 
 @property (nonatomic, strong) STNetTaskQueue *queue;
 @property (nonatomic, strong) STHTTPNetTask *task;
-@property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, weak) NSURLSession *session;
 @property (nonatomic, strong) NSURL *baseURL;
 
 - (void)start;
@@ -220,8 +220,6 @@ static NSString *STHTTPNetTaskFormDataBoundary;
         }
         [_queue task:_task didFailWithError:error];
     }
-    
-    task.operation = nil; // Release the operation
 }
 
 #pragma makr - Response data parsing methods
