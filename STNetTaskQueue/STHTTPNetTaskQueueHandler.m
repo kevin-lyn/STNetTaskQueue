@@ -179,8 +179,12 @@ static NSString *STHTTPNetTaskFormDataBoundary;
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
-    NSData *data = [NSData dataWithData:_data];
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
+    if (!httpResponse) { // NSURLSessionTask is cancelled
+        return;
+    }
+    
+    NSData *data = [NSData dataWithData:_data];
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 300) {
         id responseObj = nil;
         NSError *error = nil;
