@@ -15,6 +15,7 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 #define STNetTaskObserve(TASK) \
 [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) { \
     [[[[RACObserve(TASK, pending) skip:1] ignore:@YES] deliverOnMainThread] subscribeNext:^(id x) { \
+        [subscriber sendNext:TASK];\
         [subscriber sendCompleted]; \
     }]; \
     return nil; \
