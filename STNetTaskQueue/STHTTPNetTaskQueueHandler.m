@@ -179,11 +179,11 @@ static NSString *STHTTPNetTaskFormDataBoundary;
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
-    if (!httpResponse) { // NSURLSessionTask is cancelled
+    if (error && error.code == NSURLErrorCancelled) {
         return;
     }
     
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
     NSData *data = [NSData dataWithData:_data];
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 300) {
         id responseObj = nil;
