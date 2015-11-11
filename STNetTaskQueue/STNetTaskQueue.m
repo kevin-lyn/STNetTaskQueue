@@ -60,12 +60,25 @@
     }
 }
 
+- (void)performInThread:(NSThread *)thread usingBlock:(void(^)())block
+{
+    [self performSelector:@selector(performUsingBlock:) onThread:thread withObject:block waitUntilDone:NO];
+}
+
+- (void)performUsingBlock:(void(^)())block
+{
+    block();
+}
+
 - (void)addTask:(STNetTask *)task
 {
     NSAssert(self.handler, @"STNetTaskQueueHandler is not set.");
     NSAssert(!task.finished, @"STNetTask is finished, please recreate a net task.");
+    
     task.pending = YES;
-    [self performSelector:@selector(_addTask:) onThread:self.thred withObject:task waitUntilDone:NO];
+    [self performInThread:self.thred usingBlock:^{
+        [self _addTask:task];
+    }];
 }
 
 - (void)_addTask:(STNetTask *)task
@@ -84,7 +97,10 @@
     if (!task) {
         return;
     }
-    [self performSelector:@selector(_cancelTask:) onThread:self.thred withObject:task waitUntilDone:NO];
+    
+    [self performInThread:self.thred usingBlock:^{
+        [self _cancelTask:task];
+    }];
 }
 
 - (void)_cancelTask:(STNetTask *)task
@@ -124,14 +140,13 @@
 
 - (void)task:(STNetTask *)task didResponse:(id)response
 {
-    [self performSelector:@selector(_taskDidResponse:) onThread:self.thred withObject:@{ @"task": task, @"response": response } waitUntilDone:NO];
+    [self performInThread:self.thred usingBlock:^{
+        [self _task:task didResponse:response];
+    }];
 }
 
-- (void)_taskDidResponse:(NSDictionary *)params
+- (void)_task:(STNetTask *)task didResponse:(id)response
 {
-    STNetTask *task = params[@"task"];
-    id response = params[@"response"];
-    
     if (![self.tasks containsObject:task]) {
         return;
     }
@@ -144,7 +159,7 @@
         [STNetTaskQueueLog log:@"Exception in 'didResponse' - %@", exception.debugDescription];
         NSError *error = [NSError errorWithDomain:STNetTaskUnknownError
                                              code:-1
-                                         userInfo:@{ @"msg": exception.description }];
+                                         userInfo:@{ @"msg": exception.description ? : @"nil" }];
         
         if ([self _retryTask:task withError:error]) {
             return;
@@ -164,14 +179,13 @@
 
 - (void)task:(STNetTask *)task didFailWithError:(NSError *)error
 {
-    [self performSelector:@selector(_taskDidFailWithError:) onThread:self.thred withObject:@{ @"task": task, @"error": error } waitUntilDone:NO];
+    [self performInThread:self.thred usingBlock:^{
+        [self _task:task didFailWithError:error];
+    }];
 }
 
-- (void)_taskDidFailWithError:(NSDictionary *)params
+- (void)_task:(STNetTask *)task didFailWithError:(NSError *)error
 {
-    STNetTask *task = params[@"task"];
-    NSError *error = params[@"error"];
-    
     if (![self.tasks containsObject:task]) {
         return;
     }

@@ -15,12 +15,6 @@ NSString *const STHTTPNetTaskErrorStatusCodeUserInfoKey = @"statusCode";
 NSString *const STHTTPNetTaskErrorResponseDataUserInfoKey = @"responseData";
 NSString *STHTTPNetTaskRequestObjectDefaultSeparator = @"_";
 
-@interface STHTTPNetTask ()
-
-@property (nonatomic, strong) NSURLSessionTask *sessionTask;
-
-@end
-
 @implementation STHTTPNetTask
 
 - (STHTTPNetTaskMethod)method

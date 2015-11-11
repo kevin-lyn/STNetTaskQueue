@@ -78,11 +78,12 @@ static NSString * STBase64String(NSString *string)
 static NSDictionary *STHTTPNetTaskMethodMap;
 static NSDictionary *STHTTPNetTaskContentTypeMap;
 static NSString *STHTTPNetTaskFormDataBoundary;
+static NSMapTable *STHTTPNetTaskToSessionTask;
 
 @interface STHTTPNetTaskQueueHandlerOperation : NSObject <NSURLSessionDataDelegate>
 
 @property (nonatomic, strong) STNetTaskQueue *queue;
-@property (nonatomic, weak) STHTTPNetTask *task;
+@property (nonatomic, strong) STHTTPNetTask *task;
 @property (nonatomic, strong) NSURLSession *session;
 @property (nonatomic, strong) NSURL *baseURL;
 
@@ -106,6 +107,7 @@ static NSString *STHTTPNetTaskFormDataBoundary;
     STHTTPNetTaskContentTypeMap = @{ @(STHTTPNetTaskRequestJSON): @"application/json; charset=utf-8",
                                      @(STHTTPNetTaskRequestKeyValueString): @"application/x-www-form-urlencoded" };
     STHTTPNetTaskFormDataBoundary = [NSString stringWithFormat:@"ST-Boundary-%@", [[NSUUID UUID] UUIDString]];
+    STHTTPNetTaskToSessionTask = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsWeakMemory valueOptions:NSPointerFunctionsWeakMemory capacity:50];
 }
 
 - (void)start
@@ -164,7 +166,7 @@ static NSString *STHTTPNetTaskFormDataBoundary;
             break;
     }
     
-    [_task setValue:sessionTask forKey:@"sessionTask"];
+    [STHTTPNetTaskToSessionTask setObject:sessionTask forKey:_task];
     
     sessionTask.operation = self;
     [sessionTask resume];
@@ -396,12 +398,8 @@ static NSString *STHTTPNetTaskFormDataBoundary;
 {
     NSAssert([task isKindOfClass:[STHTTPNetTask class]], @"Net task should be subclass of STHTTPNetTask");
     
-    STHTTPNetTask *httpTask = (STHTTPNetTask *)task;
-    
-    NSURLSessionTask *sessionTask = [httpTask valueForKey:@"sessionTask"];
+    NSURLSessionTask *sessionTask = [STHTTPNetTaskToSessionTask objectForKey:task];
     [sessionTask cancel];
-    
-    [httpTask setValue:nil forKey:@"sessionTask"];
 }
 
 - (void)netTaskQueueDidBecomeInactive:(STNetTaskQueue *)netTaskQueue
