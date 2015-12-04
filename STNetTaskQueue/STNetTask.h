@@ -18,6 +18,9 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
         [subscriber sendNext:TASK];\
         [subscriber sendCompleted]; \
     }]; \
+    [[[[RACObserve(TASK, cancelled) skip:1] ignore:@NO] deliverOnMainThread] subscribeNext:^(id x) { \
+        [subscriber sendError:nil];\
+    }]; \
     return nil; \
 }]
 #endif
@@ -46,6 +49,12 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
  This value will be set to "YES" immediately after the net task is added to net task queue.
  */
 @property (atomic, assign) BOOL pending;
+
+/*
+ Indicates if the net task is cancelled.
+ This value would be "NO" by default after net task is created, even the net task is not added to queue.
+ */
+@property (atomic, assign) BOOL cancelled;
 
 /* Indicates if the net task is finished(no matter it's successful or failed). */
 @property (atomic, assign) BOOL finished;

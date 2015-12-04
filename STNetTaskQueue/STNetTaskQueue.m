@@ -73,7 +73,7 @@
 - (void)addTask:(STNetTask *)task
 {
     NSAssert(self.handler, @"STNetTaskQueueHandler is not set.");
-    NSAssert(!task.finished, @"STNetTask is finished, please recreate a net task.");
+    NSAssert(!task.finished && !task.cancelled, @"STNetTask is finished/cancelled, please recreate a net task.");
     
     task.pending = YES;
     [self performInThread:self.thred usingBlock:^{
@@ -110,6 +110,7 @@
     task.pending = NO;
     
     [self.handler netTaskQueue:self didCancelTask:task];
+    task.cancelled = YES;
 }
 
 - (BOOL)_retryTask:(STNetTask *)task withError:(NSError *)error
