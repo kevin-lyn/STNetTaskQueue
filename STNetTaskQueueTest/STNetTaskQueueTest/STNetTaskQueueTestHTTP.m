@@ -60,7 +60,7 @@
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     
-    _expectation = [self expectationWithDescription:@"testRetryNetTask"];
+    _expectation = [self expectationWithDescription:@"testCancelNetTask"];
     
     STTestRetryNetTask *testRetryTask = [STTestRetryNetTask new];
     [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:testRetryTask.uri];

@@ -125,8 +125,10 @@
 
 - (void)_retryTask:(STNetTask *)task
 {
-    [task didRetry];
-    [self addTask:task];
+    if (!task.cancelled) {
+        [task didRetry];
+        [self addTask:task];
+    }
 }
 
 - (void)_sendWatingTasks
