@@ -246,10 +246,10 @@
     [self.lock unlock];
 }
 
-- (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)class
+- (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)clazz
 {
-    NSString *className = NSStringFromClass(class);
-    NSAssert([class isSubclassOfClass:[STNetTask class]], @"%@ should be a subclass of STNetTask", className);
+    NSString *className = NSStringFromClass(clazz);
+    NSAssert([clazz isSubclassOfClass:[STNetTask class]], @"%@ should be a subclass of STNetTask", className);
     
     [self.lock lock];
     
@@ -279,9 +279,9 @@
     [self removeTaskDelegate:delegate key:uri];
 }
 
-- (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)class
+- (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)clazz
 {
-    [self removeTaskDelegate:delegate key:NSStringFromClass(class)];
+    [self removeTaskDelegate:delegate key:NSStringFromClass(clazz)];
 }
 
 - (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate key:(NSString *)key

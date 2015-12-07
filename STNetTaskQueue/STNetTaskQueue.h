@@ -106,7 +106,7 @@
  @param delegate id<STNetTaskDelegate>
  @param class Class Class which extends STNetTask.
  */
-- (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)class;
+- (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)clazz;
 
 /*
  Most of the times you don't need to remove net task delegate explicitly,
@@ -116,7 +116,7 @@
  @param uri NSString
  */
 - (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate uri:(NSString *)uri;
-- (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)class;
+- (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)clazz;
 - (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate;
 
 @end
