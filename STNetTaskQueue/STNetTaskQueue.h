@@ -91,13 +91,22 @@
 - (void)task:(STNetTask *)task didFailWithError:(NSError *)error;
 
 /*
- Add a net task delegate to "STNetTaskQueue",
+ Add a net task delegate to "STNetTaskQueue" with uri of the net task,
  it's a weak reference and duplicated delegate with same uri will be ignored.
  
  @param delegate id<STNetTaskDelegate>
  @param uri NSString A unique string returned by STNetTask.
  */
 - (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate uri:(NSString *)uri;
+
+/*
+ Add a net task delegate to "STNetTaskQueue" with class of net task,
+ it's a weak reference and duplicated delegate with same class will be ignored.
+ 
+ @param delegate id<STNetTaskDelegate>
+ @param class Class Class which extends STNetTask.
+ */
+- (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)class;
 
 /*
  Most of the times you don't need to remove net task delegate explicitly,
@@ -107,6 +116,7 @@
  @param uri NSString
  */
 - (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate uri:(NSString *)uri;
+- (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)class;
 - (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate;
 
 @end

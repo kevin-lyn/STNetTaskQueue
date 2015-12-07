@@ -214,14 +214,18 @@
 {
     [self.lock lock];
     
-    NSHashTable *delegates = self.taskDelegates[task.uri];
-    NSArray *allDelegates = [NSArray arrayWithArray:delegates.allObjects];
+    NSHashTable *delegatesForURI = self.taskDelegates[task.uri];
+    NSHashTable *delegatesForClass = self.taskDelegates[NSStringFromClass(task.class)];
+    NSMutableSet *set = [NSMutableSet new];
+    [set addObjectsFromArray:delegatesForURI.allObjects];
+    [set addObjectsFromArray:delegatesForClass.allObjects];
+    NSArray *delegates = set.allObjects;
     
     [self.lock unlock];
     
-    if (allDelegates.count) {
+    if (delegates.count) {
         dispatch_async(dispatch_get_main_queue(), ^ {
-            for (id<STNetTaskDelegate> delegate in allDelegates) {
+            for (id<STNetTaskDelegate> delegate in delegates) {
                 [delegate netTaskDidEnd:task];
             }
         });
@@ -242,12 +246,29 @@
     [self.lock unlock];
 }
 
+- (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)class
+{
+    NSString *className = NSStringFromClass(class);
+    NSAssert([class isSubclassOfClass:[STNetTask class]], @"%@ should be a subclass of STNetTask", className);
+    
+    [self.lock lock];
+    
+    NSHashTable *delegates = self.taskDelegates[className];
+    if (!delegates) {
+        delegates = [NSHashTable weakObjectsHashTable];
+        self.taskDelegates[className] = delegates;
+    }
+    [delegates addObject:delegate];
+    
+    [self.lock unlock];
+}
+
 - (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate
 {
     [self.lock lock];
     
-    for (NSString *uri in self.taskDelegates) {
-        [self removeTaskDelegate:delegate uri:uri];
+    for (NSString *key in self.taskDelegates) {
+        [self removeTaskDelegate:delegate key:key];
     }
     
     [self.lock unlock];
@@ -255,9 +276,19 @@
 
 - (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate uri:(NSString *)uri
 {
+    [self removeTaskDelegate:delegate key:uri];
+}
+
+- (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)class
+{
+    [self removeTaskDelegate:delegate key:NSStringFromClass(class)];
+}
+
+- (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate key:(NSString *)key
+{
     [self.lock lock];
     
-    NSHashTable *delegates = self.taskDelegates[uri];
+    NSHashTable *delegates = self.taskDelegates[key];
     [delegates removeObject:delegate];
     
     [self.lock unlock];

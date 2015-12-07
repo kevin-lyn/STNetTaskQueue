@@ -152,10 +152,10 @@
 
 - (void)testMaxConcurrentTasksCountTask
 {
-    _expectation = [self expectationWithDescription:@"testMaxConcurrentTasksCount"];
-    
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     [STNetTaskQueue sharedQueue].maxConcurrentTasksCount = 1;
+    
+    _expectation = [self expectationWithDescription:@"testMaxConcurrentTasksCount"];
     
     STTestMaxConcurrentTasksCountNetTask *task1 = [STTestMaxConcurrentTasksCountNetTask new];
     task1.id = 1;
@@ -171,6 +171,20 @@
     [self waitForExpectationsWithTimeout:20 handler:nil];
 }
 
+- (void)testTaskDelegateForClass
+{
+    [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
+    
+    _expectation = [self expectationWithDescription:@"testTaskDelegateForClass"];
+    
+    STTestGetNetTask *testGetTask = [STTestGetNetTask new];
+    testGetTask.id = 1;
+    [[STNetTaskQueue sharedQueue] addTaskDelegate:self class:testGetTask.class];
+    [[STNetTaskQueue sharedQueue] addTask:testGetTask];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
 - (void)netTaskDidEnd:(STNetTask *)task
 {
     if (!_expectation) {
@@ -179,14 +193,14 @@
     if ([task isKindOfClass:[STTestRetryNetTask class]]) {
         [_expectation fulfill];
         if (!task.error || task.retryCount != task.maxRetryCount) {
-            XCTFail(@"testRetryNetTask failed");
+            XCTFail(@"%@ failed", _expectation.description);
         }
     }
     else if ([task isKindOfClass:[STTestGetNetTask class]]) {
         [_expectation fulfill];
         STTestGetNetTask *testGetTask = (STTestGetNetTask *)task;
         if (task.error || [testGetTask.post[@"id"] intValue] != testGetTask.id) {
-            XCTFail(@"testGetNetTask failed");
+            XCTFail(@"%@ failed", _expectation.description);
         }
     }
     else if ([task isKindOfClass:[STTestPostNetTask class]]) {
@@ -196,27 +210,27 @@
             ![testPostTask.post[@"title"] isEqualToString:testPostTask.title] ||
             ![testPostTask.post[@"body"] isEqualToString:testPostTask.body] ||
             [testPostTask.post[@"user_id"] intValue] != testPostTask.userId) {
-            XCTFail(@"testPostNetTask failed");
+            XCTFail(@"%@ failed", _expectation.description);
         }
     }
     else if ([task isKindOfClass:[STTestPutNetTask class]]) {
         [_expectation fulfill];
         STTestPutNetTask *testPutTask = (STTestPutNetTask *)task;
         if (task.error || !testPutTask.post) {
-            XCTFail(@"testPutNetTask failed");
+            XCTFail(@"%@ failed", _expectation.description);
         }
     }
     else if ([task isKindOfClass:[STTestPatchNetTask class]]) {
         [_expectation fulfill];
         STTestPatchNetTask *testPatchTask = (STTestPatchNetTask *)task;
         if (task.error || !testPatchTask.post) {
-            XCTFail(@"testPatchNetTask failed");
+            XCTFail(@"%@ failed", _expectation.description);
         }
     }
     else if ([task isKindOfClass:[STTestDeleteNetTask class]]) {
         [_expectation fulfill];
         if (task.error) {
-            XCTFail(@"testDeleteNetTask failed");
+            XCTFail(@"%@ failed", _expectation.description);
         }
     }
     else if ([task isKindOfClass:[STTestMaxConcurrentTasksCountNetTask class]]) {
