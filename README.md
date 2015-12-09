@@ -188,9 +188,6 @@ Conform STHTTPNetTaskRequestObject protocol
 
 ```objc
 [STNetTaskObserve(_openWeatherTask) subscribeCompleted:^(
-    if (!_openWeatherTask.finished) { // Detect "finished" if _openWeatherTask may have a chance to be canceled.
-        return;
-    }
     if (_openWeatherTask.error) { // Would be network issue
         _resultLabel.text = @"Network Unavailable";
         _goBtn.hidden = YES;
