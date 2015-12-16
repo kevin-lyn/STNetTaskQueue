@@ -11,7 +11,7 @@
 
 @interface STNetTaskQueue()
 
-@property (nonatomic, strong) NSThread *thred;
+@property (nonatomic, strong) NSThread *thread;
 @property (nonatomic, strong) NSRecursiveLock *lock;
 @property (nonatomic, strong) NSMutableDictionary *taskDelegates; // <NSString, NSHashTable<STNetTaskDelegate>>
 @property (nonatomic, strong) NSMutableArray *tasks; // <STNetTask>
@@ -34,9 +34,9 @@
 - (id)init
 {    
     if (self = [super init]) {
-        self.thred = [[NSThread alloc] initWithTarget:self selector:@selector(threadEntryPoint) object:nil];
-        self.thred.name = NSStringFromClass(self.class);
-        [self.thred start];
+        self.thread = [[NSThread alloc] initWithTarget:self selector:@selector(threadEntryPoint) object:nil];
+        self.thread.name = NSStringFromClass(self.class);
+        [self.thread start];
         self.lock = [NSRecursiveLock new];
         self.lock.name = [NSString stringWithFormat:@"%@Lock", NSStringFromClass(self.class)];
         self.taskDelegates = [NSMutableDictionary new];
@@ -76,7 +76,7 @@
     NSAssert(!task.finished && !task.cancelled, @"STNetTask is finished/cancelled, please recreate a net task.");
     
     task.pending = YES;
-    [self performInThread:self.thred usingBlock:^{
+    [self performInThread:self.thread usingBlock:^{
         [self _addTask:task];
     }];
 }
@@ -98,7 +98,7 @@
         return;
     }
     
-    [self performInThread:self.thred usingBlock:^{
+    [self performInThread:self.thread usingBlock:^{
         [self _cancelTask:task];
     }];
 }
@@ -143,7 +143,7 @@
 
 - (void)task:(STNetTask *)task didResponse:(id)response
 {
-    [self performInThread:self.thred usingBlock:^{
+    [self performInThread:self.thread usingBlock:^{
         [self _task:task didResponse:response];
     }];
 }
@@ -182,7 +182,7 @@
 
 - (void)task:(STNetTask *)task didFailWithError:(NSError *)error
 {
-    [self performInThread:self.thred usingBlock:^{
+    [self performInThread:self.thread usingBlock:^{
         [self _task:task didFailWithError:error];
     }];
 }

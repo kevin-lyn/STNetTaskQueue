@@ -12,6 +12,9 @@
 
 + (void)log:(NSString *)content, ...
 {
+    if (!content) {
+        return;
+    }
     va_list args;
     va_start(args, content);
     content = [[NSString alloc] initWithFormat:content arguments:args];
