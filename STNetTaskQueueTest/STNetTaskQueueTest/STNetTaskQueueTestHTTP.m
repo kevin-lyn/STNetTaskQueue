@@ -53,7 +53,7 @@
     [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:testRetryTask.uri];
     [[STNetTaskQueue sharedQueue] addTask:testRetryTask];
     
-    [self waitForExpectationsWithTimeout:10 handler:nil];
+    [self waitForExpectationsWithTimeout:20 handler:nil];
 }
 
 - (void)testCancelNetTask

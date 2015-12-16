@@ -22,7 +22,7 @@
 
 - (NSUInteger)maxRetryCount
 {
-    return 3;
+    return 1;
 }
 
 @end
