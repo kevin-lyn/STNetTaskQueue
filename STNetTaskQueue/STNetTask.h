@@ -48,19 +48,19 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
  Indicates if the net task is waiting for executing or executing.
  This value will be set to "YES" immediately after the net task is added to net task queue.
  */
-@property (atomic, assign) BOOL pending;
+@property (atomic, assign, readonly) BOOL pending;
 
 /*
  Indicates if the net task is cancelled.
  This value would be "NO" by default after net task is created, even the net task is not added to queue.
  */
-@property (atomic, assign) BOOL cancelled;
+@property (atomic, assign, readonly) BOOL cancelled;
 
 /* Indicates if the net task is finished(no matter it's successful or failed). */
-@property (atomic, assign) BOOL finished;
+@property (atomic, assign, readonly) BOOL finished;
 
 /* The current retry time @see maxRetryCount */
-@property (atomic, assign) NSUInteger retryCount;
+@property (atomic, assign, readonly) NSUInteger retryCount;
 
 /*
  A unique string represents the net task.

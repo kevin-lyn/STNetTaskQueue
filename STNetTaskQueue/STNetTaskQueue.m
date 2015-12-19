@@ -9,6 +9,15 @@
 #import "STNetTaskQueue.h"
 #import "STNetTaskQueueLog.h"
 
+@interface STNetTask (STInternal)
+
+@property (atomic, assign) BOOL pending;
+@property (atomic, assign) BOOL cancelled;
+@property (atomic, assign) BOOL finished;
+@property (atomic, assign) NSUInteger retryCount;
+
+@end
+
 @interface STNetTaskQueue()
 
 @property (nonatomic, strong) NSThread *thread;

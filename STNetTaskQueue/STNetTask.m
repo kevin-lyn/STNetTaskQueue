@@ -10,6 +10,15 @@
 
 NSString *const STNetTaskUnknownError = @"STNetTaskUnknownError";
 
+@interface STNetTask ()
+
+@property (atomic, assign) BOOL pending;
+@property (atomic, assign) BOOL cancelled;
+@property (atomic, assign) BOOL finished;
+@property (atomic, assign) NSUInteger retryCount;
+
+@end
+
 @implementation STNetTask
 
 - (NSString *)uri
