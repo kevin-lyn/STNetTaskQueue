@@ -105,7 +105,8 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
                                 @(STHTTPNetTaskPost): @"POST",
                                 @(STHTTPNetTaskPut): @"PUT" };
     STHTTPNetTaskContentTypeMap = @{ @(STHTTPNetTaskRequestJSON): @"application/json; charset=utf-8",
-                                     @(STHTTPNetTaskRequestKeyValueString): @"application/x-www-form-urlencoded" };
+                                     @(STHTTPNetTaskRequestKeyValueString): @"application/x-www-form-urlencoded",
+                                     @(STHTTPNetTaskRequestFormData): @"multipart/form-data" };
     STHTTPNetTaskFormDataBoundary = [NSString stringWithFormat:@"ST-Boundary-%@", [[NSUUID UUID] UUIDString]];
     STHTTPNetTaskToSessionTask = [[NSMapTable alloc] initWithKeyOptions:NSPointerFunctionsWeakMemory valueOptions:NSPointerFunctionsWeakMemory capacity:50];
 }
