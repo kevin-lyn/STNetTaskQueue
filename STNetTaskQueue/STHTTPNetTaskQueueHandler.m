@@ -121,10 +121,6 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
     NSMutableURLRequest *request = [NSMutableURLRequest new];
     request.HTTPMethod = STHTTPNetTaskMethodMap[@(_task.method)];
     
-    for (NSString *headerField in headers) {
-        [request setValue:headers[headerField] forHTTPHeaderField:headerField];
-    }
-    
     if (_baseURL.user.length || _baseURL.password.length) {
         NSString *credentials = [NSString stringWithFormat:@"%@:%@", _baseURL.user, _baseURL.password];
         [request setValue:[NSString stringWithFormat:@"Basic %@", STBase64String(credentials)] forHTTPHeaderField:@"Authorization"];
@@ -140,7 +136,6 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
                 urlComponents.query = [self queryStringFromParameters:parameters];
             }
             request.URL = urlComponents.URL;
-            sessionTask = [_session dataTaskWithRequest:request];
         }
             break;
         case STHTTPNetTaskPost:
@@ -157,7 +152,6 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
                 NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", STHTTPNetTaskFormDataBoundary];
                 [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
             }
-            sessionTask = [_session dataTaskWithRequest:request];
         }
             break;
         default: {
@@ -165,6 +159,11 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
         }
             break;
     }
+    
+    for (NSString *headerField in headers) {
+        [request setValue:headers[headerField] forHTTPHeaderField:headerField];
+    }
+    sessionTask = [_session dataTaskWithRequest:request];
     
     [STHTTPNetTaskToSessionTask setObject:sessionTask forKey:_task];
     
