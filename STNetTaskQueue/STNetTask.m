@@ -1,6 +1,6 @@
 //
 //  STNetTask.m
-//  Sth4Me
+//  STNetTaskQueue
 //
 //  Created by Kevin Lin on 29/11/14.
 //  Copyright (c) 2014 Sth4Me. All rights reserved.
