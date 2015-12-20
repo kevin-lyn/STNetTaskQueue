@@ -16,6 +16,8 @@
 @property (atomic, assign) BOOL finished;
 @property (atomic, assign) NSUInteger retryCount;
 
+- (void)notifyState:(STNetTaskState)state;
+
 @end
 
 @interface STNetTaskQueue()
@@ -120,6 +122,7 @@
     
     [self.handler netTaskQueue:self didCancelTask:task];
     task.cancelled = YES;
+    [task notifyState:STNetTaskStateCancalled];
 }
 
 - (BOOL)_retryTask:(STNetTask *)task withError:(NSError *)error
@@ -136,6 +139,7 @@
 {
     if (!task.cancelled) {
         [task didRetry];
+        [task notifyState:STNetTaskStateRetrying];
         [self addTask:task];
     }
 }
@@ -183,6 +187,7 @@
     
     task.pending = NO;
     task.finished = YES;
+    [task notifyState:STNetTaskStateFinished];
     
     [self _netTaskDidEnd:task];
     
@@ -213,6 +218,7 @@
     [task didFail];
     task.pending = NO;
     task.finished = YES;
+    [task notifyState:STNetTaskStateFinished];
     
     [self _netTaskDidEnd:task];
     

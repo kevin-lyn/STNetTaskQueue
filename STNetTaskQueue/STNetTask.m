@@ -16,6 +16,7 @@ NSString *const STNetTaskUnknownError = @"STNetTaskUnknownError";
 @property (atomic, assign) BOOL cancelled;
 @property (atomic, assign) BOOL finished;
 @property (atomic, assign) NSUInteger retryCount;
+@property (nonatomic, strong) NSMutableDictionary *stateToBlock;
 
 @end
 
@@ -54,6 +55,35 @@ NSString *const STNetTaskUnknownError = @"STNetTaskUnknownError";
 - (NSTimeInterval)retryInterval
 {
     return 0;
+}
+
+- (void)subscribeState:(STNetTaskState)state usingBlock:(STNetTaskSubscriptionBlock)block
+{
+    if (!self.stateToBlock) {
+        self.stateToBlock = [NSMutableDictionary new];
+    }
+    NSAssert(self.stateToBlock[@(state)] == nil, @"State is subscribed already");
+    self.stateToBlock[@(state)] = [block copy];
+}
+
+- (void)notifyState:(STNetTaskState)state
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        STNetTaskSubscriptionBlock block = self.stateToBlock[@(state)];
+        if (block) {
+            block(self);
+        }
+        
+        switch (state) {
+            case STNetTaskStateFinished:
+            case STNetTaskStateCancalled: {
+                self.stateToBlock = nil;
+            }
+                break;
+            default:
+                break;
+        }
+    });
 }
 
 @end

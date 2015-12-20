@@ -23,6 +23,7 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
     }]; \
     return nil; \
 }]
+
 #endif
 
 @class STNetTask;
@@ -38,6 +39,14 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 - (void)netTaskDidEnd:(STNetTask *)task;
 
 @end
+
+typedef NS_ENUM(NSUInteger, STNetTaskState) {
+    STNetTaskStateCancalled,
+    STNetTaskStateFinished,
+    STNetTaskStateRetrying
+};
+
+typedef void (^STNetTaskSubscriptionBlock)(STNetTask *task);
 
 @interface STNetTask : NSObject
 
@@ -71,6 +80,7 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 
 /*
  A callback method which is called when the net task is finished successfully.
+ Note: this method will be called in thread of STNetTaskQueue.
  
  @param response id The response object.
  */
@@ -78,11 +88,13 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 
 /*
  A callback method which is called when the net task is failed.
+ Note: this method will be called in thread of STNetTaskQueue.
  */
 - (void)didFail;
 
 /*
  A callback method which is called when the net task is retried.
+ Note: this method will be called in thread of STNetTaskQueue.
  */
 - (void)didRetry;
 
@@ -109,5 +121,14 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
  @return NSTimeInterval
  */
 - (NSTimeInterval)retryInterval;
+
+/*
+ Subscribe state of net task by using block
+ 
+ @param state STNetTaskState state of net task
+ @param block STNetTaskSubscriptionBlock block is called when net task is in subscribed state.
+        NOTE: this block will be called in main thread.
+ */
+- (void)subscribeState:(STNetTaskState)state usingBlock:(STNetTaskSubscriptionBlock)block;
 
 @end

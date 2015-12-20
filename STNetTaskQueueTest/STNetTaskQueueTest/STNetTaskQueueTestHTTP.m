@@ -185,6 +185,28 @@
     [self waitForExpectationsWithTimeout:10 handler:nil];
 }
 
+- (void)testSubscriptionBlock
+{
+    [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
+    
+    _expectation = [self expectationWithDescription:@"testSubscriptionBlock"];
+    
+    STTestGetNetTask *testGetTask = [STTestGetNetTask new];
+    testGetTask.id = 1;
+    [[STNetTaskQueue sharedQueue] addTask:testGetTask];
+    
+    [testGetTask subscribeState:STNetTaskStateFinished usingBlock:^(STNetTask *task) {
+        if (task.finished) {
+            [_expectation fulfill];
+        }
+        else {
+            XCTFail(@"%@ failed", _expectation.description);
+        }
+    }];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
 - (void)netTaskDidEnd:(STNetTask *)task
 {
     if (!_expectation) {
