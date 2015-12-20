@@ -98,15 +98,35 @@
         return propertyName;
     }
     
-    static NSRegularExpression *parameterNameRegex;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        parameterNameRegex = [NSRegularExpression regularExpressionWithPattern:@"([a-z])([A-Z])" options:kNilOptions error:NULL];
-    });
+    NSMutableString *parameterName = [NSMutableString new];
+    const char *chars = propertyName.UTF8String;
+    for (NSUInteger i = 0; i < propertyName.length; i++) {
+        BOOL hasPrevious = i != 0;
+        BOOL hasNext = i + 1 < propertyName.length;
+        BOOL prependUnderscore = NO;
+        char ch = chars[i];
+        if (isupper(ch)) {
+            if (hasPrevious) {
+                if (!isupper(chars[i - 1])) {
+                    prependUnderscore = YES;
+                }
+            }
+            if(hasNext && !prependUnderscore) {
+                if (!isupper(chars[i + 1])) {
+                    prependUnderscore = YES;
+                }
+            }
+            ch = tolower(ch);
+        }
+        if (prependUnderscore) {
+            [parameterName appendFormat:@"_%c", ch];
+        }
+        else {
+            [parameterName appendFormat:@"%c", ch];
+        }
+    }
     
-    NSString *parameterName = [parameterNameRegex stringByReplacingMatchesInString:propertyName options:kNilOptions range:NSMakeRange(0, propertyName.length) withTemplate:[NSString stringWithFormat:@"$1%@$2", separator]];
-    parameterName = parameterName.lowercaseString;
-    return parameterName;
+    return [NSString stringWithString:parameterName];
 }
 
 @end
