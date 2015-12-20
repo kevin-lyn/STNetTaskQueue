@@ -9,15 +9,15 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "766502871B554C9600B4F63D"
-               BuildableName = "STNetTaskQueueTest.xctest"
-               BlueprintName = "STNetTaskQueueTest"
-               ReferencedContainer = "container:STNetTaskQueueTest.xcodeproj">
+               BlueprintIdentifier = "76012C541C265A160090BE94"
+               BuildableName = "STNetTaskQueue.framework"
+               BlueprintName = "STNetTaskQueue"
+               ReferencedContainer = "container:STNetTaskQueue.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "766502871B554C9600B4F63D"
-               BuildableName = "STNetTaskQueueTest.xctest"
-               BlueprintName = "STNetTaskQueueTest"
-               ReferencedContainer = "container:STNetTaskQueueTest.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "766502871B554C9600B4F63D"
-            BuildableName = "STNetTaskQueueTest.xctest"
-            BlueprintName = "STNetTaskQueueTest"
-            ReferencedContainer = "container:STNetTaskQueueTest.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -64,10 +45,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "766502871B554C9600B4F63D"
-            BuildableName = "STNetTaskQueueTest.xctest"
-            BlueprintName = "STNetTaskQueueTest"
-            ReferencedContainer = "container:STNetTaskQueueTest.xcodeproj">
+            BlueprintIdentifier = "76012C541C265A160090BE94"
+            BuildableName = "STNetTaskQueue.framework"
+            BlueprintName = "STNetTaskQueue"
+            ReferencedContainer = "container:STNetTaskQueue.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -82,10 +63,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "766502871B554C9600B4F63D"
-            BuildableName = "STNetTaskQueueTest.xctest"
-            BlueprintName = "STNetTaskQueueTest"
-            ReferencedContainer = "container:STNetTaskQueueTest.xcodeproj">
+            BlueprintIdentifier = "76012C541C265A160090BE94"
+            BuildableName = "STNetTaskQueue.framework"
+            BlueprintName = "STNetTaskQueue"
+            ReferencedContainer = "container:STNetTaskQueue.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

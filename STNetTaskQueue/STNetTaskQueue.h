@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "STNetTask.h"
+#import <STNetTaskQueue/STNetTask.h>
+
+//! Project version number for STNetTaskQueue.
+FOUNDATION_EXPORT double STNetTaskQueueVersionNumber;
+
+//! Project version string for STNetTaskQueue.
+FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
 
 @class STNetTaskQueue;
 
@@ -120,3 +126,7 @@
 - (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate;
 
 @end
+
+#import <STNetTaskQueue/STNetTaskChain.h>
+#import <STNetTaskQueue/STHTTPNetTask.h>
+#import <STNetTaskQueue/STHTTPNetTaskQueueHandler.h>

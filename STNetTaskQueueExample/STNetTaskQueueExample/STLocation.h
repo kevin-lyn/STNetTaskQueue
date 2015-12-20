@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "STHTTPNetTask.h"
+#import <STNetTaskQueue/STNetTaskQueue.h>
 
 @interface STLocation : NSObject<STHTTPNetTaskRequestObject>
 

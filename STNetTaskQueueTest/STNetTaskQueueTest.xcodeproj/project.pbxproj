@@ -14,17 +14,28 @@
 		765FF8AE1B5B840B00DE637E /* STTestPatchNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF8AD1B5B840B00DE637E /* STTestPatchNetTask.m */; };
 		765FF8B41B5B854A00DE637E /* STTestDeleteNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF8B31B5B854A00DE637E /* STTestDeleteNetTask.m */; };
 		7665028E1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665028D1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m */; };
-		7665029D1B554CA800B4F63D /* STHTTPNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502941B554CA800B4F63D /* STHTTPNetTask.m */; };
-		7665029E1B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502961B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m */; };
-		7665029F1B554CA800B4F63D /* STNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502981B554CA800B4F63D /* STNetTask.m */; };
-		766502A01B554CA800B4F63D /* STNetTaskChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665029A1B554CA800B4F63D /* STNetTaskChain.m */; };
-		766502A11B554CA800B4F63D /* STNetTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7665029C1B554CA800B4F63D /* STNetTaskQueue.m */; };
 		766502C11B55541F00B4F63D /* STTestRetryNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 766502C01B55541F00B4F63D /* STTestRetryNetTask.m */; };
-		76C065EA1B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C065E91B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.m */; };
-		76C065ED1B9C44F90062AEC5 /* STNetTaskQueueLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C065EC1B9C44F90062AEC5 /* STNetTaskQueueLog.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		76012C811C26609D0090BE94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76012C7D1C26609D0090BE94 /* STNetTaskQueue.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 76012C551C265A160090BE94;
+			remoteInfo = STNetTaskQueue;
+		};
+		76012C831C2660AC0090BE94 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 76012C7D1C26609D0090BE94 /* STNetTaskQueue.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 76012C541C265A160090BE94;
+			remoteInfo = STNetTaskQueue;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		76012C7D1C26609D0090BE94 /* STNetTaskQueue.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = STNetTaskQueue.xcodeproj; path = ../STNetTaskQueue.xcodeproj; sourceTree = "<group>"; };
 		76586ECE1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestMaxConcurrentTasksCountNetTask.h; sourceTree = "<group>"; };
 		76586ECF1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestMaxConcurrentTasksCountNetTask.m; sourceTree = "<group>"; };
 		765FF8991B5B565E00DE637E /* STTestGetNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestGetNetTask.h; sourceTree = "<group>"; };
@@ -40,22 +51,8 @@
 		766502881B554C9600B4F63D /* STNetTaskQueueTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STNetTaskQueueTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7665028C1B554C9600B4F63D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7665028D1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueueTestHTTP.m; sourceTree = "<group>"; };
-		766502931B554CA800B4F63D /* STHTTPNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHTTPNetTask.h; sourceTree = "<group>"; };
-		766502941B554CA800B4F63D /* STHTTPNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHTTPNetTask.m; sourceTree = "<group>"; };
-		766502951B554CA800B4F63D /* STHTTPNetTaskQueueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHTTPNetTaskQueueHandler.h; sourceTree = "<group>"; };
-		766502961B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHTTPNetTaskQueueHandler.m; sourceTree = "<group>"; };
-		766502971B554CA800B4F63D /* STNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTask.h; sourceTree = "<group>"; };
-		766502981B554CA800B4F63D /* STNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTask.m; sourceTree = "<group>"; };
-		766502991B554CA800B4F63D /* STNetTaskChain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTaskChain.h; sourceTree = "<group>"; };
-		7665029A1B554CA800B4F63D /* STNetTaskChain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskChain.m; sourceTree = "<group>"; };
-		7665029B1B554CA800B4F63D /* STNetTaskQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTaskQueue.h; sourceTree = "<group>"; };
-		7665029C1B554CA800B4F63D /* STNetTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueue.m; sourceTree = "<group>"; };
 		766502BF1B55541F00B4F63D /* STTestRetryNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestRetryNetTask.h; sourceTree = "<group>"; };
 		766502C01B55541F00B4F63D /* STTestRetryNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestRetryNetTask.m; sourceTree = "<group>"; };
-		76C065E81B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHTTPNetTaskParametersPacker.h; sourceTree = "<group>"; };
-		76C065E91B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHTTPNetTaskParametersPacker.m; sourceTree = "<group>"; };
-		76C065EB1B9C44F90062AEC5 /* STNetTaskQueueLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTaskQueueLog.h; sourceTree = "<group>"; };
-		76C065EC1B9C44F90062AEC5 /* STNetTaskQueueLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueueLog.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,17 +66,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		765FF8971B5AAB7200DE637E /* HTTP */ = {
+		76012C7E1C26609D0090BE94 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				766502931B554CA800B4F63D /* STHTTPNetTask.h */,
-				766502941B554CA800B4F63D /* STHTTPNetTask.m */,
-				766502951B554CA800B4F63D /* STHTTPNetTaskQueueHandler.h */,
-				766502961B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m */,
-				76C065E81B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.h */,
-				76C065E91B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.m */,
+				76012C821C26609D0090BE94 /* STNetTaskQueue.framework */,
 			);
-			name = HTTP;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		765FF8981B5B562000DE637E /* NetTasks */ = {
@@ -114,6 +106,7 @@
 		7665027D1B554C6700B4F63D = {
 			isa = PBXGroup;
 			children = (
+				76012C7D1C26609D0090BE94 /* STNetTaskQueue.xcodeproj */,
 				7665028A1B554C9600B4F63D /* STNetTaskQueueTest */,
 				766502891B554C9600B4F63D /* Products */,
 			);
@@ -130,7 +123,6 @@
 		7665028A1B554C9600B4F63D /* STNetTaskQueueTest */ = {
 			isa = PBXGroup;
 			children = (
-				766502921B554CA800B4F63D /* STNetTaskQueue */,
 				7665028B1B554C9600B4F63D /* Supporting Files */,
 				765FF8981B5B562000DE637E /* NetTasks */,
 				7665028D1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m */,
@@ -144,23 +136,6 @@
 				7665028C1B554C9600B4F63D /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		766502921B554CA800B4F63D /* STNetTaskQueue */ = {
-			isa = PBXGroup;
-			children = (
-				765FF8971B5AAB7200DE637E /* HTTP */,
-				766502971B554CA800B4F63D /* STNetTask.h */,
-				766502981B554CA800B4F63D /* STNetTask.m */,
-				766502991B554CA800B4F63D /* STNetTaskChain.h */,
-				7665029A1B554CA800B4F63D /* STNetTaskChain.m */,
-				7665029B1B554CA800B4F63D /* STNetTaskQueue.h */,
-				7665029C1B554CA800B4F63D /* STNetTaskQueue.m */,
-				76C065EB1B9C44F90062AEC5 /* STNetTaskQueueLog.h */,
-				76C065EC1B9C44F90062AEC5 /* STNetTaskQueueLog.m */,
-			);
-			name = STNetTaskQueue;
-			path = ../../STNetTaskQueue;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +152,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				76012C841C2660AC0090BE94 /* PBXTargetDependency */,
 			);
 			name = STNetTaskQueueTest;
 			productName = STNetTaskQueueTest;
@@ -189,7 +165,7 @@
 		7665027E1B554C6700B4F63D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0720;
 				TargetAttributes = {
 					766502871B554C9600B4F63D = {
 						CreatedOnToolsVersion = 6.4;
@@ -206,12 +182,28 @@
 			mainGroup = 7665027D1B554C6700B4F63D;
 			productRefGroup = 766502891B554C9600B4F63D /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 76012C7E1C26609D0090BE94 /* Products */;
+					ProjectRef = 76012C7D1C26609D0090BE94 /* STNetTaskQueue.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				766502871B554C9600B4F63D /* STNetTaskQueueTest */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		76012C821C26609D0090BE94 /* STNetTaskQueue.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = STNetTaskQueue.framework;
+			remoteRef = 76012C811C26609D0090BE94 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		766502861B554C9600B4F63D /* Resources */ = {
@@ -230,36 +222,39 @@
 			files = (
 				765FF8B41B5B854A00DE637E /* STTestDeleteNetTask.m in Sources */,
 				7665028E1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m in Sources */,
-				7665029D1B554CA800B4F63D /* STHTTPNetTask.m in Sources */,
-				766502A01B554CA800B4F63D /* STNetTaskChain.m in Sources */,
 				765FF8A21B5B7B3100DE637E /* STTestPutNetTask.m in Sources */,
 				766502C11B55541F00B4F63D /* STTestRetryNetTask.m in Sources */,
-				76C065ED1B9C44F90062AEC5 /* STNetTaskQueueLog.m in Sources */,
-				7665029E1B554CA800B4F63D /* STHTTPNetTaskQueueHandler.m in Sources */,
-				7665029F1B554CA800B4F63D /* STNetTask.m in Sources */,
 				765FF89B1B5B565E00DE637E /* STTestGetNetTask.m in Sources */,
 				765FF89F1B5B763000DE637E /* STTestPostNetTask.m in Sources */,
-				76C065EA1B9C2C170062AEC5 /* STHTTPNetTaskParametersPacker.m in Sources */,
 				76586ED01B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m in Sources */,
-				766502A11B554CA800B4F63D /* STNetTaskQueue.m in Sources */,
 				765FF8AE1B5B840B00DE637E /* STTestPatchNetTask.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		76012C841C2660AC0090BE94 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = STNetTaskQueue;
+			targetProxy = 76012C831C2660AC0090BE94 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		766502821B554C6700B4F63D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ENABLE_TESTABILITY = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
 		766502831B554C6700B4F63D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 			};
 			name = Release;
 		};
@@ -300,10 +295,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = STNetTaskQueueTest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.sth4.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 			};
@@ -340,9 +336,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = STNetTaskQueueTest/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "me.sth4.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

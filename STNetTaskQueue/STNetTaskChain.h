@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "STNetTaskQueue.h"
+#import <STNetTaskQueue/STNetTaskQueue.h>
 
 @class STNetTaskChain;
 

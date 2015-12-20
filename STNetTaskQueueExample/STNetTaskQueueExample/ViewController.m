@@ -7,8 +7,7 @@
 //
 
 #import "ViewController.h"
-#import <ReactiveCocoa/ReactiveCocoa.h>
-#import "STNetTaskQueue.h"
+#import <STNetTaskQueue/STNetTaskQueue.h>
 #import "STOpenWeatherNetTask.h"
 #import "STLocation.h"
 

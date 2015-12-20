@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "STNetTaskQueue.h"
-#import "STHTTPNetTaskQueueHandler.h"
+#import <STNetTaskQueue/STNetTaskQueue.h>
 #import "ViewController.h"
 
 @interface AppDelegate ()

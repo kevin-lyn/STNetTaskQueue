@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Sth4Me. All rights reserved.
 //
 
-#import "STHTTPNetTask.h"
+#import <STNetTaskQueue/STNetTaskQueue.h>
 #import "STLocation.h"
 
 @interface STOpenWeatherNetTask : STHTTPNetTask

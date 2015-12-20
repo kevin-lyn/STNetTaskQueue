@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F307B01999BF5E23D5324F7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C208AF3D418206A834AD082 /* libPods.a */; };
 		76C065F01B9C8FB50062AEC5 /* STLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 76C065EF1B9C8FB50062AEC5 /* STLocation.m */; };
 		76F5A30D1B5412A200F5651B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A30C1B5412A200F5651B /* main.m */; };
 		76F5A3101B5412A200F5651B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A30F1B5412A200F5651B /* AppDelegate.m */; };
@@ -16,9 +15,26 @@
 		76F5A3321B54165500F5651B /* STOpenWeatherNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F5A3311B54165500F5651B /* STOpenWeatherNetTask.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		761351B91C2663CB0056AE8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 761351B51C2663CB0056AE8E /* STNetTaskQueue.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 76012C551C265A160090BE94;
+			remoteInfo = STNetTaskQueue;
+		};
+		761351BB1C2663D80056AE8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 761351B51C2663CB0056AE8E /* STNetTaskQueue.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 76012C541C265A160090BE94;
+			remoteInfo = STNetTaskQueue;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		4C208AF3D418206A834AD082 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		6283166389805BFC302B5494 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		761351B51C2663CB0056AE8E /* STNetTaskQueue.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = STNetTaskQueue.xcodeproj; path = ../STNetTaskQueue.xcodeproj; sourceTree = "<group>"; };
 		76C065EE1B9C8FB50062AEC5 /* STLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STLocation.h; sourceTree = "<group>"; };
 		76C065EF1B9C8FB50062AEC5 /* STLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STLocation.m; sourceTree = "<group>"; };
 		76F5A3071B5412A200F5651B /* STNetTaskQueueExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STNetTaskQueueExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,7 +47,6 @@
 		76F5A31A1B5412A200F5651B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		76F5A3301B54165500F5651B /* STOpenWeatherNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STOpenWeatherNetTask.h; sourceTree = "<group>"; };
 		76F5A3311B54165500F5651B /* STOpenWeatherNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STOpenWeatherNetTask.m; sourceTree = "<group>"; };
-		DA96C126CD51641B7419C5A0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,28 +54,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F307B01999BF5E23D5324F7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3BD146A677E6BCD88A628CDD /* Pods */ = {
+		761351B61C2663CB0056AE8E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6283166389805BFC302B5494 /* Pods.debug.xcconfig */,
-				DA96C126CD51641B7419C5A0 /* Pods.release.xcconfig */,
+				761351BA1C2663CB0056AE8E /* STNetTaskQueue.framework */,
 			);
-			name = Pods;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		76F5A2FE1B5412A200F5651B = {
 			isa = PBXGroup;
 			children = (
+				761351B51C2663CB0056AE8E /* STNetTaskQueue.xcodeproj */,
 				76F5A3091B5412A200F5651B /* STNetTaskQueueExample */,
 				76F5A3081B5412A200F5651B /* Products */,
-				3BD146A677E6BCD88A628CDD /* Pods */,
 				AF405C6EEE863A2431743D1B /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -114,15 +127,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76F5A32A1B5412A200F5651B /* Build configuration list for PBXNativeTarget "STNetTaskQueueExample" */;
 			buildPhases = (
-				730C60CFC22DA978694F0634 /* Check Pods Manifest.lock */,
 				76F5A3031B5412A200F5651B /* Sources */,
 				76F5A3041B5412A200F5651B /* Frameworks */,
 				76F5A3051B5412A200F5651B /* Resources */,
-				4706BC0CBCF70C722FEE49CD /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				761351BC1C2663D80056AE8E /* PBXTargetDependency */,
 			);
 			name = STNetTaskQueueExample;
 			productName = STNetTaskQueueExample;
@@ -135,7 +147,7 @@
 		76F5A2FF1B5412A200F5651B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Sth4Me;
 				TargetAttributes = {
 					76F5A3061B5412A200F5651B = {
@@ -154,12 +166,28 @@
 			mainGroup = 76F5A2FE1B5412A200F5651B;
 			productRefGroup = 76F5A3081B5412A200F5651B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 761351B61C2663CB0056AE8E /* Products */;
+					ProjectRef = 761351B51C2663CB0056AE8E /* STNetTaskQueue.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				76F5A3061B5412A200F5651B /* STNetTaskQueueExample */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		761351BA1C2663CB0056AE8E /* STNetTaskQueue.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = STNetTaskQueue.framework;
+			remoteRef = 761351B91C2663CB0056AE8E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		76F5A3051B5412A200F5651B /* Resources */ = {
@@ -171,39 +199,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		4706BC0CBCF70C722FEE49CD /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		730C60CFC22DA978694F0634 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		76F5A3031B5412A200F5651B /* Sources */ = {
@@ -219,6 +214,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		761351BC1C2663D80056AE8E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = STNetTaskQueue;
+			targetProxy = 761351BB1C2663D80056AE8E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		76F5A3191B5412A200F5651B /* LaunchScreen.xib */ = {
@@ -253,6 +256,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -268,7 +272,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -305,7 +309,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -314,22 +318,20 @@
 		};
 		76F5A32B1B5412A200F5651B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6283166389805BFC302B5494 /* Pods.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = STNetTaskQueueExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.sth4.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		76F5A32C1B5412A200F5651B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA96C126CD51641B7419C5A0 /* Pods.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = STNetTaskQueueExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "me.sth4.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

@@ -6,7 +6,7 @@
 //
 //
 
-#import "STHTTPNetTask.h"
+#import <STNetTaskQueue/STNetTaskQueue.h>
 
 @interface STTestPutNetTask : STHTTPNetTask
 

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Sth4Me. All rights reserved.
 //
 
-#import "STNetTask.h"
+#import <STNetTaskQueue/STNetTask.h>
 
 // Error domains
 FOUNDATION_EXPORT NSString *const STHTTPNetTaskServerError;

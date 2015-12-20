@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Sth4Me. All rights reserved.
 //
 
-#import "STNetTaskQueue.h"
+#import <STNetTaskQueue/STNetTaskQueue.h>
 
 @interface STHTTPNetTaskQueueHandler : NSObject<STNetTaskQueueHandler>
 

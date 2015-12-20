@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "STHTTPNetTaskQueueHandler.h"
+#import <STNetTaskQueue/STNetTaskQueue.h>
 #import "STTestRetryNetTask.h"
 #import "STTestGetNetTask.h"
 #import "STTestPostNetTask.h"
