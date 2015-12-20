@@ -52,6 +52,11 @@ platform :ios, '7.0'
 pod 'STNetTaskQueue'
 ```
 
+### Carthage
+```ruby
+github "kevin0571/STNetTaskQueue"
+```
+
 ### Use STNetTaskQueue in your project
 #### Step 1: Setup STNetTaskQueue after your app launch
 ```objc
@@ -184,21 +189,21 @@ Conform STHTTPNetTaskRequestObject protocol
 @end
 ```
 
-#### Work with ReactiveCocoa for getting net task result
-
+#### Use subscription block
 ```objc
-[STNetTaskObserve(_openWeatherTask) subscribeCompleted:^(
-    if (_openWeatherTask.error) { // Would be network issue
+[_openWeatherTask subscribeState:STNetTaskStateFinished usingBlock:^(STNetTask *task) {
+    if (task.error) { // Would be network issue
         _resultLabel.text = @"Network Unavailable";
         _goBtn.hidden = YES;
         return;
     }
+    
     _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", _openWeatherTask.place, _openWeatherTask.temperature];
     _goBtn.hidden = YES;
 }];
 ```
 
-#### Or use STNetTaskDelegate
+#### Use STNetTaskDelegate
 
 ```objc
 - (void)netTaskDidEnd:(STNetTask *)task
@@ -219,6 +224,21 @@ Conform STHTTPNetTaskRequestObject protocol
     _goBtn.hidden = YES;
 }
 ```
+
+#### Work with ReactiveCocoa for getting net task result
+
+```objc
+[STNetTaskObserve(_openWeatherTask) subscribeCompleted:^(
+    if (_openWeatherTask.error) { // Would be network issue
+        _resultLabel.text = @"Network Unavailable";
+        _goBtn.hidden = YES;
+        return;
+    }
+    _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", _openWeatherTask.place, _openWeatherTask.temperature];
+    _goBtn.hidden = YES;
+}];
+```
+
 For more details, download the example project or check out unit tests for usage references.
 
 ### Set max concurrent tasks count of STNetTaskQueue
