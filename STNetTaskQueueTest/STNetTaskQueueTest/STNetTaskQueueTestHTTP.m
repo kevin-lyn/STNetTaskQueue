@@ -195,8 +195,8 @@
     testGetTask.id = 1;
     [[STNetTaskQueue sharedQueue] addTask:testGetTask];
     
-    [testGetTask subscribeState:STNetTaskStateFinished usingBlock:^(STNetTask *task) {
-        if (task.finished) {
+    [testGetTask subscribeState:STNetTaskStateFinished usingBlock:^{
+        if (testGetTask.finished) {
             [_expectation fulfill];
         }
         else {

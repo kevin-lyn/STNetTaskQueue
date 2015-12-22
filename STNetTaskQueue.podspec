@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "STNetTaskQueue"
-  s.version      = "0.0.16"
+  s.version      = "0.0.17"
   s.summary      = "STNetTaskQueue is a networking queue library for iOS and OS X. It's abstract and can be implemented in different protocols."
 
   s.description  = <<-DESC

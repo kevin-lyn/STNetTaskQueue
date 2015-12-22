@@ -71,7 +71,7 @@ NSString *const STNetTaskUnknownError = @"STNetTaskUnknownError";
     dispatch_async(dispatch_get_main_queue(), ^{
         STNetTaskSubscriptionBlock block = self.stateToBlock[@(state)];
         if (block) {
-            block(self);
+            block();
         }
         
         switch (state) {

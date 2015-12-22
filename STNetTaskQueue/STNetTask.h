@@ -46,7 +46,7 @@ typedef NS_ENUM(NSUInteger, STNetTaskState) {
     STNetTaskStateRetrying
 };
 
-typedef void (^STNetTaskSubscriptionBlock)(STNetTask *task);
+typedef void (^STNetTaskSubscriptionBlock)();
 
 @interface STNetTask : NSObject
 

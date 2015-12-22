@@ -191,7 +191,7 @@ Conform STHTTPNetTaskRequestObject protocol
 
 #### Use subscription block
 ```objc
-[_openWeatherTask subscribeState:STNetTaskStateFinished usingBlock:^(STNetTask *task) {
+[_openWeatherTask subscribeState:STNetTaskStateFinished usingBlock:^{
     if (task.error) { // Would be network issue
         _resultLabel.text = @"Network Unavailable";
         _goBtn.hidden = YES;
