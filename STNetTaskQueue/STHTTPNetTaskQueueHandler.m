@@ -144,7 +144,7 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
         case STHTTPNetTaskPatch: {
             request.URL = [_baseURL URLByAppendingPathComponent:_task.uri];
             NSDictionary *datas = _task.datas;
-            if (!datas.count) {
+            if (_task.requestType != STHTTPNetTaskRequestFormData) {
                 request.HTTPBody = [self bodyDataFromParameters:parameters requestType:_task.requestType];
                 [request setValue:STHTTPNetTaskContentTypeMap[@(_task.requestType)] forHTTPHeaderField:@"Content-Type"];
             }
