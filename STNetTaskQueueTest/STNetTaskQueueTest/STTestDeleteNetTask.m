@@ -22,7 +22,7 @@
 
 - (NSArray *)ignoredProperties
 {
-    return @[ @"id" ];
+    return STHTTPNetTaskIgnoreAllProperties;
 }
 
 @end

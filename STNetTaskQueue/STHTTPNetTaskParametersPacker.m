@@ -41,6 +41,9 @@
     }
     
     NSSet *ignoredProperties = [NSSet setWithArray:[requestObject ignoredProperties]];
+    if (ignoredProperties.count == 1 && [ignoredProperties.anyObject isEqualToString:@"*"]) {
+        return nil;
+    }
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
     unsigned int numberOfProperties;

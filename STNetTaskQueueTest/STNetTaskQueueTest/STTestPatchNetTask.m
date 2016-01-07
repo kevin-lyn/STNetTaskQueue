@@ -20,11 +20,6 @@
     return [NSString stringWithFormat:@"posts/%d", self.id];
 }
 
-- (NSDictionary *)parameters
-{
-    return @{ @"title": self.title };
-}
-
 - (void)didResponseDictionary:(NSDictionary *)dictionary
 {
     _post = dictionary;
@@ -32,7 +27,7 @@
 
 - (NSArray *)ignoredProperties
 {
-    return @[ @"id" ];
+    return @[ NSStringFromSelector(@selector(id)) ];
 }
 
 @end

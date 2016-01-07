@@ -18,6 +18,8 @@ FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorResponseDataUserInfoKey;
 
 FOUNDATION_EXPORT NSString *STHTTPNetTaskRequestObjectDefaultSeparator;
 
+#define STHTTPNetTaskIgnoreAllProperties @[ @"*" ]
+
 typedef NS_ENUM(NSUInteger, STHTTPNetTaskMethod) {
     STHTTPNetTaskGet,
     STHTTPNetTaskPost,
