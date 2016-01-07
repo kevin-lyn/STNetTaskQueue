@@ -19,7 +19,7 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
 
 @protocol STNetTaskQueueHandler <NSObject>
 
-/*
+/**
  STNetTaskQueue will call this method when a net task is added to queue and become ready to be excecuted.
  
  @param netTaskQueue STNetTaskQueue The net task queue which is holding the net task.
@@ -27,7 +27,7 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
  */
 - (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue handleTask:(STNetTask *)task;
 
-/*
+/**
  STNetTaskQueue will call this method when a net task is cancelled and removed from net task queue.
  Giving a chance to the handler to do a clean up for the cancelled net task.
  
@@ -36,7 +36,7 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
  */
 - (void)netTaskQueue:(STNetTaskQueue *)netTaskQueue didCancelTask:(STNetTask *)task;
 
-/*
+/**
  STNetTaskQueue will call this method when the net task queue is deallocated.
  
  @param netTaskQueue STNetTaskQueue The net task queue which is deallocated.
@@ -47,21 +47,23 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
 
 @interface STNetTaskQueue : NSObject
 
-/* The STNetTaskQueueHandler which is used for handling the net tasks in queue. */
+/**
+ The STNetTaskQueueHandler which is used for handling the net tasks in queue.
+ */
 @property (nonatomic, strong) id<STNetTaskQueueHandler> handler;
 
-/* 
+/**
  Count of Max concurrent task in a queue.
  If the number of unfinished tasks in queue hits the max count, upcoming task will be processed till one of the unfinished task is done.
  */
 @property (nonatomic, assign) NSUInteger maxConcurrentTasksCount;
 
-/*
+/**
  A shared STNetTaskQueue instance.
  */
 + (instancetype)sharedQueue;
 
-/*
+/**
  Add a net task into the net task queue.
  The net task may not be executed immediately depends on the "maxConcurrentTasksCount",
  but the net task will be marked as "pending" anyway.
@@ -70,7 +72,7 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
  */
 - (void)addTask:(STNetTask *)task;
 
-/*
+/**
  Cancel and remove the net task from queue.
  If the net task is executing, it will be cancelled and remove from the queue without calling the "netTaskDidEnd" delegate method.
  
@@ -78,7 +80,7 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
  */
 - (void)cancelTask:(STNetTask *)task;
 
-/*
+/**
  This method should be called when the "handler" finish handling the net task successfully.
  After "handler" called this method, the net task will be marked as "finished", set "pending" as "NO", and removed from the queue.
  
@@ -87,7 +89,7 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
  */
 - (void)task:(STNetTask *)task didResponse:(id)response;
 
-/*
+/**
  This method should be caled when the "handler" finish handling the net task with error.
  After "hadnler" called this method, the net task will be marked as "finished", set "pending" as "NO", and removed from the queue.
  
@@ -96,7 +98,7 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
  */
 - (void)task:(STNetTask *)task didFailWithError:(NSError *)error;
 
-/*
+/**
  Add a net task delegate to "STNetTaskQueue" with uri of the net task,
  it's a weak reference and duplicated delegate with same uri will be ignored.
  
@@ -105,7 +107,7 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
  */
 - (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate uri:(NSString *)uri;
 
-/*
+/**
  Add a net task delegate to "STNetTaskQueue" with class of net task,
  it's a weak reference and duplicated delegate with same class will be ignored.
  
@@ -114,7 +116,7 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
  */
 - (void)addTaskDelegate:(id<STNetTaskDelegate>)delegate class:(Class)clazz;
 
-/*
+/**
  Most of the times you don't need to remove net task delegate explicitly,
  because "STNetTaskQueue" holds weak reference of each delegate.
  

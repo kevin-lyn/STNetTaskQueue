@@ -10,7 +10,7 @@
 
 @interface STHTTPNetTaskQueueHandler : NSObject<STNetTaskQueueHandler>
 
-/*
+/**
  Init the handler with base URL, a base URL will be used for constructing the whole url for HTTP net tasks.
  E.g HTTP net task returns uri "user/profile", handled by handler with baseURL "http://example.com", the whole url will be http://example.com/user/profile".
  
@@ -18,7 +18,7 @@
  */
 - (instancetype)initWithBaseURL:(NSURL *)baseURL;
 
-/*
+/**
  Init the handler with baseURL and NSURLSessionConfiguration.
  
  @param baseURL NSURL

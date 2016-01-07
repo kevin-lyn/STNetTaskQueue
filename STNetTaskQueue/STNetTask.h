@@ -30,7 +30,7 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 
 @protocol STNetTaskDelegate <NSObject>
 
-/*
+/**
  This delegate method will be called when the net task is finished(no matter it's successful or failed).
  If the net task is failed, task.error will be non-nil.
  
@@ -50,35 +50,41 @@ typedef void (^STNetTaskSubscriptionBlock)();
 
 @interface STNetTask : NSObject
 
-/* Error object which contains error message when net task is failed. */
+/**
+ Error object which contains error message when net task is failed.
+ */
 @property (atomic, strong) NSError *error;
 
-/*
+/**
  Indicates if the net task is waiting for executing or executing.
  This value will be set to "YES" immediately after the net task is added to net task queue.
  */
 @property (atomic, assign, readonly) BOOL pending;
 
-/*
+/**
  Indicates if the net task is cancelled.
  This value would be "NO" by default after net task is created, even the net task is not added to queue.
  */
 @property (atomic, assign, readonly) BOOL cancelled;
 
-/* Indicates if the net task is finished(no matter it's successful or failed). */
+/**
+ Indicates if the net task is finished(no matter it's successful or failed).
+ */
 @property (atomic, assign, readonly) BOOL finished;
 
-/* The current retry time @see maxRetryCount */
+/**
+ The current retry time @see maxRetryCount
+ */
 @property (atomic, assign, readonly) NSUInteger retryCount;
 
-/*
+/**
  A unique string represents the net task.
  
  @return NSString The uri string.
  */
 - (NSString *)uri;
 
-/*
+/**
  A callback method which is called when the net task is finished successfully.
  Note: this method will be called in thread of STNetTaskQueue.
  
@@ -86,19 +92,19 @@ typedef void (^STNetTaskSubscriptionBlock)();
  */
 - (void)didResponse:(id)response;
 
-/*
+/**
  A callback method which is called when the net task is failed.
  Note: this method will be called in thread of STNetTaskQueue.
  */
 - (void)didFail;
 
-/*
+/**
  A callback method which is called when the net task is retried.
  Note: this method will be called in thread of STNetTaskQueue.
  */
 - (void)didRetry;
 
-/*
+/**
  Indicates how many times the net task should be retried after failed.
  Default 0.
  
@@ -106,7 +112,7 @@ typedef void (^STNetTaskSubscriptionBlock)();
  */
 - (NSUInteger)maxRetryCount;
 
-/*
+/**
  If you are going to retry the net task only when specific error is returned, return NO in this method.
  Default YES.
  
@@ -115,14 +121,14 @@ typedef void (^STNetTaskSubscriptionBlock)();
  */
 - (BOOL)shouldRetryForError:(NSError *)error;
 
-/*
+/**
  Indicates how many seconds should be delayed before retrying the net task.
  
  @return NSTimeInterval
  */
 - (NSTimeInterval)retryInterval;
 
-/*
+/**
  Subscribe state of net task by using block
  
  @param state STNetTaskState state of net task
