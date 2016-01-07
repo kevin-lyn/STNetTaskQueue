@@ -193,9 +193,14 @@
     STTestGetNetTask *testGetTask = [STTestGetNetTask new];
     testGetTask.id = 1;
     [[STNetTaskQueue sharedQueue] addTask:testGetTask];
-    
+
+    __block NSUInteger subscriptionCalled = 0;
     [testGetTask subscribeState:STNetTaskStateFinished usingBlock:^{
-        if (testGetTask.finished) {
+        subscriptionCalled++;
+    }];
+    [testGetTask subscribeState:STNetTaskStateFinished usingBlock:^{
+        subscriptionCalled++;
+        if (testGetTask.finished && subscriptionCalled == 2) {
             [_expectation fulfill];
         }
         else {

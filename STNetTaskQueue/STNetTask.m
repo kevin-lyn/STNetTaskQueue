@@ -16,7 +16,7 @@ NSString *const STNetTaskUnknownError = @"STNetTaskUnknownError";
 @property (atomic, assign) BOOL cancelled;
 @property (atomic, assign) BOOL finished;
 @property (atomic, assign) NSUInteger retryCount;
-@property (nonatomic, strong) NSMutableDictionary *stateToBlock;
+@property (nonatomic, strong) NSMutableDictionary<NSNumber *, NSMutableArray *> *stateToBlock;
 
 @end
 
@@ -59,21 +59,36 @@ NSString *const STNetTaskUnknownError = @"STNetTaskUnknownError";
 
 - (void)subscribeState:(STNetTaskState)state usingBlock:(STNetTaskSubscriptionBlock)block
 {
+    if ([NSThread isMainThread]) {
+        [self _subscribeState:state usingBlock:block];
+    }
+    else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self _subscribeState:state usingBlock:block];
+        });
+    }
+}
+
+- (void)_subscribeState:(STNetTaskState)state usingBlock:(STNetTaskSubscriptionBlock)block
+{
     if (!self.stateToBlock) {
         self.stateToBlock = [NSMutableDictionary new];
     }
-    NSAssert(self.stateToBlock[@(state)] == nil, @"State is subscribed already");
-    self.stateToBlock[@(state)] = [block copy];
+    NSMutableArray *blocks = self.stateToBlock[@(state)];
+    if (!blocks) {
+        blocks = [NSMutableArray new];
+        self.stateToBlock[@(state)] = blocks;
+    }
+    [blocks addObject:[block copy]];
 }
 
 - (void)notifyState:(STNetTaskState)state
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        STNetTaskSubscriptionBlock block = self.stateToBlock[@(state)];
-        if (block) {
+        NSArray *blocks = self.stateToBlock[@(state)];
+        for (STNetTaskSubscriptionBlock block in blocks) {
             block();
         }
-        
         switch (state) {
             case STNetTaskStateFinished:
             case STNetTaskStateCancalled: {
