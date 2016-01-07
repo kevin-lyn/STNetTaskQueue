@@ -49,9 +49,9 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
 /**
  Properties which should be ignored when packing parameters for reqeust.
  
- @return NSArray An array of strings representing the name of properties to be ignored.
+ @return NSArray<NSString> An array of strings representing the name of properties to be ignored.
  */
-- (NSArray *)ignoredProperties;
+- (NSArray<NSString *> *)ignoredProperties;
 
 @optional
 
@@ -97,14 +97,14 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
  
  @return NSDictionary<NSString, NSString> Custom headers, e.g. @{ @"User-Agent": @"STNetTaskQueue Client" }
  */
-- (NSDictionary *)headers;
+- (NSDictionary<NSString *, NSString *> *)headers;
 
 /**
  Additional parameters which will be added as HTTP request parameters.
  
  @return NSDictionary<NSString, id>
  */
-- (NSDictionary *)parameters;
+- (NSDictionary<NSString *, id> *)parameters;
 
 /**
  NSDatas which will be added into multi-part form data body,
@@ -112,7 +112,7 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
  
  @return NSDictionary<NSString, NSData>
  */
-- (NSDictionary *)datas;
+- (NSDictionary<NSString *, NSData *> *)datas;
 
 /**
  This method will be called if the response object is a dictionary.

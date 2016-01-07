@@ -11,6 +11,6 @@
 @interface STHTTPNetTaskParametersPacker : NSObject
 
 - (instancetype)initWithNetTask:(STHTTPNetTask *)netTask;
-- (NSDictionary *)pack;
+- (NSDictionary<NSString *, id> *)pack;
 
 @end
