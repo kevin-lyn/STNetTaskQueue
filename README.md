@@ -57,6 +57,7 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 @property (nonatomic, strong) NSString *body;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, assign) int userId;
+@property (nonatomic, strong) NSString<STIgnore> *ignored; // This property is ignored when packing the request.
 @property (nonatomic, strong, readonly) NSDictionary *post;
 
 @end
@@ -129,8 +130,29 @@ testPostTask.title = @"Test Post Net Task Title";
 testPostTask.body = @"Test Post Net Task Body";
 testPostTask.userId = 1;
 testPostTask.date = [NSDate new];
+testPostTask.ignored = @"test";
 [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:testPostTask.uri];
 [[STNetTaskQueue sharedQueue] addTask:testPostTask];
+
+// The net task will be sent as described below.
+/*
+    URI: posts
+    Method: POST
+    Request Type: Key-Value String
+    Response Type: JSON
+    Custom Headers:
+    {
+        "custom_header" = value;
+    }
+    Parameters:
+    {
+        body = "Test Post Net Task Body";
+        date = "1452239110.829915";
+        "other_parameter" = value;
+        title = "Test Post Net Task Title";
+        "user_id" = 1;
+    }
+ */
 ```
 
 #### Use subscription block

@@ -158,8 +158,8 @@
 
 - (BOOL)shouldPackPropertyWithAttributes:(NSArray *)attributes
 {
-    // Only pack non-readonly property
-    return ![attributes containsObject:@"R"];
+    // Only pack non-readonly property and property which is not ignored.
+    return ![attributes containsObject:@"R"] && [attributes[0] rangeOfString:NSStringFromProtocol(@protocol(STIgnore))].location == NSNotFound;
 }
 
 @end

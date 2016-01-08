@@ -42,6 +42,23 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
 };
 
 /**
+ STIgnore marks a property as "ignore" so that the property will be ignored when packing the request.
+ STHTTPNetTaskRequestObject-ignoredProperties will do the same.
+ 
+ @see STHTTPNetTaskRequestObject
+ */
+@protocol STIgnore
+
+@end
+
+/**
+ To avoid complier warnings
+ */
+@interface NSObject (STHTTPNetTaskRequestObject) <STIgnore>
+
+@end
+
+/**
  If a class conforms to this protocol, it means the instance of this class will be converted to a dictionary and passed as parameter in a HTTP request.
  */
 @protocol STHTTPNetTaskRequestObject <NSObject>
