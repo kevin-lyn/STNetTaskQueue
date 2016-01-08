@@ -222,7 +222,7 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
                                         code:0
                                     userInfo:@{ STHTTPNetTaskErrorStatusCodeUserInfoKey: @(httpResponse.statusCode),
                                                 STHTTPNetTaskErrorResponseDataUserInfoKey: data }];
-            [STNetTaskQueueLog log:_task.description];
+            [STNetTaskQueueLog log:@"\n%@", _task.description];
         }
         [_queue task:_task didFailWithError:error];
     }

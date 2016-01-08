@@ -56,6 +56,15 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
 @optional
 
 /**
+ Transform a value to another.
+ Use case: NSArray need to be transformed to comma separated string.
+ 
+ @param value id Value to be transformed
+ @return id The transformed value. Should return the same value if "value" is not supposed to be transformed.
+ */
+- (id)transformValue:(id)value;
+
+/**
  Separator string which should be used when packing parameters.
  E.g. property schoolName will be converted to school_name.
  Default: @"_"

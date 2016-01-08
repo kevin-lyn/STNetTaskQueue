@@ -61,26 +61,11 @@
             continue;
         }
         
-        id propertyValue = [(NSObject *)requestObject valueForKey:propertyName];
-        if ([propertyValue conformsToProtocol:@protocol(STHTTPNetTaskRequestObject)]) {
-            [parameters addEntriesFromDictionary:[self parametersFromRequestObject:propertyValue]];
-        }
-        else if ([propertyValue isKindOfClass:[NSDictionary class]]) {
-            [parameters addEntriesFromDictionary:propertyValue];
-        }
-        else {
-            if (![propertyValue isKindOfClass:[NSNumber class]] &&
-                ![propertyValue isKindOfClass:[NSString class]] &&
-                ![propertyValue isKindOfClass:[NSArray class]]) {
-                continue;
-            }
-            
-            NSString *separator = STHTTPNetTaskRequestObjectDefaultSeparator;
-            if ([requestObject respondsToSelector:@selector(parameterNameSeparator)]) {
-                separator = [requestObject parameterNameSeparator];
-            }
-            NSString *parameterName = [self parameterNameOfProperty:propertyName withSeparator:separator];
-            parameters[parameterName] = propertyValue;
+        NSString *separator = [self separatorFromRequestObject:requestObject];
+        NSString *parameterName = [self parameterNameFromName:propertyName withSeparator:separator];
+        id parameterValue = [self parameterValueFromValue:[(NSObject *)requestObject valueForKey:propertyName] inRequestObject:requestObject];
+        if (parameterName && parameterValue) {
+            parameters[parameterName] = parameterValue;
         }
     }
     
@@ -89,23 +74,53 @@
     return parameters;
 }
 
-- (BOOL)shouldPackPropertyWithAttributes:(NSArray *)attributes
+- (NSDictionary *)parametersFromDictionary:(NSDictionary *)dictionary inRequestObject:(id<STHTTPNetTaskRequestObject>)requestObject
 {
-    // Only pack non-readonly property
-    return ![attributes containsObject:@"R"];
+    NSString *separator = [self separatorFromRequestObject:requestObject];
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    for (NSString *key in dictionary) {
+        NSString *parameterName = [self parameterNameFromName:key withSeparator:separator];
+        id parameterValue = [self parameterValueFromValue:dictionary[key] inRequestObject:requestObject];
+        if (parameterName && parameterValue) {
+            parameters[parameterName] = parameterValue;
+        }
+    }
+    return parameters;
 }
 
-- (NSString *)parameterNameOfProperty:(NSString *)propertyName withSeparator:(NSString *)separator
+- (id)parameterValueFromValue:(id)value inRequestObject:(id<STHTTPNetTaskRequestObject>)requestObject
+{
+    if ([requestObject respondsToSelector:@selector(transformedValue:)]) {
+        id transformedValue = [requestObject transformValue:value];
+        if (transformedValue != value) {
+            return transformedValue;
+        }
+    }
+    if ([value conformsToProtocol:@protocol(STHTTPNetTaskRequestObject)]) {
+        return [self parametersFromRequestObject:value];
+    }
+    else if ([value isKindOfClass:[NSDictionary class]]) {
+        return [self parametersFromDictionary:value inRequestObject:requestObject];
+    }
+    else if ([value isKindOfClass:[NSNumber class]] ||
+             [value isKindOfClass:[NSString class]] ||
+             [value isKindOfClass:[NSArray class]]) {
+        return value;
+    }
+    return nil;
+}
+
+- (NSString *)parameterNameFromName:(NSString *)name withSeparator:(NSString *)separator
 {
     if (!separator) {
-        return propertyName;
+        return name;
     }
     
     NSMutableString *parameterName = [NSMutableString new];
-    const char *chars = propertyName.UTF8String;
-    for (NSUInteger i = 0; i < propertyName.length; i++) {
+    const char *chars = name.UTF8String;
+    for (NSUInteger i = 0; i < name.length; i++) {
         BOOL hasPrevious = i != 0;
-        BOOL hasNext = i + 1 < propertyName.length;
+        BOOL hasNext = i + 1 < name.length;
         BOOL prependUnderscore = NO;
         char ch = chars[i];
         if (isupper(ch)) {
@@ -130,6 +145,21 @@
     }
     
     return [NSString stringWithString:parameterName];
+}
+
+- (NSString *)separatorFromRequestObject:(id<STHTTPNetTaskRequestObject>)requestObject
+{
+    NSString *separator = STHTTPNetTaskRequestObjectDefaultSeparator;
+    if ([requestObject respondsToSelector:@selector(parameterNameSeparator)]) {
+        separator = [requestObject parameterNameSeparator];
+    }
+    return separator;
+}
+
+- (BOOL)shouldPackPropertyWithAttributes:(NSArray *)attributes
+{
+    // Only pack non-readonly property
+    return ![attributes containsObject:@"R"];
 }
 
 @end
