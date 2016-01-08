@@ -15,6 +15,7 @@
 #import "STTestPatchNetTask.h"
 #import "STTestDeleteNetTask.h"
 #import "STTestMaxConcurrentTasksCountNetTask.h"
+#import "STTestPackerNetTask.h"
 
 @interface STNetTaskQueueTestHTTP : XCTestCase <STNetTaskDelegate>
 
@@ -201,6 +202,41 @@
     [testGetTask subscribeState:STNetTaskStateFinished usingBlock:^{
         subscriptionCalled++;
         if (testGetTask.finished && subscriptionCalled == 2) {
+            [_expectation fulfill];
+        }
+        else {
+            XCTFail(@"%@ failed", _expectation.description);
+        }
+    }];
+    
+    [self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
+- (void)testPackerTask
+{
+    [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
+    
+    _expectation = [self expectationWithDescription:@"testPackerTask"];
+
+    STTestPackerNetTask *testPackerTask = [STTestPackerNetTask new];
+    testPackerTask.string = @"String Value";
+    testPackerTask.date = [NSDate new];
+    testPackerTask.dictionary = @{ @"dictionaryKey1": @"dictionaryValue1",
+                                   @"dictionaryKey2": @"dictionaryValue2",
+                                   @"dictionaryKey3": @"dictionaryValue3" };
+    testPackerTask.array = @[ @"arrayValue1", @"arrayValue2", @"arrayValue3" ];
+    [[STNetTaskQueue sharedQueue] addTask:testPackerTask];
+    
+    [testPackerTask subscribeState:STNetTaskStateFinished usingBlock:^{
+        if (testPackerTask.error) {
+            XCTFail(@"%@ failed", _expectation.description);
+            return;
+        }
+        
+        if ([testPackerTask.post[@"string"] isEqualToString:testPackerTask.string] &&
+            [testPackerTask.post[@"date"] isEqual:@([testPackerTask.date timeIntervalSince1970])] &&
+            [testPackerTask.post[@"dictionary"][@"dictionary_key1"] isEqualToString:testPackerTask.dictionary[@"dictionaryKey1"]] &&
+            [testPackerTask.post[@"array"] isEqualToString:[testPackerTask.array componentsJoinedByString:@","]]) {
             [_expectation fulfill];
         }
         else {

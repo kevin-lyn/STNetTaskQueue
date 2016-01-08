@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A054A7A1C3F758A00534A9A /* STTestPackerNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A054A791C3F758A00534A9A /* STTestPackerNetTask.m */; };
 		76586ED01B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 76586ECF1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m */; };
 		765FF89B1B5B565E00DE637E /* STTestGetNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF89A1B5B565E00DE637E /* STTestGetNetTask.m */; };
 		765FF89F1B5B763000DE637E /* STTestPostNetTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 765FF89E1B5B763000DE637E /* STTestPostNetTask.m */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A054A781C3F758A00534A9A /* STTestPackerNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestPackerNetTask.h; sourceTree = "<group>"; };
+		0A054A791C3F758A00534A9A /* STTestPackerNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestPackerNetTask.m; sourceTree = "<group>"; };
 		76012C7D1C26609D0090BE94 /* STNetTaskQueue.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = STNetTaskQueue.xcodeproj; path = ../STNetTaskQueue.xcodeproj; sourceTree = "<group>"; };
 		76586ECE1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STTestMaxConcurrentTasksCountNetTask.h; sourceTree = "<group>"; };
 		76586ECF1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STTestMaxConcurrentTasksCountNetTask.m; sourceTree = "<group>"; };
@@ -99,6 +102,8 @@
 				765FF8B31B5B854A00DE637E /* STTestDeleteNetTask.m */,
 				76586ECE1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.h */,
 				76586ECF1B6CC698007D29E9 /* STTestMaxConcurrentTasksCountNetTask.m */,
+				0A054A781C3F758A00534A9A /* STTestPackerNetTask.h */,
+				0A054A791C3F758A00534A9A /* STTestPackerNetTask.m */,
 			);
 			name = HTTP;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A054A7A1C3F758A00534A9A /* STTestPackerNetTask.m in Sources */,
 				765FF8B41B5B854A00DE637E /* STTestDeleteNetTask.m in Sources */,
 				7665028E1B554C9600B4F63D /* STNetTaskQueueTestHTTP.m in Sources */,
 				765FF8A21B5B7B3100DE637E /* STTestPutNetTask.m in Sources */,

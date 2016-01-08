@@ -90,7 +90,7 @@
 
 - (id)parameterValueFromValue:(id)value inRequestObject:(id<STHTTPNetTaskRequestObject>)requestObject
 {
-    if ([requestObject respondsToSelector:@selector(transformedValue:)]) {
+    if ([requestObject respondsToSelector:@selector(transformValue:)]) {
         id transformedValue = [requestObject transformValue:value];
         if (transformedValue != value) {
             return transformedValue;
