@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *body;
+@property (nonatomic, strong) NSDate *date;
 @property (nonatomic, assign) int userId;
 @property (nonatomic, strong, readonly) NSDictionary *post;
 

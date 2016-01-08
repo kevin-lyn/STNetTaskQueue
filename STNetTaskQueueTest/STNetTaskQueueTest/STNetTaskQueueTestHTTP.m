@@ -98,6 +98,7 @@
     testPostTask.title = @"Test Post Net Task Title";
     testPostTask.body = @"Test Post Net Task Body";
     testPostTask.userId = 1;
+    testPostTask.date = [NSDate new];
     [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:testPostTask.uri];
     [[STNetTaskQueue sharedQueue] addTask:testPostTask];
     
@@ -271,7 +272,8 @@
         if (task.error ||
             ![testPostTask.post[@"title"] isEqualToString:testPostTask.title] ||
             ![testPostTask.post[@"body"] isEqualToString:testPostTask.body] ||
-            [testPostTask.post[@"user_id"] intValue] != testPostTask.userId) {
+            [testPostTask.post[@"user_id"] intValue] != testPostTask.userId ||
+            [testPostTask.post[@"date"] doubleValue] != testPostTask.date.timeIntervalSince1970) {
             XCTFail(@"%@ failed", _expectation.description);
         }
     }

@@ -3,22 +3,6 @@ STNetTaskQueue is a networking queue library for iOS and OS X. It's abstract and
 
 STNetTaskQueue avoid you from directly dealing with "url", "request packing" and "response parsing". All networking tasks are described and processed by subclassing STNetTask, which provides you a clean code style in UI layer when handling networking.
 
-## Glance
-### Tired of this?
-```objc
-[network GET:@"data/2.5/weather" parameters:@{ @"lat": location.lat,
-                                               @"lon": location.lon,
-                                               @"user_info": location.userInfo,
-                                               @"other_parameter": @"value" }];
-```
-### What about this?
-```objc
-STOpenWeatherNetTask *openWeatherTask = [STOpenWeatherNetTask new];
-openWeatherTask.location = location;
-[[STNetTaskQueue sharedQueue] addTask:openWeatherTask];
-```
-STNetTaskQueue will get all non-readonly properties from "location" and pack them to parameters for you. See [Get Started](https://github.com/kevin0571/STNetTaskQueue#get-started) for more details.
-
 ## Features
 - Auto packing parameters for HTTP net task.
 - Max concurrent tasks count in each STNetTaskQueue.
@@ -60,34 +44,34 @@ github "kevin0571/STNetTaskQueue"
 ### Use STNetTaskQueue in your project
 #### Step 1: Setup STNetTaskQueue after your app launch
 ```objc
-NSURL *baseUrl = [NSURL URLWithString:@"http://api.openweathermap.org"];
+NSURL *baseUrl = [NSURL URLWithString:@"http://jsonplaceholder.typicode.com"];
 STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] initWithBaseURL:baseUrl];
 [STNetTaskQueue sharedQueue].handler = httpHandler;
 ```
 
 #### Step 2: Create your net task
 ```objc
-@interface STOpenWeatherNetTask : STHTTPNetTask
+@interface STTestPostNetTask : STHTTPNetTask
 
-@property (nonatomic, strong) STLocation *location;
-@property (nonatomic, strong) NSString *userInfo;
-@property (nonatomic, strong, readonly) NSString *place;
-@property (nonatomic, assign, readonly) float temperature;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *body;
+@property (nonatomic, assign) int userId;
+@property (nonatomic, strong, readonly) NSDictionary *post;
 
 @end
 ```
 
 ```objc
-@implementation STOpenWeatherNetTask
+@implementation STTestPostNetTask
 
 - (STHTTPNetTaskMethod)method
 {
-    return STHTTPNetTaskGet;
+    return STHTTPNetTaskPost;
 }
 
 - (NSString *)uri
 {
-    return @"data/2.5/weather";
+    return @"posts";
 }
 
 // Optional. Retry 3 times after error occurs.
@@ -120,10 +104,18 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
     return @{ @"other_parameter": @"value" };
 }
 
+// Optional. Transform value to a format you want.
+- (id)transformValue:(id)value
+{
+    if ([value isKindOfClass:[NSDate class]]) {
+        return @([value timeIntervalSince1970]);
+    }
+    return value;
+}
+
 - (void)didResponseDictionary:(NSDictionary *)dictionary
 {
-    _place = dictionary[@"name"];
-    _temperature = [dictionary[@"main"][@"temp"] floatValue] / 10;
+    _post = dictionary;
 }
 
 @end
@@ -131,75 +123,23 @@ STHTTPNetTaskQueueHandler *httpHandler = [[STHTTPNetTaskQueueHandler alloc] init
 
 #### Step 3: Send net task and delegate for the result
 ```objc
-- (void)sendOpenWeatherTask
-{
-    if (_openWeatherTask.pending) {
-        return;
-    }
-    
-    STLocation *location = [STLocation new];
-    location.lat = @"1.306038";
-    location.lon = @"103.772962";
-    location.ignoredValue = 1;
-    
-    _openWeatherTask = [STOpenWeatherNetTask new];
-    _openWeatherTask.location = location;
-    _openWeatherTask.userInfo = @"user info";
-    // STHTTPNetTask will pack non-readonly properties which is number, BOOL, NSString, NSDictionary, NSArray or object conforms to STHTTPNetTaskRequestObject, also parameters returned by overwritten method "parameters". Which means the final packed parameters would be:
-    // @{ @"lat": @"1.306038",
-    //    @"lon": @"103.772962",
-    //    @"user_info": @"user info",
-    //    @"other_parameter": @"value" }
-    
-    // Task delegate will be a weak reference, so there is no need to remove it manually.
-    // It's appropriate to add task delegate here because duplicated task delegates will be ignored by STNetTaskQueue.
-    [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:_openWeatherTask.uri];
-    [[STNetTaskQueue sharedQueue] addTask:_openWeatherTask];
-}
-```
-
-#### Create a request object
-Conform STHTTPNetTaskRequestObject protocol
-```objc
-@interface STLocation : NSObject<STHTTPNetTaskRequestObject>
-
-@property (nonatomic, strong) NSString *lat;
-@property (nonatomic, strong) NSString *lon;
-@property (nonatomic, assign) int ignoredValue;
-@property (nonatomic, assign, readonly) BOOL readOnlyProperty; // Read only property will not be packed into parameters
-
-@end
-```
-
-```objc
-@implementation STLocation
-
-// If you want to ignore some properties when packing the request object, return an array with property names.
-- (NSArray *)ignoredProperties
-{
-    return @[ @"ignoredValue" ];
-}
-
-// This is optional, if this is not implemented, underscore "_" will be used as separator when packing parameters. Which means if you use CamelCase naming for your property, it will be converted to lower cases string separated by "_", e.g. "userInfo" will be packed as "user_info" in parameters.
-- (NSString *)parameterNameSeparator
-{
-    return @"_";
-}
-
-@end
+STTestPostNetTask *testPostTask = [STTestPostNetTask new];
+testPostTask.title = @"Test Post Net Task Title";
+testPostTask.body = @"Test Post Net Task Body";
+testPostTask.userId = 1;
+testPostTask.date = [NSDate new];
+[[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:testPostTask.uri];
+[[STNetTaskQueue sharedQueue] addTask:testPostTask];
 ```
 
 #### Use subscription block
 ```objc
-[_openWeatherTask subscribeState:STNetTaskStateFinished usingBlock:^{
-    if (task.error) { // Would be network issue
-        _resultLabel.text = @"Network Unavailable";
-        _goBtn.hidden = YES;
+[testPostTask subscribeState:STNetTaskStateFinished usingBlock:^{
+    if (testPostTask.error) {
+        // Handle error cases
         return;
     }
-    
-    _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", _openWeatherTask.place, _openWeatherTask.temperature];
-    _goBtn.hidden = YES;
+    // Access result from net task
 }];
 ```
 
@@ -208,38 +148,27 @@ Conform STHTTPNetTaskRequestObject protocol
 ```objc
 - (void)netTaskDidEnd:(STNetTask *)task
 {
-    // It's necessary to detect if _openWeatherTask != task,
-    // if you have mutiple viewControllers deleagating the same uri.
-    if (_openWeatherTask != task) {
+    if (task.error) {
+        // Handle error cases
         return;
     }
-
-    if (task.error) { // Would be network issue
-        _resultLabel.text = @"Network Unavailable";
-        _goBtn.hidden = YES;
-        return;
-    }
-
-    _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", _openWeatherTask.place, _openWeatherTask.temperature];
-    _goBtn.hidden = YES;
+    // Access result from net task
 }
 ```
 
 #### Work with ReactiveCocoa for getting net task result
 
 ```objc
-[STNetTaskObserve(_openWeatherTask) subscribeCompleted:^(
-    if (_openWeatherTask.error) { // Would be network issue
-        _resultLabel.text = @"Network Unavailable";
-        _goBtn.hidden = YES;
+[STNetTaskObserve(testPostTask) subscribeCompleted:^(
+    if (testPostTask.error) {
+        // Handle error cases
         return;
     }
-    _resultLabel.text = [NSString stringWithFormat:@"%@\n%.1f°C", _openWeatherTask.place, _openWeatherTask.temperature];
-    _goBtn.hidden = YES;
+    // Access result from net task
 }];
 ```
 
-For more details, download the example project or check out unit tests for usage references.
+For more details, check out unit tests.
 
 ### Set max concurrent tasks count of STNetTaskQueue
 Sometimes we need to set the concurrent image download tasks to avoid too much data coming at the same time.
