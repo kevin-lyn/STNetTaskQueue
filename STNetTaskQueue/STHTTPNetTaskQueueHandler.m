@@ -63,6 +63,8 @@ static NSString * STBase64String(NSString *string)
 
 @implementation NSURLSessionTask (STHTTPNetTaskQueueHandlerOperation)
 
+@dynamic operation;
+
 - (void)setOperation:(STHTTPNetTaskQueueHandlerOperation *)operation
 {
     objc_setAssociatedObject(self, @selector(operation), operation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
