@@ -133,7 +133,7 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
         case STHTTPNetTaskGet:
         case STHTTPNetTaskHead:
         case STHTTPNetTaskDelete: {
-            NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:[_baseURL URLByAppendingPathComponent:_task.uri]
+            NSURLComponents *urlComponents = [NSURLComponents componentsWithURL:[self requestURL]
                                                         resolvingAgainstBaseURL:NO];
             if (parameters.count) {
                 urlComponents.query = [self queryStringFromParameters:parameters];
@@ -144,7 +144,7 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
         case STHTTPNetTaskPost:
         case STHTTPNetTaskPut:
         case STHTTPNetTaskPatch: {
-            request.URL = [_baseURL URLByAppendingPathComponent:_task.uri];
+            request.URL = [self requestURL];
             NSDictionary *datas = _task.datas;
             if (_task.requestType != STHTTPNetTaskRequestFormData) {
                 request.HTTPBody = [self bodyDataFromParameters:parameters requestType:_task.requestType];
@@ -172,6 +172,14 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
     
     sessionTask.operation = self;
     [sessionTask resume];
+}
+
+- (NSURL *)requestURL
+{
+    if (_baseURL) {
+        return [_baseURL URLByAppendingPathComponent:_task.uri];
+    }
+    return [NSURL URLWithString:_task.uri];
 }
 
 #pragma mark - NSURLSessionDataDelegate
