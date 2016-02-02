@@ -17,9 +17,8 @@
     }
     va_list args;
     va_start(args, content);
-    content = [[NSString alloc] initWithFormat:content arguments:args];
+    NSLogv([NSString stringWithFormat:@"[STNetTaskQueue] %@", content], args);
     va_end(args);
-    NSLog(@"[STNetTaskQueue] %@", content);
 }
 
 @end
