@@ -238,7 +238,7 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
     }
 }
 
-#pragma makr - Response data parsing methods
+#pragma mark - Response data parsing methods
 
 - (NSString *)stringFromData:(NSData *)data
 {
