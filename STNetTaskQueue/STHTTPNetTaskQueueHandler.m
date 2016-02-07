@@ -53,6 +53,13 @@ static NSString * STBase64String(NSString *string)
     return [NSString stringWithString:encodedString];
 }
 
+@interface STHTTPNetTask (STInternal)
+
+@property (atomic, assign) NSInteger statusCode;
+@property (atomic, strong) NSDictionary *responseHeaders;
+
+@end
+
 @class STHTTPNetTaskQueueHandlerOperation;
 
 @interface NSURLSessionTask (STHTTPNetTaskQueueHandlerOperation)
@@ -197,6 +204,10 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
     
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)task.response;
     NSData *data = [NSData dataWithData:_data];
+    
+    _task.statusCode = httpResponse.statusCode;
+    _task.responseHeaders = httpResponse.allHeaderFields;
+    
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 300) {
         id responseObj = nil;
         NSError *error = nil;
@@ -228,10 +239,13 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
     }
     else {
         if (!error) { // Response status code is not 20x
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
             error = [NSError errorWithDomain:STHTTPNetTaskServerError
                                         code:0
                                     userInfo:@{ STHTTPNetTaskErrorStatusCodeUserInfoKey: @(httpResponse.statusCode),
                                                 STHTTPNetTaskErrorResponseDataUserInfoKey: data }];
+#pragma GCC diagnostic pop
             [STNetTaskQueueLog log:@"\n%@", _task.description];
         }
         [_queue task:_task didFailWithError:error];

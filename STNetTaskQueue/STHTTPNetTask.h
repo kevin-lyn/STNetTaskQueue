@@ -13,7 +13,7 @@ FOUNDATION_EXPORT NSString *const STHTTPNetTaskServerError;
 FOUNDATION_EXPORT NSString *const STHTTPNetTaskResponseParsedError;
 
 // Error "userInfo" keys
-FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorStatusCodeUserInfoKey;
+FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorStatusCodeUserInfoKey; DEPRECATED_MSG_ATTRIBUTE("Use STHTTPNetTask.statusCode instead")
 FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorResponseDataUserInfoKey;
 
 FOUNDATION_EXPORT NSString *STHTTPNetTaskRequestObjectDefaultSeparator;
@@ -96,6 +96,16 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
  Net task which is designed for HTTP protocol.
  */
 @interface STHTTPNetTask : STNetTask<STHTTPNetTaskRequestObject>
+
+/**
+ HTTP status code.
+ */
+@property (atomic, assign, readonly) NSInteger statusCode;
+
+/**
+ HTTP headers of response.
+ */
+@property (atomic, strong, readonly) NSDictionary *responseHeaders;
 
 /**
  HTTP method which should be used for the HTTP net task.
