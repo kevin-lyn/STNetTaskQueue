@@ -13,7 +13,7 @@ FOUNDATION_EXPORT NSString *const STHTTPNetTaskServerError;
 FOUNDATION_EXPORT NSString *const STHTTPNetTaskResponseParsedError;
 
 // Error "userInfo" keys
-FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorStatusCodeUserInfoKey; DEPRECATED_MSG_ATTRIBUTE("Use STHTTPNetTask.statusCode instead")
+FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorStatusCodeUserInfoKey DEPRECATED_MSG_ATTRIBUTE("Use STHTTPNetTask.statusCode instead");
 FOUNDATION_EXPORT NSString *const STHTTPNetTaskErrorResponseDataUserInfoKey;
 
 FOUNDATION_EXPORT NSString *STHTTPNetTaskRequestObjectDefaultSeparator;
