@@ -36,7 +36,7 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
  
  @param task STNetTask The finished net task.
  */
-- (void)netTaskDidEnd:(STNetTask *)task;
+- (void)netTaskDidEnd:(__kindof STNetTask *)task;
 
 @end
 
