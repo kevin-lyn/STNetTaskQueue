@@ -289,11 +289,11 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
     [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL *stop) {
         if ([value isKindOfClass:[NSArray class]]) {
             for (id element in value) {
-                [self appendKeyValueToString:queryString withKey:key value:[element description]];
+                [self appendKeyValueToString:queryString withKey:key value:[element description] percentEncoding:NO];
             }
         }
         else {
-            [self appendKeyValueToString:queryString withKey:key value:[value description]];
+            [self appendKeyValueToString:queryString withKey:key value:[value description] percentEncoding:NO];
         }
     }];
     [queryString deleteCharactersInRange:NSMakeRange(queryString.length - 1, 1)];
@@ -321,11 +321,11 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
             [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *key, id value, BOOL *stop) {
                 if ([value isKindOfClass:[NSArray class]]) {
                     for (id element in value) {
-                        [self appendKeyValueToString:bodyString withKey:key value:[element description]];
+                        [self appendKeyValueToString:bodyString withKey:key value:[element description] percentEncoding:YES];
                     }
                 }
                 else {
-                    [self appendKeyValueToString:bodyString withKey:key value:[value description]];
+                    [self appendKeyValueToString:bodyString withKey:key value:[value description] percentEncoding:YES];
                 }
             }];
             [bodyString deleteCharactersInRange:NSMakeRange(bodyString.length - 1, 1)];
@@ -365,9 +365,13 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
     return formData;
 }
 
-- (void)appendKeyValueToString:(NSMutableString *)string withKey:(NSString *)key value:(NSString *)value
+- (void)appendKeyValueToString:(NSMutableString *)string withKey:(NSString *)key value:(NSString *)value percentEncoding:(BOOL)percentEncoding
 {
-    [string appendFormat:@"%@=%@&", key, [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    if (percentEncoding) {
+        key = [key stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        value = [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    }
+    [string appendFormat:@"%@=%@&", key, value];
 }
 
 - (void)appendToFormData:(NSMutableData *)formData withKey:(NSString *)key value:(NSString *)value
