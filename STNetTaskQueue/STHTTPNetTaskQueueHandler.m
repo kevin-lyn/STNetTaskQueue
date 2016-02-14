@@ -367,7 +367,7 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
 
 - (void)appendKeyValueToString:(NSMutableString *)string withKey:(NSString *)key value:(NSString *)value
 {
-    [string appendFormat:@"%@=%@&", key, value];
+    [string appendFormat:@"%@=%@&", key, [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 }
 
 - (void)appendToFormData:(NSMutableData *)formData withKey:(NSString *)key value:(NSString *)value
