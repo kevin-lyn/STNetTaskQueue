@@ -12,47 +12,6 @@
 #import "STNetTaskQueueLog.h"
 #import <objc/runtime.h>
 
-static uint8_t const STBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-static NSString * STBase64String(NSString *string)
-{
-    NSMutableString *encodedString = [NSMutableString new];
-    
-    NSData *data = [NSData dataWithBytes:string.UTF8String length:[string lengthOfBytesUsingEncoding:NSUTF8StringEncoding]];
-    NSUInteger length = data.length;
-    uint8_t *bytes = (uint8_t *)data.bytes;
-    
-    for (NSUInteger i = 0; i < length; i += 3) {
-        uint8_t byte = bytes[i];
-        int tableIndex = (byte & 0xFC) >> 2;
-        [encodedString appendFormat:@"%c", STBase64EncodingTable[tableIndex]];
-        tableIndex = (byte & 0x03) << 4;
-        
-        if (i + 1 < length) {
-            byte = bytes[i + 1];
-            tableIndex |= (byte & 0xF0) >> 4;
-            [encodedString appendFormat:@"%c", STBase64EncodingTable[tableIndex]];
-            tableIndex = (byte & 0x0F) << 2;
-            
-            if (i + 2 < length) {
-                byte = bytes[i + 2];
-                tableIndex |= (byte & 0xC0) >> 6;
-                [encodedString appendFormat:@"%c", STBase64EncodingTable[tableIndex]];
-                
-                tableIndex = (byte & 0x3F);
-                [encodedString appendFormat:@"%c", STBase64EncodingTable[tableIndex]];
-            }
-            else {
-                [encodedString appendFormat:@"%c=", STBase64EncodingTable[tableIndex]];
-            }
-        }
-        else {
-            [encodedString appendFormat:@"%c=", STBase64EncodingTable[tableIndex]];
-        }
-    }
-    
-    return [NSString stringWithString:encodedString];
-}
-
 @interface STHTTPNetTask (STInternal)
 
 @property (atomic, assign) NSInteger statusCode;
@@ -133,7 +92,8 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
     
     if (_baseURL.user.length || _baseURL.password.length) {
         NSString *credentials = [NSString stringWithFormat:@"%@:%@", _baseURL.user, _baseURL.password];
-        [request setValue:[NSString stringWithFormat:@"Basic %@", STBase64String(credentials)] forHTTPHeaderField:@"Authorization"];
+        credentials = [[credentials dataUsingEncoding:NSUTF8StringEncoding] base64EncodedStringWithOptions:kNilOptions];
+        [request setValue:[NSString stringWithFormat:@"Basic %@", credentials] forHTTPHeaderField:@"Authorization"];
     }
     
     switch (_task.method) {
