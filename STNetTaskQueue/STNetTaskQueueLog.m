@@ -12,6 +12,7 @@
 
 + (void)log:(NSString *)content, ...
 {
+#ifdef DEBUG
     if (!content) {
         return;
     }
@@ -19,6 +20,7 @@
     va_start(args, content);
     NSLogv([NSString stringWithFormat:@"[STNetTaskQueue] %@", content], args);
     va_end(args);
+#endif
 }
 
 @end
