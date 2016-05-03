@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSRecursiveLock *lock;
 @property (nonatomic, strong) NSMutableDictionary *taskDelegates; // <NSString, NSHashTable<STNetTaskDelegate>>
 @property (nonatomic, strong) NSMutableArray *tasks; // <STNetTask>
-@property (nonatomic, strong) NSMutableArray *watingTasks; // <STNetTask>
+@property (nonatomic, strong) NSMutableArray *waitingTasks; // <STNetTask>
 
 @end
 
@@ -52,7 +52,7 @@
         self.lock.name = [NSString stringWithFormat:@"%@Lock", NSStringFromClass(self.class)];
         self.taskDelegates = [NSMutableDictionary new];
         self.tasks = [NSMutableArray new];
-        self.watingTasks = [NSMutableArray new];
+        self.waitingTasks = [NSMutableArray new];
     }
     return self;
 }
@@ -95,7 +95,7 @@
 - (void)_addTask:(STNetTask *)task
 {
     if (self.maxConcurrentTasksCount > 0 && self.tasks.count >= self.maxConcurrentTasksCount) {
-        [self.watingTasks addObject:task];
+        [self.waitingTasks addObject:task];
         return;
     }
 
@@ -117,7 +117,7 @@
 - (void)_cancelTask:(STNetTask *)task
 {
     [self.tasks removeObject:task];
-    [self.watingTasks removeObject:task];
+    [self.waitingTasks removeObject:task];
     task.pending = NO;
     
     [self.handler netTaskQueue:self didCancelTask:task];
@@ -144,13 +144,13 @@
     }
 }
 
-- (void)_sendWatingTasks
+- (void)_sendwaitingTasks
 {
-    if (!self.watingTasks.count) {
+    if (!self.waitingTasks.count) {
         return;
     }
-    STNetTask *task = self.watingTasks.firstObject;
-    [self.watingTasks removeObjectAtIndex:0];
+    STNetTask *task = self.waitingTasks.firstObject;
+    [self.waitingTasks removeObjectAtIndex:0];
     [self addTask:task];
 }
 
@@ -191,7 +191,7 @@
     
     [self _netTaskDidEnd:task];
     
-    [self _sendWatingTasks];
+    [self _sendwaitingTasks];
 }
 
 - (void)task:(STNetTask *)task didFailWithError:(NSError *)error
@@ -222,7 +222,7 @@
     
     [self _netTaskDidEnd:task];
     
-    [self _sendWatingTasks];
+    [self _sendwaitingTasks];
 }
 
 - (void)_netTaskDidEnd:(STNetTask *)task
