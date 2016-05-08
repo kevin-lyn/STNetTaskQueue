@@ -9,6 +9,8 @@
 #import "STNetTaskGroup.h"
 #import "STNetTaskQueue.h"
 
+static NSMutableSet<STNetTaskGroup *> *_retainedGroups; // Retain group to make sure it won't be autoreleased.
+
 @interface STNetTaskGroup ()
 
 @property (nonatomic, strong) STNetTask *executingTask;
@@ -62,21 +64,26 @@
 - (void)notifyState:(STNetTaskGroupState)state withError:(NSError *)error
 {
     NSMutableArray<STNetTaskGroupSubscriptionBlock> *blocks = self.stateToBlock[@(state)];
-    for (STNetTaskSubscriptionBlock block in blocks) {
+    for (STNetTaskGroupSubscriptionBlock block in blocks) {
         block(self, error);
     }
     self.stateToBlock = nil;
     self.taskSubscriptionBlock = nil;
+    [_retainedGroups removeObject:self];
 }
 
 - (void)start
 {
-    NSAssert(!self.started, @"STNetTaskQueue can not be reused, please create a new instance.");
+    NSAssert(!self.started, @"STNetTaskGroup can not be reused, please create a new instance.");
     if (self.pending) {
         return;
     }
     self.pending = YES;
     self.started = YES;
+    if (!_retainedGroups) {
+        _retainedGroups = [NSMutableSet new];
+    }
+    [_retainedGroups addObject:self];
  
     switch (self.mode) {
         case STNetTaskGroupModeSerial: {

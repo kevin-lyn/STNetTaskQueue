@@ -23,9 +23,13 @@ STNetTask is abstract, it provides basic properties and callbacks for subclassin
 
 STNetTaskDelegate is the delegate protocol for observing result of STNetTask, mostly it is used in view controller. 
 
-## STNetTaskChain
+## ~~STNetTaskChain~~ (Deprecated. Use STNetTaskGroup instead)
 
-STNetTaskChain is a chain which processes an array of STNetTask serially. A net task chain is considered as successful only if all net tasks in the chain are end without error.
+~~STNetTaskChain is a chain which processes an array of STNetTask serially. A net task chain is considered as successful only if all net tasks in the chain are end without error.~~
+
+## STNetTaskGroup
+
+A net task group for executing net tasks serially or concurrently.
 
 ## Get Started
 
@@ -207,7 +211,41 @@ downloadQueue.maxConcurrentTasksCount = 2;
 */
 ```
 
-## What's Next
+### Use STNetTaskGroup to execute multiple net tasks
+STNetTaskGroup supports two modes: STNetTaskGroupModeSerial and STNetTaskGroupConcurrent.
+STNetTaskGroupModeSerial will execute a net task after the previous net task is finished.
+STNetTaskGroupModeConcurrent will execute all net tasks concurrently.
+```objc
+STTestGetNetTask *task1 = [STTestGetNetTask new];
+task1.id = 1;
+    
+STTestGetNetTask *task2 = [STTestGetNetTask new];
+task2.id = 2;
+    
+STNetTaskGroup *group = [[STNetTaskGroup alloc] initWithTasks:@[ task1, task2 ] mode:STNetTaskGroupModeSerial];
+[group subscribeState:STNetTaskGroupStateFinished usingBlock:^(STNetTaskGroup *group, NSError *error) {
+    if (error) {
+        // One of the net task is failed.
+        return;
+    }
+    // All net tasks are finished without error.
+}];
+[group start];
+```
 
-- More unit tests for STHTTPNetTaskQueueHandler.
-- Detailed documentation for STNetTaskQueue, STNetTask, STNetTaskChain.
+Or a handy way:
+```objc
+STTestGetNetTask *task1 = [STTestGetNetTask new];
+task1.id = 1;
+    
+STTestGetNetTask *task2 = [STTestGetNetTask new];
+task2.id = 2;
+
+[[@[ task1, task2 ] subscribeState:STNetTaskGroupStateFinished usingBlock:^(STNetTaskGroup *group, NSError *error) {
+    if (error) {
+        // One of the net task is failed.
+        return;
+    }
+    // All net tasks are finished without error.
+}] start];
+```
