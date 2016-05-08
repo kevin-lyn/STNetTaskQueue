@@ -241,7 +241,7 @@ task1.id = 1;
 STTestGetNetTask *task2 = [STTestGetNetTask new];
 task2.id = 2;
 
-[[@[ task1, task2 ] subscribeState:STNetTaskGroupStateFinished usingBlock:^(STNetTaskGroup *group, NSError *error) {
+[[[@[ task1, task2 ] serialNetTaskGroup] subscribeState:STNetTaskGroupStateFinished usingBlock:^(STNetTaskGroup *group, NSError *error) {
     if (error) {
         // One of the net task is failed.
         return;
