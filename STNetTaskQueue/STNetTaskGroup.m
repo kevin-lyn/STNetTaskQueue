@@ -45,7 +45,7 @@
     self.tasks = [NSArray arrayWithArray:tasks];
 }
 
-- (void)subscribeState:(STNetTaskGroupState)state usingBlock:(STNetTaskGroupSubscriptionBlock)block
+- (STNetTaskGroup *)subscribeState:(STNetTaskGroupState)state usingBlock:(STNetTaskGroupSubscriptionBlock)block
 {
     if (!self.stateToBlock) {
         self.stateToBlock = [NSMutableDictionary new];
@@ -56,6 +56,7 @@
         self.stateToBlock[@(state)] = blocks;
     }
     [blocks addObject:[block copy]];
+    return self;
 }
 
 - (void)notifyState:(STNetTaskGroupState)state withError:(NSError *)error

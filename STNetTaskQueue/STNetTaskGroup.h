@@ -88,7 +88,7 @@ typedef void (^STNetTaskGroupSubscriptionBlock)(STNetTaskGroup *group, NSError *
  @param state STNetTaskGroupState
  @param block STNetTaskGroupSubscriptionBlock
  */
-- (void)subscribeState:(STNetTaskGroupState)state usingBlock:(STNetTaskGroupSubscriptionBlock)block;
+- (STNetTaskGroup *)subscribeState:(STNetTaskGroupState)state usingBlock:(STNetTaskGroupSubscriptionBlock)block;
 
 /**
  Start executing tasks in this group.
