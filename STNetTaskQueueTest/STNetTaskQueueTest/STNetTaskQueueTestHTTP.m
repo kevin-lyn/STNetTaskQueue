@@ -236,7 +236,7 @@
         }
         
         if ([testPackerTask.post[@"string"] isEqualToString:testPackerTask.string] &&
-            [testPackerTask.post[@"date"] isEqual:@([testPackerTask.date timeIntervalSince1970])] &&
+            [testPackerTask.post[@"date"] doubleValue] == testPackerTask.date.timeIntervalSince1970 &&
             [testPackerTask.post[@"dictionary"][@"dictionary_key1"] isEqualToString:testPackerTask.dictionary[@"dictionaryKey1"]] &&
             [testPackerTask.post[@"array"] isEqualToString:[testPackerTask.array componentsJoinedByString:@","]]) {
             [_expectation fulfill];
