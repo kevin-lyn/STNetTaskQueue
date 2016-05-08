@@ -7,16 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <STNetTaskQueue/STNetTaskQueue.h>
 
+@class STNetTaskQueue;
+@class STNetTask;
 @class STNetTaskChain;
 
+DEPRECATED_MSG_ATTRIBUTE("Use STNetTaskGroup instead")
 @protocol STNetTaskChainDelegate <NSObject>
 
 - (void)netTaskChainDidEnd:(STNetTaskChain *)netTaskChain;
 
 @end
 
+DEPRECATED_MSG_ATTRIBUTE("Use STNetTaskGroup instead")
 @interface STNetTaskChain : NSObject
 
 @property (nonatomic, weak) id<STNetTaskChainDelegate> delegate;

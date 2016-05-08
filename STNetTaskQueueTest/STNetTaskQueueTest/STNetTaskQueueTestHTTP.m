@@ -47,7 +47,7 @@
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     
-    _expectation = [self expectationWithDescription:@"testRetryNetTask"];
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     STTestRetryNetTask *testRetryTask = [STTestRetryNetTask new];
     [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:testRetryTask.uri];
@@ -60,7 +60,7 @@
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     
-    _expectation = [self expectationWithDescription:@"testCancelNetTask"];
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     STTestRetryNetTask *testRetryTask = [STTestRetryNetTask new];
     [[STNetTaskQueue sharedQueue] addTaskDelegate:self uri:testRetryTask.uri];
@@ -78,7 +78,7 @@
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     
-    _expectation = [self expectationWithDescription:@"testGetNetTask"];
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     STTestGetNetTask *testGetTask = [STTestGetNetTask new];
     testGetTask.id = 1;
@@ -92,7 +92,7 @@
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     
-    _expectation = [self expectationWithDescription:@"testPostNetTask"];
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     STTestPostNetTask *testPostTask = [STTestPostNetTask new];
     testPostTask.title = @"Test Post Net Task Title";
@@ -110,7 +110,7 @@
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     
-    _expectation = [self expectationWithDescription:@"testPutNetTask"];
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     STTestPutNetTask *testPutTask = [STTestPutNetTask new];
     testPutTask.id = 1;
@@ -127,7 +127,7 @@
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     
-    _expectation = [self expectationWithDescription:@"testPatchNetTask"];
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     STTestPatchNetTask *testPatchTask = [STTestPatchNetTask new];
     testPatchTask.id = 1;
@@ -142,7 +142,7 @@
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     
-    _expectation = [self expectationWithDescription:@"testDeleteNetTask"];
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     STTestDeleteNetTask *testDeleteTask = [STTestDeleteNetTask new];
     testDeleteTask.id = 1;
@@ -157,7 +157,7 @@
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     [STNetTaskQueue sharedQueue].maxConcurrentTasksCount = 1;
     
-    _expectation = [self expectationWithDescription:@"testMaxConcurrentTasksCount"];
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     STTestMaxConcurrentTasksCountNetTask *task1 = [STTestMaxConcurrentTasksCountNetTask new];
     task1.id = 1;
@@ -177,7 +177,7 @@
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     
-    _expectation = [self expectationWithDescription:@"testTaskDelegateForClass"];
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     STTestGetNetTask *testGetTask = [STTestGetNetTask new];
     testGetTask.id = 1;
@@ -191,7 +191,7 @@
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     
-    _expectation = [self expectationWithDescription:@"testSubscriptionBlock"];
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
     
     STTestGetNetTask *testGetTask = [STTestGetNetTask new];
     testGetTask.id = 1;
@@ -218,7 +218,7 @@
 {
     [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
     
-    _expectation = [self expectationWithDescription:@"testPackerTask"];
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
 
     STTestPackerNetTask *testPackerTask = [STTestPackerNetTask new];
     testPackerTask.string = @"String Value";
@@ -247,6 +247,83 @@
     }];
     
     [self waitForExpectationsWithTimeout:10 handler:nil];
+}
+
+- (void)testNonErrorSerialNetTaskGroup
+{
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
+    [self testNonErrorNetTaskGroupWithMode:STNetTaskGroupModeSerial];
+}
+
+- (void)testErrorSerialNetTaskGroup
+{
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
+    [self testErrorNetTaskGroupWithMode:STNetTaskGroupModeSerial];
+}
+
+- (void)testNonErrorConcurrentNetTaskGroup
+{
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
+    [self testNonErrorNetTaskGroupWithMode:STNetTaskGroupModeConcurrent];
+}
+
+- (void)testErrorConcurrentNetTaskGroup
+{
+    _expectation = [self expectationWithDescription:NSStringFromSelector(_cmd)];
+    [self testErrorNetTaskGroupWithMode:STNetTaskGroupModeConcurrent];
+}
+
+- (void)testNonErrorNetTaskGroupWithMode:(STNetTaskGroupMode)mode
+{
+    [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
+    
+    STTestGetNetTask *task1 = [STTestGetNetTask new];
+    task1.id = 1;
+    
+    STTestGetNetTask *task2 = [STTestGetNetTask new];
+    task2.id = 2;
+    
+    STNetTaskGroup *group = [[STNetTaskGroup alloc] initWithTasks:@[ task1, task2 ] mode:mode];
+    [group subscribeState:STNetTaskGroupStateFinished usingBlock:^(STNetTaskGroup *group, NSError *error) {
+        if (error) {
+            XCTFail(@"%@ failed", _expectation.description);
+            return;
+        }
+        
+        if ([task1.post[@"id"] intValue] == task1.id && [task2.post[@"id"] intValue] == task2.id) {
+            [_expectation fulfill];
+        }
+        else {
+            XCTFail(@"%@ failed", _expectation.description);
+        }
+    }];
+    [group start];
+    
+    [self waitForExpectationsWithTimeout:20 handler:nil];
+}
+
+- (void)testErrorNetTaskGroupWithMode:(STNetTaskGroupMode)mode
+{
+    [self setUpNetTaskQueueWithBaseURLString:@"http://jsonplaceholder.typicode.com"];
+    
+    STTestGetNetTask *task1 = [STTestGetNetTask new];
+    task1.id = 1;
+    
+    STTestRetryNetTask *task2 = [STTestRetryNetTask new];
+    
+    STNetTaskGroup *group = [[STNetTaskGroup alloc] initWithTasks:@[ task1, task2 ] mode:mode];
+    [group subscribeState:STNetTaskGroupStateFinished usingBlock:^(STNetTaskGroup *group, NSError *error) {
+        if (error && error == task2.error) {
+            [_expectation fulfill];
+        }
+        else {
+            XCTFail(@"%@ failed", _expectation.description);
+        }
+        
+    }];
+    [group start];
+    
+    [self waitForExpectationsWithTimeout:20 handler:nil];
 }
 
 - (void)netTaskDidEnd:(STNetTask *)task

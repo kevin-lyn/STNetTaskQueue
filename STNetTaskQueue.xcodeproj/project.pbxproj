@@ -21,6 +21,8 @@
 		76012C791C265EC50090BE94 /* STNetTaskQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 76012C6B1C265EC50090BE94 /* STNetTaskQueue.m */; };
 		76012C7A1C265EC50090BE94 /* STNetTaskQueueLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 76012C6C1C265EC50090BE94 /* STNetTaskQueueLog.h */; };
 		76012C7B1C265EC50090BE94 /* STNetTaskQueueLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 76012C6D1C265EC50090BE94 /* STNetTaskQueueLog.m */; };
+		7645D0FF1CDF66D5000ED54A /* STNetTaskGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 7645D0FD1CDF66D5000ED54A /* STNetTaskGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7645D1001CDF66D5000ED54A /* STNetTaskGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7645D0FE1CDF66D5000ED54A /* STNetTaskGroup.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		76012C6B1C265EC50090BE94 /* STNetTaskQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueue.m; sourceTree = "<group>"; };
 		76012C6C1C265EC50090BE94 /* STNetTaskQueueLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTaskQueueLog.h; sourceTree = "<group>"; };
 		76012C6D1C265EC50090BE94 /* STNetTaskQueueLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueueLog.m; sourceTree = "<group>"; };
+		7645D0FD1CDF66D5000ED54A /* STNetTaskGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTaskGroup.h; sourceTree = "<group>"; };
+		7645D0FE1CDF66D5000ED54A /* STNetTaskGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskGroup.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 				76012C6B1C265EC50090BE94 /* STNetTaskQueue.m */,
 				76012C6C1C265EC50090BE94 /* STNetTaskQueueLog.h */,
 				76012C6D1C265EC50090BE94 /* STNetTaskQueueLog.m */,
+				7645D0FD1CDF66D5000ED54A /* STNetTaskGroup.h */,
+				7645D0FE1CDF66D5000ED54A /* STNetTaskGroup.m */,
 				76012C5A1C265A160090BE94 /* Info.plist */,
 			);
 			path = STNetTaskQueue;
@@ -110,6 +116,7 @@
 				76012C761C265EC50090BE94 /* STNetTaskChain.h in Headers */,
 				76012C741C265EC50090BE94 /* STNetTask.h in Headers */,
 				76012C781C265EC50090BE94 /* STNetTaskQueue.h in Headers */,
+				7645D0FF1CDF66D5000ED54A /* STNetTaskGroup.h in Headers */,
 				76012C721C265EC50090BE94 /* STHTTPNetTaskQueueHandler.h in Headers */,
 				76012C7A1C265EC50090BE94 /* STNetTaskQueueLog.h in Headers */,
 				76012C701C265EC50090BE94 /* STHTTPNetTaskParametersPacker.h in Headers */,
@@ -184,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76012C6F1C265EC50090BE94 /* STHTTPNetTask.m in Sources */,
+				7645D1001CDF66D5000ED54A /* STNetTaskGroup.m in Sources */,
 				76012C7B1C265EC50090BE94 /* STNetTaskQueueLog.m in Sources */,
 				76012C711C265EC50090BE94 /* STHTTPNetTaskParametersPacker.m in Sources */,
 				76012C771C265EC50090BE94 /* STNetTaskChain.m in Sources */,

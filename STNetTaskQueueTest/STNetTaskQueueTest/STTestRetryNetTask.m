@@ -22,12 +22,12 @@
 
 - (NSUInteger)maxRetryCount
 {
-    return 3;
+    return 2;
 }
 
 - (NSTimeInterval)retryInterval
 {
-    return 1;
+    return 0.2;
 }
 
 @end

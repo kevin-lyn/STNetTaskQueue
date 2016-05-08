@@ -7,6 +7,7 @@
 //
 
 #import "STHTTPNetTaskParametersPacker.h"
+#import "STHTTPNetTask.h"
 #import <objc/runtime.h>
 
 @implementation STHTTPNetTaskParametersPacker

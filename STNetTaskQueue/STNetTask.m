@@ -16,7 +16,7 @@ NSString *const STNetTaskUnknownError = @"STNetTaskUnknownError";
 @property (atomic, assign) BOOL cancelled;
 @property (atomic, assign) BOOL finished;
 @property (atomic, assign) NSUInteger retryCount;
-@property (nonatomic, strong) NSMutableDictionary<NSNumber *, NSMutableArray *> *stateToBlock;
+@property (nonatomic, strong) NSMutableDictionary<NSNumber *, NSMutableArray<STNetTaskSubscriptionBlock> *> *stateToBlock;
 
 @end
 

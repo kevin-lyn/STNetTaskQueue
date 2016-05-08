@@ -6,7 +6,9 @@
 //  Copyright (c) 2014 Sth4Me. All rights reserved.
 //
 
-#import <STNetTaskQueue/STHTTPNetTask.h>
+#import <Foundation/Foundation.h>
+
+@class STHTTPNetTask;
 
 @interface STHTTPNetTaskParametersPacker : NSObject
 

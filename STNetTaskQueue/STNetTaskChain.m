@@ -7,6 +7,8 @@
 //
 
 #import "STNetTaskChain.h"
+#import "STNetTask.h"
+#import "STNetTaskQueue.h"
 
 @interface STNetTaskChain()<STNetTaskDelegate>
 
