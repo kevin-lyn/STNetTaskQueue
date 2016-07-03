@@ -199,7 +199,7 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
             [_queue task:_task didFailWithError:error];
         }
         else {
-            if (_task.useOffileCache) {
+            if (_task.useOfflineCache) {
                 [_queue.cache saveResponseWithData:data forURL:_task.uri];
             }
             [_queue task:_task didResponse:responseObj];
@@ -217,7 +217,7 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
             [STNetTaskQueueLog log:@"\n%@", _task.description];
         }
         
-        if (_task.useOffileCache && [error isNoInternetConnectionError]) {
+        if (_task.useOfflineCache && [error isNoInternetConnectionError]) {
             NSData *responseData = [_queue.cache responseDataForUrl:_task.uri];
             id responseObj = [self responseFromData:responseData forTask:_task];
             
