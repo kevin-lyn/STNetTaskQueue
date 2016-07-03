@@ -77,6 +77,12 @@ typedef void (^STNetTaskSubscriptionBlock)();
  */
 @property (atomic, assign, readonly) NSUInteger retryCount;
 
+
+/**
+ Indicates if the net task should cache a request. In case if request is failed and cache exists, the task should be finished with the last cached data.
+ */
+@property (atomic, assign, readonly) BOOL useCachedData;
+
 /**
  A unique string represents the net task.
  

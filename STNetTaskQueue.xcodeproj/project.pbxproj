@@ -23,6 +23,10 @@
 		76012C7B1C265EC50090BE94 /* STNetTaskQueueLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 76012C6D1C265EC50090BE94 /* STNetTaskQueueLog.m */; };
 		7645D0FF1CDF66D5000ED54A /* STNetTaskGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 7645D0FD1CDF66D5000ED54A /* STNetTaskGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7645D1001CDF66D5000ED54A /* STNetTaskGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 7645D0FE1CDF66D5000ED54A /* STNetTaskGroup.m */; };
+		7B1333981D2941FC00DA5E58 /* WebCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B1333961D2941FC00DA5E58 /* WebCache.xcdatamodeld */; };
+		7B13339B1D29426E00DA5E58 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B13339A1D29426E00DA5E58 /* CoreData.framework */; };
+		7B1333A31D2942AB00DA5E58 /* STWebURLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B13339F1D2942AB00DA5E58 /* STWebURLResponse.h */; };
+		7B1333A41D2942AB00DA5E58 /* STWebURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1333A01D2942AB00DA5E58 /* STWebURLResponse.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +48,10 @@
 		76012C6D1C265EC50090BE94 /* STNetTaskQueueLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskQueueLog.m; sourceTree = "<group>"; };
 		7645D0FD1CDF66D5000ED54A /* STNetTaskGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STNetTaskGroup.h; sourceTree = "<group>"; };
 		7645D0FE1CDF66D5000ED54A /* STNetTaskGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STNetTaskGroup.m; sourceTree = "<group>"; };
+		7B1333971D2941FC00DA5E58 /* WebCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WebCache.xcdatamodel; sourceTree = "<group>"; };
+		7B13339A1D29426E00DA5E58 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		7B13339F1D2942AB00DA5E58 /* STWebURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWebURLResponse.h; sourceTree = "<group>"; };
+		7B1333A01D2942AB00DA5E58 /* STWebURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWebURLResponse.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B13339B1D29426E00DA5E58 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +69,7 @@
 		76012C4B1C265A160090BE94 = {
 			isa = PBXGroup;
 			children = (
+				7B13339A1D29426E00DA5E58 /* CoreData.framework */,
 				76012C571C265A160090BE94 /* STNetTaskQueue */,
 				76012C561C265A160090BE94 /* Products */,
 			);
@@ -76,6 +86,7 @@
 		76012C571C265A160090BE94 /* STNetTaskQueue */ = {
 			isa = PBXGroup;
 			children = (
+				7B1333951D2941E000DA5E58 /* Cache */,
 				76012C7C1C265F6E0090BE94 /* HTTP */,
 				76012C661C265EC50090BE94 /* STNetTask.h */,
 				76012C671C265EC50090BE94 /* STNetTask.m */,
@@ -105,6 +116,32 @@
 			name = HTTP;
 			sourceTree = "<group>";
 		};
+		7B1333951D2941E000DA5E58 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				7B13339C1D29429000DA5E58 /* Model */,
+				7B1333991D29424F00DA5E58 /* CoreData Model */,
+			);
+			name = Cache;
+			sourceTree = "<group>";
+		};
+		7B1333991D29424F00DA5E58 /* CoreData Model */ = {
+			isa = PBXGroup;
+			children = (
+				7B1333961D2941FC00DA5E58 /* WebCache.xcdatamodeld */,
+			);
+			name = "CoreData Model";
+			sourceTree = "<group>";
+		};
+		7B13339C1D29429000DA5E58 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7B13339F1D2942AB00DA5E58 /* STWebURLResponse.h */,
+				7B1333A01D2942AB00DA5E58 /* STWebURLResponse.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -119,6 +156,7 @@
 				7645D0FF1CDF66D5000ED54A /* STNetTaskGroup.h in Headers */,
 				76012C721C265EC50090BE94 /* STHTTPNetTaskQueueHandler.h in Headers */,
 				76012C7A1C265EC50090BE94 /* STNetTaskQueueLog.h in Headers */,
+				7B1333A31D2942AB00DA5E58 /* STWebURLResponse.h in Headers */,
 				76012C701C265EC50090BE94 /* STHTTPNetTaskParametersPacker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,8 +233,10 @@
 				76012C7B1C265EC50090BE94 /* STNetTaskQueueLog.m in Sources */,
 				76012C711C265EC50090BE94 /* STHTTPNetTaskParametersPacker.m in Sources */,
 				76012C771C265EC50090BE94 /* STNetTaskChain.m in Sources */,
+				7B1333A41D2942AB00DA5E58 /* STWebURLResponse.m in Sources */,
 				76012C731C265EC50090BE94 /* STHTTPNetTaskQueueHandler.m in Sources */,
 				76012C751C265EC50090BE94 /* STNetTask.m in Sources */,
+				7B1333981D2941FC00DA5E58 /* WebCache.xcdatamodeld in Sources */,
 				76012C791C265EC50090BE94 /* STNetTaskQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,6 +388,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7B1333961D2941FC00DA5E58 /* WebCache.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7B1333971D2941FC00DA5E58 /* WebCache.xcdatamodel */,
+			);
+			currentVersion = 7B1333971D2941FC00DA5E58 /* WebCache.xcdatamodel */;
+			path = WebCache.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 76012C4C1C265A160090BE94 /* Project object */;
 }
