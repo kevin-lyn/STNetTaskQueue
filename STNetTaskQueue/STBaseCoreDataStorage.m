@@ -151,9 +151,12 @@
         if (_model != nil) {
             return (id)nil;
         }
-        NSURL *modelURL = [[NSBundle mainBundle] URLForResource:_storeName withExtension:@"momd"];
+        
+        NSBundle *bundle = [NSBundle bundleWithIdentifier:@"STNetTaskQueue"];
+        
+        NSURL *modelURL = [bundle URLForResource:_storeName withExtension:@"momd"];
         if(modelURL == nil) {
-            modelURL = [[NSBundle mainBundle] URLForResource:_storeName withExtension:@"mom"];
+            modelURL = [bundle URLForResource:_storeName withExtension:@"mom"];
         }
         _model = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
         return (id)nil;

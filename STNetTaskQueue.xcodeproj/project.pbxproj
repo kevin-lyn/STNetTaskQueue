@@ -31,7 +31,7 @@
 		7B1333A91D29438F00DA5E58 /* STWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1333A71D29438F00DA5E58 /* STWebCache.m */; };
 		7B1333AD1D29455300DA5E58 /* STBaseCoreDataStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1333AB1D29455300DA5E58 /* STBaseCoreDataStorage.h */; };
 		7B1333AE1D29455300DA5E58 /* STBaseCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1333AC1D29455300DA5E58 /* STBaseCoreDataStorage.m */; };
-		7B1333B01D295E4800DA5E58 /* WebCache.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 7B1333961D2941FC00DA5E58 /* WebCache.xcdatamodeld */; };
+		7B1333B11D29669C00DA5E58 /* WebCache.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 7B1333961D2941FC00DA5E58 /* WebCache.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -249,7 +249,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B1333B01D295E4800DA5E58 /* WebCache.xcdatamodeld in Resources */,
+				7B1333B11D29669C00DA5E58 /* WebCache.xcdatamodeld in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
