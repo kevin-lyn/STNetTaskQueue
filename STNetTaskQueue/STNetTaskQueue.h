@@ -50,6 +50,11 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
 @interface STNetTaskQueue : NSObject
 
 /**
+  Indicates amount of days for cached responses. By default it is equal to 3 days.
+*/
+@property (nonatomic, assign) NSUInteger cachedResponsesDuration;
+
+/**
  The STNetTaskQueueHandler which is used for handling the net tasks in queue.
  */
 @property (nonatomic, strong) id<STNetTaskQueueHandler> handler;

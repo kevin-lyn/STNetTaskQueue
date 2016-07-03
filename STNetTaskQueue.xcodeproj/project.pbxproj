@@ -27,6 +27,10 @@
 		7B13339B1D29426E00DA5E58 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B13339A1D29426E00DA5E58 /* CoreData.framework */; };
 		7B1333A31D2942AB00DA5E58 /* STWebURLResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B13339F1D2942AB00DA5E58 /* STWebURLResponse.h */; };
 		7B1333A41D2942AB00DA5E58 /* STWebURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1333A01D2942AB00DA5E58 /* STWebURLResponse.m */; };
+		7B1333A81D29438F00DA5E58 /* STWebCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1333A61D29438F00DA5E58 /* STWebCache.h */; };
+		7B1333A91D29438F00DA5E58 /* STWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1333A71D29438F00DA5E58 /* STWebCache.m */; };
+		7B1333AD1D29455300DA5E58 /* STBaseCoreDataStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B1333AB1D29455300DA5E58 /* STBaseCoreDataStorage.h */; };
+		7B1333AE1D29455300DA5E58 /* STBaseCoreDataStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1333AC1D29455300DA5E58 /* STBaseCoreDataStorage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +56,10 @@
 		7B13339A1D29426E00DA5E58 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		7B13339F1D2942AB00DA5E58 /* STWebURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWebURLResponse.h; sourceTree = "<group>"; };
 		7B1333A01D2942AB00DA5E58 /* STWebURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWebURLResponse.m; sourceTree = "<group>"; };
+		7B1333A61D29438F00DA5E58 /* STWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STWebCache.h; sourceTree = "<group>"; };
+		7B1333A71D29438F00DA5E58 /* STWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STWebCache.m; sourceTree = "<group>"; };
+		7B1333AB1D29455300DA5E58 /* STBaseCoreDataStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STBaseCoreDataStorage.h; sourceTree = "<group>"; };
+		7B1333AC1D29455300DA5E58 /* STBaseCoreDataStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STBaseCoreDataStorage.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +127,8 @@
 		7B1333951D2941E000DA5E58 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
+				7B1333AA1D29453800DA5E58 /* Base Storage */,
+				7B1333A51D29437400DA5E58 /* Manager */,
 				7B13339C1D29429000DA5E58 /* Model */,
 				7B1333991D29424F00DA5E58 /* CoreData Model */,
 			);
@@ -142,6 +152,24 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		7B1333A51D29437400DA5E58 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				7B1333A61D29438F00DA5E58 /* STWebCache.h */,
+				7B1333A71D29438F00DA5E58 /* STWebCache.m */,
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
+		7B1333AA1D29453800DA5E58 /* Base Storage */ = {
+			isa = PBXGroup;
+			children = (
+				7B1333AB1D29455300DA5E58 /* STBaseCoreDataStorage.h */,
+				7B1333AC1D29455300DA5E58 /* STBaseCoreDataStorage.m */,
+			);
+			name = "Base Storage";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -152,11 +180,13 @@
 				76012C6E1C265EC50090BE94 /* STHTTPNetTask.h in Headers */,
 				76012C761C265EC50090BE94 /* STNetTaskChain.h in Headers */,
 				76012C741C265EC50090BE94 /* STNetTask.h in Headers */,
+				7B1333A81D29438F00DA5E58 /* STWebCache.h in Headers */,
 				76012C781C265EC50090BE94 /* STNetTaskQueue.h in Headers */,
 				7645D0FF1CDF66D5000ED54A /* STNetTaskGroup.h in Headers */,
 				76012C721C265EC50090BE94 /* STHTTPNetTaskQueueHandler.h in Headers */,
 				76012C7A1C265EC50090BE94 /* STNetTaskQueueLog.h in Headers */,
 				7B1333A31D2942AB00DA5E58 /* STWebURLResponse.h in Headers */,
+				7B1333AD1D29455300DA5E58 /* STBaseCoreDataStorage.h in Headers */,
 				76012C701C265EC50090BE94 /* STHTTPNetTaskParametersPacker.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,11 +262,13 @@
 				7645D1001CDF66D5000ED54A /* STNetTaskGroup.m in Sources */,
 				76012C7B1C265EC50090BE94 /* STNetTaskQueueLog.m in Sources */,
 				76012C711C265EC50090BE94 /* STHTTPNetTaskParametersPacker.m in Sources */,
+				7B1333AE1D29455300DA5E58 /* STBaseCoreDataStorage.m in Sources */,
 				76012C771C265EC50090BE94 /* STNetTaskChain.m in Sources */,
 				7B1333A41D2942AB00DA5E58 /* STWebURLResponse.m in Sources */,
 				76012C731C265EC50090BE94 /* STHTTPNetTaskQueueHandler.m in Sources */,
 				76012C751C265EC50090BE94 /* STNetTask.m in Sources */,
 				7B1333981D2941FC00DA5E58 /* WebCache.xcdatamodeld in Sources */,
+				7B1333A91D29438F00DA5E58 /* STWebCache.m in Sources */,
 				76012C791C265EC50090BE94 /* STNetTaskQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
