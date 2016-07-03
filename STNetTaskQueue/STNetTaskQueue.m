@@ -238,6 +238,19 @@
 
 - (void)_netTaskDidEnd:(STNetTask *)task
 {
+    if ([task conformsToProtocol:@protocol(STNetTaskBlockBasedContract)]) {
+        id<STNetTaskBlockBasedContract> blockTask = (STNetTask<STNetTaskBlockBasedContract> *)task;
+        if (blockTask.completionHandler != nil) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                blockTask.completionHandler(task);
+            });
+            
+            return;
+        }
+        
+    }
+    
     [self.lock lock];
     
     NSHashTable *delegatesForURI = self.taskDelegates[task.uri];
