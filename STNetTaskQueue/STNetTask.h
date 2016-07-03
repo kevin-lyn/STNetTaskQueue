@@ -79,9 +79,10 @@ typedef void (^STNetTaskSubscriptionBlock)();
 
 
 /**
- Indicates if the net task should cache a request. In case if request is failed and cache exists, the task should be finished with the last cached data.
+ Indicates if the net task should cache a request. 
+ In case if request is failed by internet connection error and cache exists, the task should be finished with the last cached data which is specified for the task.uri.
  */
-@property (atomic, assign, readonly) BOOL useCachedData;
+@property (atomic, assign, readonly) BOOL useOffileCache;
 
 /**
  A unique string represents the net task.

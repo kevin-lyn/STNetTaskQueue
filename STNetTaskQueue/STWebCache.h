@@ -15,7 +15,9 @@
 */
 @property (nonatomic, assign) NSUInteger cacheDaysDuration;
 
-- (void)saveURLResponseWithData:(NSData *)data forURL:(NSString*)url;
++ (STWebCache *)sharedInstance;
+
+- (void)saveResponseWithData:(NSData *)data forURL:(NSString*)url;
 - (NSData *)responseDataForUrl:(NSString *)url;
 
 @end

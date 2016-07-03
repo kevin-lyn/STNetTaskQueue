@@ -8,6 +8,7 @@
 
 #import "STNetTaskQueue.h"
 #import "STNetTaskQueueLog.h"
+#import "STWebCache.h"
 
 @interface STNetTask (STInternal)
 
@@ -28,9 +29,13 @@
 @property (nonatomic, strong) NSMutableArray *tasks; // <STNetTask>
 @property (nonatomic, strong) NSMutableArray *waitingTasks; // <STNetTask>
 
+@property (nonatomic, strong) STWebCache *cache;
+
 @end
 
 @implementation STNetTaskQueue
+
+@dynamic cachedResponsesDuration;
 
 + (instancetype)sharedQueue
 {
@@ -53,6 +58,8 @@
         self.taskDelegates = [NSMutableDictionary new];
         self.tasks = [NSMutableArray new];
         self.waitingTasks = [NSMutableArray new];
+        
+        self.cache = [STWebCache sharedInstance];
     }
     return self;
 }
@@ -60,6 +67,10 @@
 - (void)dealloc
 {
     [self.handler netTaskQueueDidBecomeInactive:self];
+}
+
+- (void)setCachedResponsesDuration:(NSUInteger)cachedResponsesDuration {
+    self.cache.cacheDaysDuration = cachedResponsesDuration;
 }
 
 - (void)threadEntryPoint
@@ -127,6 +138,12 @@
 
 - (BOOL)_retryTask:(STNetTask *)task withError:(NSError *)error
 {
+    if (task.useOffileCache) {
+        NSData *response = [self.cache responseDataForUrl:task.uri];
+        [self task:task didResponse:response];
+        return YES;
+    }
+    
     if ([task shouldRetryForError:error] && task.retryCount < task.maxRetryCount) {
         task.retryCount++;
         [self performSelector:@selector(_retryTask:) withObject:task afterDelay:task.retryInterval];
@@ -183,6 +200,10 @@
         
         task.error = error;
         [task didFail];
+    }
+    
+    if (task.useOffileCache) {
+        [self.cache saveResponseWithData:response forURL:task.uri];
     }
     
     task.pending = NO;
@@ -307,6 +328,19 @@
     [delegates removeObject:delegate];
     
     [self.lock unlock];
+}
+
+@end
+
+@interface NSError (NoConnection)
+- (BOOL)isNoInternetConnectionError;
+@end
+
+@implementation NSError (NoConnection)
+
+- (BOOL)isNoInternetConnectionError
+{
+    return ([self.domain isEqualToString:NSURLErrorDomain] && (self.code == NSURLErrorNotConnectedToInternet));
 }
 
 @end

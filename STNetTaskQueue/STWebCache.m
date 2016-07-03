@@ -21,8 +21,7 @@ static NSString *const kCacheDaysDurationKey = @"kDurationKey";
     static STWebCache *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [[STWebCache alloc] init];
-        //sInstance = [[HOWebCache alloc] initWithStoreName:kStorageName];
+        sharedInstance = [[STWebCache alloc] initWithStoreName:kStorageName];
     });
     return sharedInstance;
 }
@@ -44,7 +43,7 @@ static NSString *const kCacheDaysDurationKey = @"kDurationKey";
     return duration;
 }
 
-- (void)saveURLResponseWithData:(NSData *)data forURL:(NSString*)url {
+- (void)saveResponseWithData:(NSData *)data forURL:(NSString *)url {
     [self executeBlockInPrivate:^() {
         STWebURLResponse *item = [self recordsWithName:NSStringFromClass([STWebURLResponse class])
                                              predicate:[NSPredicate predicateWithFormat:@"url == [c]%@", url]].lastObject;
