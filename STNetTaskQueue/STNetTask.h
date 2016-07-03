@@ -28,6 +28,20 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 
 @class STNetTask;
 
+typedef void (^STNetTaskCompletionBlock)(STNetTask *task);
+
+@protocol STNetTaskBlockBasedContract <NSObject>
+
+/**
+ This handler will be called if STNetTask subclass implements STNetTaskBlockBasedContract.
+ If the next task is failed, task.error will be non-nil.
+ 
+ In case if class implements STNetTaskBlockBasedContract, but completion handler is nil, 'netTaskDidEnd:' method will be triggered.
+ */
+@property (nonatomic, copy) STNetTaskCompletionBlock completionHandler;
+
+@end
+
 @protocol STNetTaskDelegate <NSObject>
 
 /**
