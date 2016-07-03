@@ -138,12 +138,6 @@
 
 - (BOOL)_retryTask:(STNetTask *)task withError:(NSError *)error
 {
-    if (task.useOffileCache) {
-        NSData *response = [self.cache responseDataForUrl:task.uri];
-        [self task:task didResponse:response];
-        return YES;
-    }
-    
     if ([task shouldRetryForError:error] && task.retryCount < task.maxRetryCount) {
         task.retryCount++;
         [self performSelector:@selector(_retryTask:) withObject:task afterDelay:task.retryInterval];
@@ -201,11 +195,7 @@
         task.error = error;
         [task didFail];
     }
-    
-    if (task.useOffileCache) {
-        [self.cache saveResponseWithData:response forURL:task.uri];
-    }
-    
+
     task.pending = NO;
     task.finished = YES;
     [task notifyState:STNetTaskStateFinished];
@@ -328,19 +318,6 @@
     [delegates removeObject:delegate];
     
     [self.lock unlock];
-}
-
-@end
-
-@interface NSError (NoConnection)
-- (BOOL)isNoInternetConnectionError;
-@end
-
-@implementation NSError (NoConnection)
-
-- (BOOL)isNoInternetConnectionError
-{
-    return ([self.domain isEqualToString:NSURLErrorDomain] && (self.code == NSURLErrorNotConnectedToInternet));
 }
 
 @end

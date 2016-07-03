@@ -22,14 +22,15 @@ static NSString *const kCacheDaysDurationKey = @"kDurationKey";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[STWebCache alloc] initWithStoreName:kStorageName];
+        [sharedInstance clean];
     });
     return sharedInstance;
 }
 
 - (void)setCacheDaysDuration:(NSUInteger)cacheDaysDuration {
-    [self cleanUnusedResponses];
     [[NSUserDefaults standardUserDefaults] setInteger:cacheDaysDuration
                                                forKey:kCacheDaysDurationKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (NSUInteger)cacheDaysDuration {
@@ -72,7 +73,7 @@ static NSString *const kCacheDaysDurationKey = @"kDurationKey";
 
 #pragma mark - Private interface
 
-- (void)cleanUnusedResponses {
+- (void)clean {
     NSTimeInterval const kCleanInterval = 60 * 60 * 24 * self.cacheDaysDuration;
   
     [self executeBlockInPrivate:^() {

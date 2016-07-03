@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class STNetTask;
+@class STWebCache;
 @protocol STNetTaskDelegate;
 
 //! Project version number for STNetTaskQueue.
@@ -53,6 +54,12 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
   Indicates count of days for cached responses. By default it is equal to 3 days.
 */
 @property (nonatomic, assign) NSUInteger cachedResponsesDuration;
+
+/**
+ A cache for responses. Set task.useOfflineCache to enabling response caching.
+ User cache.clean() to manually clean the cache.
+*/
+@property (nonatomic, readonly, strong) STWebCache *cache;
 
 /**
  The STNetTaskQueueHandler which is used for handling the net tasks in queue.

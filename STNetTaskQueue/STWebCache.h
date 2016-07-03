@@ -20,4 +20,6 @@
 - (void)saveResponseWithData:(NSData *)data forURL:(NSString*)url;
 - (NSData *)responseDataForUrl:(NSString *)url;
 
+- (void)clean;
+
 @end

@@ -12,6 +12,23 @@
 #import "STNetTaskQueueLog.h"
 #import <objc/runtime.h>
 
+#import "STWebCache.h"
+
+#pragma mark - NSError (NoConnection)
+
+@interface NSError (NoConnection)
+- (BOOL)isNoInternetConnectionError;
+@end
+
+@implementation NSError (NoConnection)
+
+- (BOOL)isNoInternetConnectionError
+{
+    return ([self.domain isEqualToString:NSURLErrorDomain] && (self.code == NSURLErrorNotConnectedToInternet));
+}
+
+@end
+
 @interface STHTTPNetTask (STInternal)
 
 @property (atomic, assign) NSInteger statusCode;
@@ -169,21 +186,9 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
     _task.responseHeaders = httpResponse.allHeaderFields;
     
     if (httpResponse.statusCode >= 200 && httpResponse.statusCode < 300) {
-        id responseObj = nil;
+        id responseObj = [self responseFromData:data forTask:_task];
+      
         NSError *error = nil;
-        switch (_task.responseType) {
-            case STHTTPNetTaskResponseRawData:
-                responseObj = data;
-                break;
-            case STHTTPNetTaskResponseString:
-                responseObj = [self stringFromData:data];
-                break;
-            case STHTTPNetTaskResponseJSON:
-            default:
-                responseObj = [self JSONFromData:data];
-                break;
-        }
-        
         if (!responseObj) {
             error = [NSError errorWithDomain:STHTTPNetTaskResponseParsedError
                                         code:0
@@ -194,6 +199,9 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
             [_queue task:_task didFailWithError:error];
         }
         else {
+            if (_task.useOffileCache) {
+                [_queue.cache saveResponseWithData:data forURL:_task.uri];
+            }
             [_queue task:_task didResponse:responseObj];
         }
     }
@@ -208,11 +216,42 @@ static NSMapTable *STHTTPNetTaskToSessionTask;
 #pragma GCC diagnostic pop
             [STNetTaskQueueLog log:@"\n%@", _task.description];
         }
+        
+        if (_task.useOffileCache && [error isNoInternetConnectionError]) {
+            NSData *responseData = [_queue.cache responseDataForUrl:_task.uri];
+            id responseObj = [self responseFromData:responseData forTask:_task];
+            
+            if (responseObj) {
+                [_queue task:_task didResponse:responseObj];
+                return;
+            }
+        }
+        
         [_queue task:_task didFailWithError:error];
     }
 }
 
 #pragma mark - Response data parsing methods
+
+- (id)responseFromData:(NSData *)data forTask:(STHTTPNetTask *)task
+{
+    id responseObj = nil;
+    if (!data) { return responseObj; }
+    
+    switch (task.responseType) {
+        case STHTTPNetTaskResponseRawData:
+            responseObj = data;
+            break;
+        case STHTTPNetTaskResponseString:
+            responseObj = [self stringFromData:data];
+            break;
+        case STHTTPNetTaskResponseJSON:
+        default:
+            responseObj = [self JSONFromData:data];
+            break;
+    }
+    return responseObj;
+}
 
 - (NSString *)stringFromData:(NSData *)data
 {
