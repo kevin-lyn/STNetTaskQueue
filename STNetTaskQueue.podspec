@@ -17,12 +17,6 @@ Pod::Spec.new do |s|
   s.resources = "STNetTaskQueue/*.xcdatamodeld"
   s.frameworks = "CoreData"
 
-  s.resource_bundles = {
-    "STNetTaskQueue" => [
-      'Pod/**/*.xcdatamodeld'
-    ]
-  }
-
   s.source_files = "STNetTaskQueue/*.{h,m}"
   s.public_header_files = "STNetTaskQueue/*.h"
 end

@@ -152,7 +152,7 @@
             return (id)nil;
         }
         
-        NSBundle *bundle = [NSBundle bundleWithIdentifier:@"STNetTaskQueue"];
+        NSBundle *bundle = [NSBundle bundleForClass:[self classForCoder]];
         
         NSURL *modelURL = [bundle URLForResource:_storeName withExtension:@"momd"];
         if(modelURL == nil) {
