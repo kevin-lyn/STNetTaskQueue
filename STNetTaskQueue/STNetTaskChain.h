@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class STNetTaskQueue;
 @class STNetTask;
 @class STNetTaskChain;
@@ -22,9 +24,9 @@ DEPRECATED_MSG_ATTRIBUTE("Use STNetTaskGroup instead")
 DEPRECATED_MSG_ATTRIBUTE("Use STNetTaskGroup instead")
 @interface STNetTaskChain : NSObject
 
-@property (nonatomic, weak) id<STNetTaskChainDelegate> delegate;
-@property (nonatomic, strong) STNetTaskQueue *queue;
-@property (nonatomic, strong, readonly) NSError *error;
+@property (nullable, nonatomic, weak) id<STNetTaskChainDelegate> delegate;
+@property (nullable, nonatomic, strong) STNetTaskQueue *queue;
+@property (nullable, nonatomic, strong, readonly) NSError *error;
 @property (nonatomic, assign, readonly) BOOL started;
 
 - (void)setTasks:(STNetTask *)task, ...;
@@ -35,3 +37,5 @@ DEPRECATED_MSG_ATTRIBUTE("Use STNetTaskGroup instead")
 - (void)cancel;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class STHTTPNetTask;
 
 @interface STHTTPNetTaskParametersPacker : NSObject
@@ -16,3 +18,5 @@
 - (NSDictionary<NSString *, id> *)pack;
 
 @end
+
+NS_ASSUME_NONNULL_END

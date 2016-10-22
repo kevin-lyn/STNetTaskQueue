@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class STNetTask;
 @class STNetTaskQueue;
 @class STNetTaskGroup;
@@ -26,7 +28,7 @@ typedef NS_ENUM(NSUInteger, STNetTaskGroupState) {
  @param group STNetTaskGroup
  @param error NSError the first error was encountered in the group.
  */
-typedef void (^STNetTaskGroupSubscriptionBlock)(STNetTaskGroup *group, NSError *error);
+typedef void (^STNetTaskGroupSubscriptionBlock)(STNetTaskGroup *group, NSError  * _Nullable error);
 
 /**
  STNetTaskGroup is a group to execute STNetTasks in serial or concurrent mode.
@@ -38,7 +40,7 @@ typedef void (^STNetTaskGroupSubscriptionBlock)(STNetTaskGroup *group, NSError *
  The executing task in the group when it is in STNetTaskGroupModeSerial.
  It will be always 'nil' when the group is in STNetTaskGroupModeConcurrent.
  */
-@property (nonatomic, strong, readonly) STNetTask *executingTask;
+@property (nullable, nonatomic, strong, readonly) STNetTask *executingTask;
 
 /**
  All tasks in this group.
@@ -113,3 +115,5 @@ typedef void (^STNetTaskGroupSubscriptionBlock)(STNetTaskGroup *group, NSError *
 - (STNetTaskGroup *)concurrentNetTaskGroupInQueue:(STNetTaskQueue *)queue;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 
 #ifdef RACObserve
@@ -138,3 +140,5 @@ typedef void (^STNetTaskSubscriptionBlock)();
 - (void)subscribeState:(STNetTaskState)state usingBlock:(STNetTaskSubscriptionBlock)block;
 
 @end
+
+NS_ASSUME_NONNULL_END

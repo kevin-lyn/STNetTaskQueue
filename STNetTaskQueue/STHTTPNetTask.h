@@ -8,6 +8,8 @@
 
 #import <STNetTaskQueue/STNetTask.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 // Error domains
 FOUNDATION_EXPORT NSString *const STHTTPNetTaskServerError;
 FOUNDATION_EXPORT NSString *const STHTTPNetTaskResponseParsedError;
@@ -79,7 +81,7 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
  @param value id Value to be transformed
  @return id The transformed value. Should return the same value if "value" is not supposed to be transformed.
  */
-- (id)transformValue:(id)value;
+- (nullable id)transformValue:(id)value;
 
 /**
  Separator string which should be used when packing parameters.
@@ -88,7 +90,7 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
  
  @return NSString
  */
-- (NSString *)parameterNameSeparator;
+- (nullable NSString *)parameterNameSeparator;
 
 @end
 
@@ -179,3 +181,5 @@ typedef NS_ENUM(NSUInteger, STHTTPNetTaskResponseType) {
 - (void)didResponseData:(NSData *)data;
 
 @end
+
+NS_ASSUME_NONNULL_END

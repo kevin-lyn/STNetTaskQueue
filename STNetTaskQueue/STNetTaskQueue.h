@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class STNetTask;
 @protocol STNetTaskDelegate;
 
@@ -52,7 +54,7 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
 /**
  The STNetTaskQueueHandler which is used for handling the net tasks in queue.
  */
-@property (nonatomic, strong) id<STNetTaskQueueHandler> handler;
+@property (nullable, nonatomic, strong) id<STNetTaskQueueHandler> handler;
 
 /**
  Count of Max concurrent task in a queue.
@@ -130,6 +132,8 @@ FOUNDATION_EXPORT const unsigned char STNetTaskQueueVersionString[];
 - (void)removeTaskDelegate:(id<STNetTaskDelegate>)delegate;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #import <STNetTaskQueue/STNetTaskChain.h>
 #import <STNetTaskQueue/STNetTaskGroup.h>

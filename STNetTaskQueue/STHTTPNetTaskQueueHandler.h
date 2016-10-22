@@ -8,6 +8,8 @@
 
 #import <STNetTaskQueue/STNetTaskQueue.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface STHTTPNetTaskQueueHandler : NSObject<STNetTaskQueueHandler>
 
 /**
@@ -16,13 +18,15 @@
  
  @param baseURL NSURL
  */
-- (instancetype)initWithBaseURL:(NSURL *)baseURL;
+- (instancetype)initWithBaseURL:(nullable NSURL *)baseURL;
 
 /**
  Init the handler with baseURL and NSURLSessionConfiguration.
  
  @param baseURL NSURL
  */
-- (instancetype)initWithBaseURL:(NSURL *)baseURL configuration:(NSURLSessionConfiguration *)configuration;
+- (instancetype)initWithBaseURL:(nullable NSURL *)baseURL configuration:(NSURLSessionConfiguration *)configuration;
 
 @end
+
+NS_ASSUME_NONNULL_END
