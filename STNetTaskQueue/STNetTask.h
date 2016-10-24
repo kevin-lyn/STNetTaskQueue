@@ -55,7 +55,7 @@ typedef void (^STNetTaskSubscriptionBlock)();
 /**
  Error object which contains error message when net task is failed.
  */
-@property (atomic, strong) NSError *error;
+@property (nullable, atomic, strong) NSError *error;
 
 /**
  Indicates if the net task is waiting for executing or executing.
