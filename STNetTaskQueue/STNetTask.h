@@ -30,6 +30,20 @@ FOUNDATION_EXPORT NSString *const STNetTaskUnknownError;
 
 @class STNetTask;
 
+typedef void (^STNetTaskCompletionBlock)(STNetTask *task);
+
+@protocol STNetTaskBlockBasedContract <NSObject>
+
+/**
+ This handler will be called if STNetTask subclass implements STNetTaskBlockBasedContract.
+ If the next task is failed, task.error will be non-nil.
+ 
+ In case if class implements STNetTaskBlockBasedContract, but completion handler is nil, 'netTaskDidEnd:' method will be triggered.
+ */
+@property (nonatomic, copy) STNetTaskCompletionBlock completionHandler;
+
+@end
+
 @protocol STNetTaskDelegate <NSObject>
 
 /**
@@ -78,6 +92,13 @@ typedef void (^STNetTaskSubscriptionBlock)();
  The current retry time @see maxRetryCount
  */
 @property (atomic, assign, readonly) NSUInteger retryCount;
+
+
+/**
+ Indicates if the net task should cache a request. 
+ In case if request is failed by internet connection error and cache exists, the task should be finished with the last cached data which is specified for the task.uri.
+ */
+@property (atomic, assign, readwrite) BOOL useOfflineCache;
 
 /**
  A unique string represents the net task.

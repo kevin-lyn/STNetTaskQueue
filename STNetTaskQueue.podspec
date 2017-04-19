@@ -12,7 +12,10 @@ Pod::Spec.new do |s|
   s.author       = { "Kevin Lin" => "kevin_lyn@outlook.com" }
 
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/kevin0571/STNetTaskQueue.git", :tag => s.version }
+  s.source       = { :git => "https://github.com/osorochich/STNetTaskQueue.git", :branch => "common_changes" }
+
+  s.resources = "STNetTaskQueue/*.xcdatamodeld"
+  s.frameworks = "CoreData"
 
   s.source_files = "STNetTaskQueue/*.{h,m}"
   s.public_header_files = "STNetTaskQueue/*.h"

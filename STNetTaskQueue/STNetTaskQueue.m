@@ -8,6 +8,7 @@
 
 #import "STNetTaskQueue.h"
 #import "STNetTaskQueueLog.h"
+#import "STWebCache.h"
 
 @interface STNetTask (STInternal)
 
@@ -28,9 +29,13 @@
 @property (nonatomic, strong) NSMutableArray *tasks; // <STNetTask>
 @property (nonatomic, strong) NSMutableArray *waitingTasks; // <STNetTask>
 
+@property (nonatomic, strong) STWebCache *cache;
+
 @end
 
 @implementation STNetTaskQueue
+
+@dynamic cachedResponsesDuration;
 
 + (instancetype)sharedQueue
 {
@@ -53,6 +58,8 @@
         self.taskDelegates = [NSMutableDictionary new];
         self.tasks = [NSMutableArray new];
         self.waitingTasks = [NSMutableArray new];
+        
+        self.cache = [STWebCache sharedInstance];
     }
     return self;
 }
@@ -60,6 +67,10 @@
 - (void)dealloc
 {
     [self.handler netTaskQueueDidBecomeInactive:self];
+}
+
+- (void)setCachedResponsesDuration:(NSUInteger)cachedResponsesDuration {
+    self.cache.cacheDaysDuration = cachedResponsesDuration;
 }
 
 - (void)threadEntryPoint
@@ -184,7 +195,7 @@
         task.error = error;
         [task didFail];
     }
-    
+
     task.pending = NO;
     task.finished = YES;
     [task notifyState:STNetTaskStateFinished];
@@ -227,6 +238,19 @@
 
 - (void)_netTaskDidEnd:(STNetTask *)task
 {
+    if ([task conformsToProtocol:@protocol(STNetTaskBlockBasedContract)]) {
+        id<STNetTaskBlockBasedContract> blockTask = (STNetTask<STNetTaskBlockBasedContract> *)task;
+        if (blockTask.completionHandler != nil) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                blockTask.completionHandler(task);
+            });
+            
+            return;
+        }
+        
+    }
+    
     [self.lock lock];
     
     NSHashTable *delegatesForURI = self.taskDelegates[task.uri];
